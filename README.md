@@ -3,7 +3,8 @@
 ### run front end (Vue JS) locally
 
 ```
-cd front_end
+sudo apt-get install -y yarn
+cd ernav2_frontend
 yarn serve
 ```
 Access user interface at browser, namely Chrome, at http://localhost:8080/
@@ -13,6 +14,14 @@ Access user interface at browser, namely Chrome, at http://localhost:8080/
 ```
 yarn install
 ```
+
+update npm and node
+```
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+```
+
 
 ### Compiles and hot-reloads for development
 ```

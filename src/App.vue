@@ -6,6 +6,7 @@
 
 <script>
 import MainPage from "./layouts/MainPage";
+//import {BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 export default {
   name: "App",

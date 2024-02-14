@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <b-container>
     <HeaderBar></HeaderBar>
     <ContentPage></ContentPage>
     <FooterBar></FooterBar>
-  </div>
+  </b-container>
+
 </template>
 
 <script>
@@ -21,4 +22,3 @@ export default {
 };
 </script>
 
-<style></style>

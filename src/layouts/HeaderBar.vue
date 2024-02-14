@@ -1,16 +1,22 @@
 <template>
-  <div class="container">
-    <div class="logo">
-      <img src="#" />
-    </div>
-    <div>
-      <h1>eRNA v2</h1>
-    </div>
-    <div class="login">
-      User Name: <mark>{{ current_user.username }}</mark> |
-      <a href="#">logout</a>
-    </div>
-  </div>
+<b-container fluid class="bv-example-row border bg-dark">
+  <b-row>
+    <b-col align-self="center">
+      <b-img thumbnail rounded="0" src="#" alt="logo"></b-img>
+    </b-col>
+
+    <b-col class="text-white">
+      <h1>eRNA</h1>
+    </b-col>
+
+    <b-col align-self="end" class="text-white">
+      <span class="p-3">
+        User Name: <mark>{{ current_user.username }}</mark>
+      </span>
+      <b-link href="#" class="text-decoration-none">logout</b-link>
+    </b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>
@@ -24,24 +30,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  height: 100px;
-  background-color: lightblue;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-}
-.container .logo {
-  width: 100px;
-  border: 1px solid white;
-}
-.container .login {
-  text-align: right;
-  margin-top: 10px;
-}
-a {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-</style>
