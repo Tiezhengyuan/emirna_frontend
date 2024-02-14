@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import HomePage from "../views/HomePage";
-import SampleManagement from "../views/SampleManagement";
+import ManageView from "../views/ManageView";
 import RNAseqPipeline from "../views/RNAseqPipeline";
 import AnalyticTools from "../views/AnalyticTools";
 
@@ -22,7 +22,7 @@ const routes = [
   {
     path: "/manage",
     name: "manage",
-    component: SampleManagement,
+    component: ManageView,
     children: [
       {
         path: "create_project",

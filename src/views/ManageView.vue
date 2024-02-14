@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "SampleManagement",
+  name: "ManageView",
 };
 </script>
 

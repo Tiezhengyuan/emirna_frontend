@@ -1,5 +1,5 @@
 <template>
-  <b-container class="min-height-70">
+  <b-container>
     <b-card title="Applications" no-body>
       <b-card-header header-tag="nav">
         <b-nav tabs>

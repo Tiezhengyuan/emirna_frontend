@@ -1,10 +1,11 @@
 <template>
-  <div class="container async-tasks">
-    <div class="select">
+  <b-container>
+    <div>
       <inputRadio :data="status" :receive="getStatus"></inputRadio>
       <inputCheckbox :data="select_columns" :receive="receive"></inputCheckbox>
     </div>
-    <div class="show-tasks">
+
+    <div>
       <table border="1">
         <thead>
           <tr>
@@ -24,13 +25,14 @@
         </tbody>
       </table>
     </div>
-  </div>
+
+  </b-container>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import inputCheckbox from "../../components/forms/inputCheckbox";
-import inputRadio from "../../components/forms/inputRadio";
+import inputCheckbox from "../components/forms/inputCheckbox";
+import inputRadio from "../components/forms/inputRadio";
 
 export default {
   name: "AsyncTasks",
@@ -87,20 +89,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container.async-tasks {
-  height: 500px;
-  min-width: 600px;
-}
-.container.async-tasks .show-tasks {
-  height: 350px;
-  min-width: 600px;
-  padding: 10px;
-  overflow: auto;
-  margin-top: 10px;
-  border: 1px solid blue;
-}
-.show-tasks td {
-  padding: 5px;
-}
-</style>
