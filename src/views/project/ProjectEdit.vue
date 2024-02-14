@@ -19,7 +19,7 @@ import inputText from "../../components/forms/inputText";
 import inputDropdown from "../../components/forms/inputDropdown";
 
 export default {
-  name: "EditProject",
+  name: "ProjectEdit",
   components: {
     inputText,
     inputDropdown,

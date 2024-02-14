@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import RNAseqHeader from "./rnaseq/RNAseqHeader";
-import RNAseqLeft from "./rnaseq/RNAseqLeft";
-import RNAseqRight from "./rnaseq/RNAseqRight";
+import RNAseqHeader from "./RNAseqHeader";
+import RNAseqLeft from "./RNAseqLeft";
+import RNAseqRight from "./RNAseqRight";
 
 export default {
-  name: "RNAseqPipeline",
+  name: "ViewRNAseq",
   components: {
     RNAseqHeader,
     RNAseqLeft,

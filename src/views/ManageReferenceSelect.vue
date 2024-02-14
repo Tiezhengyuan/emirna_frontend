@@ -17,10 +17,10 @@
 
 <script>
 import { mapState } from "vuex";
-import inputDropdown from "../../components/forms/inputDropdown";
+import inputDropdown from "../components/forms/inputDropdown";
 
 export default {
-  name: "SelectReference",
+  name: "ManageReferenceSelect",
   components: {
     inputDropdown,
   },

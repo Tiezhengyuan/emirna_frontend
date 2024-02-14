@@ -37,10 +37,10 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import inputDropdown from "../../components/forms/inputDropdown";
+import inputDropdown from "../components/forms/inputDropdown";
 
 export default {
-  name: "ImportRawData",
+  name: "ManageRawData",
   components: {
     inputDropdown,
   },

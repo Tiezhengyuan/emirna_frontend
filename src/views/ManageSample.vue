@@ -1,8 +1,8 @@
 <template>
-  <div class="container load-samples">
+  <b-container>
     <fieldset>
       <legend>Load samples into database</legend>
-      <div class="import-samples">
+      <b-container>
         <div>
           <inputText :data="study_name" :receive="setStudyName"></inputText>
           <SelectFile></SelectFile>
@@ -10,31 +10,31 @@
         <div>
           <button @click="saveSamples">Save Samples</button>
         </div>
-      </div>
-      <TableSample></TableSample>
+      </b-container>
+      <ManageSampleShow></ManageSampleShow>
     </fieldset>
 
-    <fieldset class="parse-samples">
+    <fieldset>
       <legend>Parse raw data with samples</legend>
-      <ParseSamples></ParseSamples>
+      <ManageSampleParse></ManageSampleParse>
     </fieldset>
-  </div>
+  </b-container>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import inputText from "../../components/forms/inputText";
-import SelectFile from "../../components/forms/SelectFile";
-import ParseSamples from "./ParseSamples";
-import TableSample from "./TableSample";
+import inputText from "../components/forms/inputText";
+import SelectFile from "../components/forms/SelectFile";
+import ManageSampleParse from "./ManageSampleParse";
+import ManageSampleShow from "./ManageSampleShow";
 
 export default {
-  name: "LoadSamples",
+  name: "ManageSample",
   components: {
     inputText,
     SelectFile,
-    TableSample,
-    ParseSamples,
+    ManageSampleShow,
+    ManageSampleParse,
   },
   mounted() {
     this.$store.dispatch("getStudyNames");
@@ -57,25 +57,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.container.load-samples {
-  width: 100%;
-}
-.container.load-samples fieldset {
-  border-color: lightblue;
-  border-radius: 5px;
-  background-color: white;
-}
-.import-samples {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid grey;
-}
-.import-samples button {
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-}
-</style>

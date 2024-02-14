@@ -21,7 +21,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "TableSample",
+  name: "ManageSampleShow",
   computed: {
     ...mapState(["study_name", "loaded_samples"]),
     sample_header() {

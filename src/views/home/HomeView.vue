@@ -6,10 +6,10 @@
       <div @click="changeShowAsync">
         <span class="h3 p-2">Asynchronized Tasks</span>
         <img v-show="showAsync"
-          src="../../node_modules/bootstrap-icons/icons/box-arrow-in-up.svg"
+          src="../../../node_modules/bootstrap-icons/icons/box-arrow-in-up.svg"
           alt="#"/>
         <img v-show="!showAsync" 
-          src="../../node_modules/bootstrap-icons/icons/box-arrow-down.svg"
+          src="../../../node_modules/bootstrap-icons/icons/box-arrow-down.svg"
           alt="#"/>
       </div>
       <AsyncTasks v-if="showAsync"></AsyncTasks>  
@@ -19,10 +19,10 @@
       <div @click="changeShowProcessing">
         <span class="h3 p-2">Monitor Processing Status</span>
         <img v-show="showProcessing"
-          src="../../node_modules/bootstrap-icons/icons/box-arrow-in-up.svg"
+          src="../../../node_modules/bootstrap-icons/icons/box-arrow-in-up.svg"
           alt="#"/>
         <img v-show="!showProcessing"
-          src="../../node_modules/bootstrap-icons/icons/box-arrow-down.svg"
+          src="../../../node_modules/bootstrap-icons/icons/box-arrow-down.svg"
           alt="#"/>
       </div>
       <ProcessingStatus v-if="showProcessing"></ProcessingStatus>
@@ -32,10 +32,10 @@
       <div @click="changeShowSummary">
         <span class="h3 p-2">Summary of eRNA</span>
         <img v-show="showSummary"
-          src="../../node_modules/bootstrap-icons/icons/box-arrow-in-up.svg"
+          src="../../../node_modules/bootstrap-icons/icons/box-arrow-in-up.svg"
           alt="#"/>
         <img v-show="!showSummary"
-          src="../../node_modules/bootstrap-icons/icons/box-arrow-down.svg"
+          src="../../../node_modules/bootstrap-icons/icons/box-arrow-down.svg"
           alt="#"/>
       </div>
       <HomeSummary v-if="showSummary"></HomeSummary>
@@ -47,11 +47,11 @@
 
 <script>
 import HomeSummary from "./HomeSummary";
-import ProcessingStatus from "./HomeProcessingStatus";
-import AsyncTasks from "./HomeAsyncTasks";
+import ProcessingStatus from "./ProcessingStatus";
+import AsyncTasks from "./AsyncTasks";
 
 export default {
-  name: "HomePage",
+  name: "HomeView",
   components: {
     HomeSummary,
     ProcessingStatus,

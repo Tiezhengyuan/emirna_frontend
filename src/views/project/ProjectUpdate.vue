@@ -5,21 +5,21 @@
       <!-- {{ deleted_projects }} -->
       <!-- {{ updated_projects }} -->
     </div>
-    <EditProject v-if="showUpdate"></EditProject>
-    <ListProjects></ListProjects>
+    <ProjectEdit v-if="showUpdate"></ProjectEdit>
+    <ProjectList></ProjectList>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import EditProject from "./EditProject";
-import ListProjects from "./ListProjects";
+import ProjectEdit from "./ProjectEdit";
+import ProjectList from "./ProjectList";
 
 export default {
-  name: "UpdateProjects",
+  name: "ProjectUpdate",
   components: {
-    EditProject,
-    ListProjects,
+    ProjectEdit,
+    ProjectList,
   },
   computed: {
     ...mapState(["current_project", "deleted_projects", "updated_projects"]),

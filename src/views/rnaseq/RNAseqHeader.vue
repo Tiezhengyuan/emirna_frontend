@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SelectProject from "../project/SelectProject";
+import SelectProject from "../project/ProjectSelect";
 import SelectMethod from "../task/SelectMethod";
 import OperateTasks from "../task/OperateTasks";
 

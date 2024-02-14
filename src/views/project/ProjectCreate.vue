@@ -24,7 +24,7 @@ import inputText from "../../components/forms/inputText";
 import inputDropdown from "../../components/forms/inputDropdown";
 
 export default {
-  name: "CreateProject",
+  name: "ProjectCreate",
   components: {
     PairedLabel,
     inputText,

@@ -31,11 +31,11 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import inputDropdown from "../../components/forms/inputDropdown";
-import inputText from "../../components/forms/inputText";
+import inputDropdown from "../components/forms/inputDropdown";
+import inputText from "../components/forms/inputText";
 
 export default {
-  name: "ParseSamples",
+  name: "ManageSampleParse",
   components: {
     inputDropdown,
     inputText,

@@ -14,7 +14,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "SelectProject",
+  name: "ProjectSelect",
   props: ["select_label", "receive"],
   data() {
     return {

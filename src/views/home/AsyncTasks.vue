@@ -31,8 +31,8 @@
 
 <script>
 import { mapState } from "vuex";
-import inputCheckbox from "../components/forms/inputCheckbox";
-import inputRadio from "../components/forms/inputRadio";
+import inputCheckbox from "../../components/forms/inputCheckbox";
+import inputRadio from "../../components/forms/inputRadio";
 
 export default {
   name: "AsyncTasks",

@@ -35,7 +35,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "ListProjects",
+  name: "ProjectList",
   computed: {
     ...mapState(["projects"]),
   },
