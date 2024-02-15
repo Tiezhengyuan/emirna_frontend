@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import HomeView from "../views/home/HomeView";
+import SampleView from "../views/sample/SampleView";
 import ManageView from "../views/ManageView";
 import RNAseqView from "../views/rnaseq/RNAseqView";
 import ToolsView from "../views/tools/ToolsView";
@@ -12,6 +13,7 @@ import ProjectCreate from "../views/project/ProjectCreate";
 import ProjectUpdate from "../views/project/ProjectUpdate";
 import ImportRawData from "../views/sample/ImportRawData";
 import LoadSamples from "../views/sample/LoadSamples";
+import ParseSamples from "../views/sample/ParseSamples";
 import ManageReference from "../views/ManageReference";
 
 const routes = [
@@ -19,6 +21,28 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/sample",
+    name: "sample",
+    component:SampleView,
+    children: [
+      {
+        path: "load_samples",
+        name: "load_samples",
+        component: LoadSamples,
+      },
+      {
+        path: "import_raw_data",
+        name: "import_raw_data",
+        component: ImportRawData,
+      },
+      {
+        path: "parse_samples",
+        name: "parse_samples",
+        component: ParseSamples,
+      },
+    ],
   },
   {
     path: "/manage",
@@ -35,16 +59,7 @@ const routes = [
         name: "update_projects",
         component: ProjectUpdate,
       },
-      {
-        path: "load_samples",
-        name: "load_samples",
-        component: LoadSamples,
-      },
-      {
-        path: "import_raw_data",
-        name: "import_raw_data",
-        component: ImportRawData,
-      },
+
       {
         path: "build_reference",
         name: "build_reference",

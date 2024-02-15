@@ -1,7 +1,5 @@
 <template>
   <b-container>
-
-    <b-card-group deck>
       <b-card
         header="Load samples into database"
         border-variant="primary"
@@ -20,21 +18,6 @@
           <ShowSamples></ShowSamples>
         </b-card-text>
       </b-card>
-
-      <b-card
-        header="Parse raw data with samples"
-        border-variant="secondary"
-        header-bg-variant="secondary"
-        header-text-variant="white"
-        align="center"
-        class="mt-3"
-      >
-        <b-card-text>
-          <ParseSamples></ParseSamples>
-        </b-card-text>
-      </b-card>
-    </b-card-group>
-
   </b-container>
 </template>
 
@@ -42,7 +25,6 @@
 import { mapState, mapGetters } from "vuex";
 import inputText from "../../components/forms/inputText";
 import SelectFile from "../../components/forms/SelectFile";
-import ParseSamples from "./ParseSamples";
 import ShowSamples from "./ShowSamples";
 
 export default {
@@ -51,7 +33,6 @@ export default {
     inputText,
     SelectFile,
     ShowSamples,
-    ParseSamples,
   },
   mounted() {
     this.$store.dispatch("getStudyNames");

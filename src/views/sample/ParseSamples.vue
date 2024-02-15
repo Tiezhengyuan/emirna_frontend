@@ -1,32 +1,39 @@
 <template>
-  <div class="container parse-samples">
-    <div class="select">
-      <inputDropdown :data="study_names" :receive="receive"></inputDropdown>
-      <inputText :data="sample_name_reg" :receive="receive"></inputText>
-      <button @click="parseSampleFiles">Submit</button>
-    </div>
+  <b-container>
+    <b-card
+      header="Parse raw data with samples"
+      border-variant="secondary"
+      header-bg-variant="secondary"
+      header-text-variant="white"
+      align="center"
+      class="mt-3"
+    >
 
-    <table border="1" v-show="unparsed_data.length">
-      <thead>
-        <tr>
-          <th>Delete</th>
-          <th>Sample name</th>
-          <th>Batch of raw data</th>
-          <th>File path of raw data</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, i) in unparsed_data" :key="i">
-          <th>
-            <button @click="removeFile(i)">delete</button>
-          </th>
-          <th>{{ item.sample_name }}</th>
-          <th>{{ item.batch_name }}</th>
-          <th>{{ item.full_path }}</th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <b-card-text>
+        <b-container>
+          <inputDropdown :data="study_names" :receive="receive"></inputDropdown>
+          <inputText :data="sample_name_reg" :receive="receive"></inputText>
+          <button @click="parseSampleFiles">Submit</button>
+        </b-container>
+
+        <b-table striped
+          :items="unparsed_data"
+          :fields="fields"
+          v-show="unparsed_data.length"
+        >
+          <template #cell(Actions)="row">
+            <b-button @click="removeFile(row.index)">delete</b-button>
+          </template>
+          <template #cell(Details)="row">
+            <b-form-checkbox v-model="row.detailsShowing" @change="row.toggleDetails">
+              Details via check
+            </b-form-checkbox>
+          </template>
+        </b-table>
+      </b-card-text>
+
+    </b-card>
+  </b-container>
 </template>
 
 <script>
@@ -39,6 +46,11 @@ export default {
   components: {
     inputDropdown,
     inputText,
+  },
+  data () {
+    return {
+      fields: ["Actions", "sample_name", "batch_name", "file_name", "Details"],
+    };
   },
   computed: {
     ...mapState(["unparsed_data"]),
@@ -59,19 +71,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.container.parse-samples {
-  width: 100%;
-}
-.container.parse-samples fieldset {
-  border-color: lightblue;
-  border-radius: 5px;
-  background-color: white;
-}
-.container.parse-samples .select {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>
