@@ -15,6 +15,9 @@
           <b-nav-item>
             <router-link to="/tools">Tools</router-link>
           </b-nav-item>
+          <b-nav-item>
+            <router-link to="/debugging">Debugging</router-link>
+          </b-nav-item>
         </b-nav>
       </b-card-header>
   

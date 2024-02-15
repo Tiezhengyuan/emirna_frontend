@@ -1,5 +1,10 @@
 <template>
-  <div class="container table-sample">
+  <div>
+    <b-table striped hover :items="items" :fields="fields">
+      <template #table-caption>This is a table caption.</template>
+    </b-table>
+
+
     <table border="1">
       <caption v-show="loaded_samples.length > 0">
         Samples of the study {{ study_name }}
@@ -20,8 +25,21 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
-  name: "ManageSampleShow",
+  name: "ShowSamples",
+  data() {
+      return {
+        table_name: "Name",
+        fields: ['first_name', 'last_name', 'age'],
+        items: [
+          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+        ]
+      }
+    },
   computed: {
     ...mapState(["study_name", "loaded_samples"]),
     sample_header() {
@@ -34,8 +52,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container.table-sample {
-  background-color: white;
-}
-</style>

@@ -6,11 +6,12 @@ import HomeView from "../views/home/HomeView";
 import ManageView from "../views/ManageView";
 import RNAseqView from "../views/rnaseq/RNAseqView";
 import ToolsView from "../views/tools/ToolsView";
+import DebuggingView from "../views/DebuggingView";
 
 import ProjectCreate from "../views/project/ProjectCreate";
 import ProjectUpdate from "../views/project/ProjectUpdate";
-import ManageRawData from "../views/ManageRawData";
-import ManageSample from "../views/ManageSample";
+import ImportRawData from "../views/sample/ImportRawData";
+import LoadSamples from "../views/sample/LoadSamples";
 import ManageReference from "../views/ManageReference";
 
 const routes = [
@@ -37,12 +38,12 @@ const routes = [
       {
         path: "load_samples",
         name: "load_samples",
-        component: ManageSample,
+        component: LoadSamples,
       },
       {
         path: "import_raw_data",
         name: "import_raw_data",
-        component: ManageRawData,
+        component: ImportRawData,
       },
       {
         path: "build_reference",
@@ -61,6 +62,12 @@ const routes = [
     name: "tools",
     component: ToolsView,
   },
+  {
+    path: "/debugging",
+    name: "debugging",
+    component: DebuggingView,
+  },
+
 ];
 
 const router = new VueRouter({

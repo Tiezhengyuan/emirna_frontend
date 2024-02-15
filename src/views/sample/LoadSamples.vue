@@ -17,7 +17,7 @@
           <div>
             <button @click="saveSamples">Save Samples</button>
           </div>
-          <ManageSampleShow></ManageSampleShow>
+          <ShowSamples></ShowSamples>
         </b-card-text>
       </b-card>
 
@@ -30,7 +30,7 @@
         class="mt-3"
       >
         <b-card-text>
-          <ManageSampleParse></ManageSampleParse>
+          <ParseSamples></ParseSamples>
         </b-card-text>
       </b-card>
     </b-card-group>
@@ -40,18 +40,18 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import inputText from "../components/forms/inputText";
-import SelectFile from "../components/forms/SelectFile";
-import ManageSampleParse from "./ManageSampleParse";
-import ManageSampleShow from "./ManageSampleShow";
+import inputText from "../../components/forms/inputText";
+import SelectFile from "../../components/forms/SelectFile";
+import ParseSamples from "./ParseSamples";
+import ShowSamples from "./ShowSamples";
 
 export default {
-  name: "ManageSample",
+  name: "LoadSamples",
   components: {
     inputText,
     SelectFile,
-    ManageSampleShow,
-    ManageSampleParse,
+    ShowSamples,
+    ParseSamples,
   },
   mounted() {
     this.$store.dispatch("getStudyNames");
