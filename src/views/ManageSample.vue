@@ -1,23 +1,40 @@
 <template>
   <b-container>
-    <fieldset>
-      <legend>Load samples into database</legend>
-      <b-container>
-        <div>
-          <inputText :data="study_name" :receive="setStudyName"></inputText>
-          <SelectFile></SelectFile>
-        </div>
-        <div>
-          <button @click="saveSamples">Save Samples</button>
-        </div>
-      </b-container>
-      <ManageSampleShow></ManageSampleShow>
-    </fieldset>
 
-    <fieldset>
-      <legend>Parse raw data with samples</legend>
-      <ManageSampleParse></ManageSampleParse>
-    </fieldset>
+    <b-card-group deck>
+      <b-card
+        header="Load samples into database"
+        border-variant="primary"
+        header-bg-variant="primary"
+        header-text-variant="white"
+        align="center"
+      >
+        <b-card-text>
+          <div>
+            <inputText :data="study_name" :receive="setStudyName"></inputText>
+            <SelectFile></SelectFile>
+          </div>
+          <div>
+            <button @click="saveSamples">Save Samples</button>
+          </div>
+          <ManageSampleShow></ManageSampleShow>
+        </b-card-text>
+      </b-card>
+
+      <b-card
+        header="Parse raw data with samples"
+        border-variant="secondary"
+        header-bg-variant="secondary"
+        header-text-variant="white"
+        align="center"
+        class="mt-3"
+      >
+        <b-card-text>
+          <ManageSampleParse></ManageSampleParse>
+        </b-card-text>
+      </b-card>
+    </b-card-group>
+
   </b-container>
 </template>
 

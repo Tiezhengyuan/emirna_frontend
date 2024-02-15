@@ -1,5 +1,5 @@
 <template>
-  <div class="container list-projects">
+  <b-container class="border mt-3 p-2">
     <table border="1">
       <thead>
         <tr>
@@ -8,8 +8,7 @@
           <th>Description</th>
           <th>Sequencing</th>
           <th>Status</th>
-          <th>Delete</th>
-          <th>Edit</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -20,15 +19,15 @@
           <td>{{ project.sequencing }}</td>
           <td>{{ project.status }}</td>
           <td>
-            <button @click="deleteProject(project)">Delete</button>
-          </td>
-          <td>
-            <button @click="editProject(project)">Edit</button>
+            <b-button class="p-1 m-1" @click="deleteProject(project)"
+            >Delete</b-button>
+            <b-button class="p-1 m-1" @click="editProject(project)"
+            >Edit</b-button>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -58,23 +57,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.container.list-projects {
-  border-top: 1px solid white;
-  padding: 10px;
-}
-.container.list-projects table {
-  margin: 0 auto;
-}
-.container .delete-project {
-  margin: 20px;
-}
-.container .delete-project button {
-  font-size: 25px;
-  width: 200px;
-  height: 50px;
-  background-color: red;
-  margin-right: 20px;
-}
-</style>

@@ -1,13 +1,13 @@
 <template>
-  <div class="container select-project">
+  <b-container>
     <slot></slot>
     <label>{{ select_label }}</label>
-    <select class="container-select" v-model="selected" @change="selectProject">
+    <select v-model="selected" @change="selectProject">
       <option v-for="(project, i) of projects" :key="i" :value="project">
         {{ project.project_id }}: {{ project.project_name }}
       </option>
     </select>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -36,5 +36,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

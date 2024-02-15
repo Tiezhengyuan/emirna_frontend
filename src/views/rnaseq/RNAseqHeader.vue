@@ -1,15 +1,29 @@
 <template>
-  <div class="container rnaseq-left">
-    <SelectProject class="select">
-      <div class="container-label">I. Select Project</div>
-    </SelectProject>
-    <div class="container-arrow">>></div>
-    <SelectMethod class="select">
-      <div class="container-label">II: Select method</div>
-    </SelectMethod>
-    <div class="container-arrow">>></div>
-    <OperateTasks class="select"></OperateTasks>
-  </div>
+  <b-container class="border">
+    <b-row>
+      <b-col>
+        <SelectProject class="select">
+          <div class="container-label">I. Select Project</div>
+        </SelectProject>
+      </b-col>
+      <b-col>
+        <div class="container-arrow">>></div>
+      </b-col>
+
+      <b-col>
+        <SelectMethod class="select">
+          <div class="container-label">II: Select method</div>
+        </SelectMethod>
+      </b-col>
+      <b-col>
+        <div class="container-arrow">>></div>
+      </b-col>
+
+      <b-col>
+        <OperateTasks class="select"></OperateTasks>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -28,14 +42,8 @@ export default {
 </script>
 
 <style scoped>
-.container.rnaseq-left {
-  background-color: white;
-  margin-bottom: 10px;
-  border: 1px slid black;
-  display: flex;
-}
 .container-arrow {
-  height: 100px;
+  height: 120px;
   width: 30px;
   margin: 5px;
   padding: 5px;
@@ -46,8 +54,8 @@ export default {
 .container-label {
   margin: 10px;
 }
-.container .select {
-  height: 90px;
+.select {
+  height: 120px;
   margin: 5px;
   padding: 5px;
   background-color: lightblue;

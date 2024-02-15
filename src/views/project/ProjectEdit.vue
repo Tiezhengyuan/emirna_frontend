@@ -1,16 +1,16 @@
 <template>
-  <div class="container edit-project">
+  <b-container class="border m-3 p-2">
     <h3>Edit project {{ current_project.project_id }}</h3>
-    <div class="project-input">
+    <div>
       <inputText :data="project_name" :receive="receive"></inputText>
       <inputText :data="description" :receive="receive"></inputText>
       <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
       <inputDropdown :data="status" :receive="receive"></inputDropdown>
-      <div class="project_create">
+      <div>
         <button @click="saveUpdate">save update</button>
       </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -76,20 +76,3 @@ export default {
 };
 </script>
 
-<style scopred>
-.container.edit-project {
-  padding: 10px;
-  border-top: 1px solid white;
-}
-.project-input {
-  width: 400px;
-  height: 180px;
-  box-sizing: border-box;
-  background-color: white;
-  margin: 0 auto;
-  padding: 20px;
-}
-.title {
-  font-size: 30px;
-}
-</style>

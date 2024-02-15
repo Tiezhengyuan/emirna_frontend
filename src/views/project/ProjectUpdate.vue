@@ -1,13 +1,19 @@
 <template>
-  <div class="container update-projects">
-    <div class="apply-changes">
-      <button @click="applyChanges">Apply all changes</button>
+  <b-container>
+    <div>
+      <b-button @click="applyChanges">Apply all changes</b-button>
       <!-- {{ deleted_projects }} -->
       <!-- {{ updated_projects }} -->
     </div>
-    <ProjectEdit v-if="showUpdate"></ProjectEdit>
-    <ProjectList></ProjectList>
-  </div>
+    <b-row>
+      <b-col cols="auto 8">
+        <ProjectList></ProjectList>
+      </b-col>
+      <b-col cols="auto 4">
+        <ProjectEdit v-if="showUpdate"></ProjectEdit>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -40,15 +46,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container.update-projects {
-  border: 1px solid white;
-}
-.container.update-projects .apply-changes button {
-  font-size: 24px;
-  margin: 10px;
-  padding: 5px;
-  color: white;
-  background-color: red;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container operate-tasks">
-    <button @click="submitTask">Submitt Tasks</button>
+    <button @click="submitTask">Submit Tasks</button>
     <button @click="refreshProjectTasks">Refresh Project</button>
   </div>
 </template>

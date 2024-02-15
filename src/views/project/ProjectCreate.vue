@@ -1,20 +1,22 @@
 <template>
-  <div class="container new-project">
+  <b-container class="text-center">
     <h3>Create a new project</h3>
-    <div class="project-input" v-if="showInput">
+    <b-container v-if="showInput">
       <PairedLabel :data="new_project_id"></PairedLabel>
       <inputText :data="project_name" :receive="receive"></inputText>
       <inputText :data="description" :receive="receive"></inputText>
       <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
       <inputDropdown :data="status" :receive="receive"></inputDropdown>
       <inputDropdown :data="ready_genome" :receive="receive"></inputDropdown>
-      <button @click="create">Create</button>
-      <button @click="reset">Reset</button>
-    </div>
-    <div class="warning" v-show="showWarning">
+      <b-button variant="success" class="m-2"
+        @click="create">Create</b-button>
+      <b-button variant="secondary"
+        @click="reset">Reset</b-button>
+    </b-container>
+    <b-container v-show="showWarning">
       Either Sequencing or genome should be selected.
-    </div>
-  </div>
+    </b-container>
+  </b-container>
 </template>
 
 <script>
@@ -68,29 +70,3 @@ export default {
   },
 };
 </script>
-
-<style scopred>
-/* .container.new-project {
-  margin: 0 auto;
-} */
-.new-project .project-input {
-  width: 500px;
-  height: 300px;
-  margin: 0 auto;
-  background-color: white;
-  padding: 20px;
-}
-.new-project .title {
-  font-size: 30px;
-}
-.new-project .project-input button {
-  font-size: 18px;
-  margin: 10px;
-}
-.new-project .warning {
-  width: 500px;
-  margin-top: 10px;
-  color: white;
-  background-color: red;
-}
-</style>
