@@ -28,8 +28,8 @@
 
 <script>
 import SelectProject from "../project/ProjectSelect";
-import SelectMethod from "../task/SelectMethod";
-import OperateTasks from "../task/OperateTasks";
+import SelectMethod from "./SelectMethod";
+import OperateTasks from "./OperateTasks";
 
 export default {
   name: "RNAseqHeader",

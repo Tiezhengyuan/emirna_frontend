@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <b-container>
     <taskMethod
       :is="current_task.component"
       v-if="!!current_task.component"
     ></taskMethod>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -29,11 +29,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.container {
-  width: 48%;
-  background-color: white;
-  border: 1px slid black;
-}
-</style>

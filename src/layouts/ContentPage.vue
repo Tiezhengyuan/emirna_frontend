@@ -13,7 +13,7 @@
             <router-link to="/manage">Management</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/rnaseq">RNA-Seq</router-link>
+            <router-link to="/rnaseq">Bioinformatics Pipeline</router-link>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/tools">Tools</router-link>

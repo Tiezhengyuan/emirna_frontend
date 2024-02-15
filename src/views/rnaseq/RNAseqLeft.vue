@@ -15,7 +15,7 @@
 
 <script>
 import { mapState } from "vuex";
-import NewTask from "../task/NewTask";
+import NewTask from "./NewTask";
 
 export default {
   name: "RNAseqLeft",
