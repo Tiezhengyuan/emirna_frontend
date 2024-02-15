@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container fluid>
     <b-card title="Applications" no-body>
       <b-card-header header-tag="nav">
         <b-nav>

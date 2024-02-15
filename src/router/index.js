@@ -3,18 +3,26 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import HomeView from "../views/home/HomeView";
-import SampleView from "../views/sample/SampleView";
-import ManageView from "../views/ManageView";
-import RNAseqView from "../views/rnaseq/RNAseqView";
-import ToolsView from "../views/tools/ToolsView";
-import DebuggingView from "../views/DebuggingView";
 
-import ProjectCreate from "../views/project/ProjectCreate";
-import ProjectUpdate from "../views/project/ProjectUpdate";
+import SampleView from "../views/sample/SampleView";
 import ImportRawData from "../views/sample/ImportRawData";
 import LoadSamples from "../views/sample/LoadSamples";
 import ParseSamples from "../views/sample/ParseSamples";
+
+import ManageView from "../views/ManageView";
+import ProjectCreate from "../views/project/ProjectCreate";
+import ProjectUpdate from "../views/project/ProjectUpdate";
 import ManageReference from "../views/ManageReference";
+
+import RNAseqView from "../views/rnaseq/RNAseqView";
+
+import ToolsView from "../views/tools/ToolsView";
+
+import DebuggingView from "../views/debugging/DebuggingView";
+import TableSimple from "../components/TableSimple";
+import BasicInput from "../components/BasicInput";
+
+
 
 const routes = [
   {
@@ -81,8 +89,19 @@ const routes = [
     path: "/debugging",
     name: "debugging",
     component: DebuggingView,
+    children: [
+      {
+        path: "simple_table",
+        name: "simple_table",
+        component: TableSimple,
+      },
+      {
+        path: "simple_input",
+        name: "simple_input",
+        component: BasicInput,
+      },
+    ],
   },
-
 ];
 
 const router = new VueRouter({

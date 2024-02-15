@@ -1,9 +1,9 @@
 <template>
-  <b-container>
+  <div>
     <HeaderBar></HeaderBar>
     <ContentPage></ContentPage>
     <!-- <FooterBar></FooterBar> -->
-  </b-container>
+  </div>
 
 </template>
 

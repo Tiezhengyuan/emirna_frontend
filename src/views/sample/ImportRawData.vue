@@ -1,15 +1,19 @@
 <template>
   <b-container>
     <div>
-      <div>
-        <label>Select a project</label>
-        <inputDropdown :data="projects_list" :receive="selectProject"></inputDropdown>
-      </div>
-      <div>
-        <label>Add samples</label>
+      <b-row class="border p-1" align-v="center">
+        <b-col cols="2" class="text-end">Select:</b-col>
+        <b-col>
+          <inputDropdown :data="projects_list" :receive="selectProject"></inputDropdown>  
+        </b-col>
+        <b-col>
           <inputDropdown :data="study_names" :receive="selectStudy"></inputDropdown>
-        <button>Save</button>
-      </div>
+        </b-col>
+        <b-col>
+          <b-button variant="success">Save</b-button>
+        </b-col>
+      </b-row>
+      
     </div>
 
     <b-container

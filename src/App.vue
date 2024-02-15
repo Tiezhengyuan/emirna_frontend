@@ -1,12 +1,11 @@
 <template>
-  <div id="app">
+  <div>
     <MainPage></MainPage>
   </div>
 </template>
 
 <script>
 import MainPage from "./layouts/MainPage";
-//import {BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 export default {
   name: "App",
@@ -20,14 +19,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 10px;
-}
-</style>

@@ -1,9 +1,9 @@
 <template>
-    <div class="border p-2">
+    <b-container class="border p-2">
         <h3>{{ table_name }}</h3>
         <b-table striped hover :items="items" :fields="fields">
         </b-table>
-    </div>
+    </b-container>
 </template>
 
 <script>
