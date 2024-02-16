@@ -1,10 +1,6 @@
 <template>
   <b-container>
-    <div>
-      <b-button @click="applyChanges">Apply all changes</b-button>
-      <!-- {{ deleted_projects }} -->
-      <!-- {{ updated_projects }} -->
-    </div>
+    <b-button variant="success" @click="applyChanges">Apply all changes</b-button>
     <b-row>
       <b-col cols="auto 8">
         <ProjectList></ProjectList>

@@ -1,20 +1,21 @@
 <template>
-  <div class="container build-ref">
-    <h3>Download genome references</h3>
+  <b-container>
+    <h3>Download Genome References</h3>
     <label>Note: genome DNA and transcripts</label>
-    <div>
+    <b-container class="border m-2">
       <!-- specie -->
       <inputDropdown :data="specie_group" :receive="selectGroup"></inputDropdown>
       <inputDropdown v-show="showSpecie" :data="specie" :receive="receive"></inputDropdown>
       <!-- genome -->
       <inputDropdown :data="data_source" :receive="selectDataSource"></inputDropdown>
       <inputDropdown v-show="showVersion" :data="version" :receive="receive"></inputDropdown>
-    </div>
+    </b-container>
     <div>
-      <button @click="submit">Submit download request</button>
-      <button @click="reset">Reset</button>
+      <b-button variant="success" class="m-2" @click="submit"
+        >Submit download request</b-button>
+      <b-button variant="secondary" @click="reset">Reset</b-button>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -63,9 +64,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.container.build-ref {
-  background-color: white;
-}
-</style>

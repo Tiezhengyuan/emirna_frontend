@@ -8,13 +8,19 @@
       align="center"
       class="mt-3"
     >
-
       <b-card-text>
-        <b-container>
-          <inputDropdown :data="study_names" :receive="receive"></inputDropdown>
-          <inputText :data="sample_name_reg" :receive="receive"></inputText>
-          <button @click="parseSampleFiles">Submit</button>
-        </b-container>
+
+        <b-row align-v="center" class="border p-2 mb-5">
+          <b-col>
+            <inputDropdown :data="study_names" :receive="receive"></inputDropdown>
+          </b-col>
+          <b-col>
+            <inputText :data="sample_name_reg" :receive="receive"></inputText>
+          </b-col>
+          <b-col>
+            <button @click="parseSampleFiles">Submit</button>
+          </b-col>
+        </b-row>
 
         <b-table striped
           :items="unparsed_data"

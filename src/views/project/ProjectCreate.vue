@@ -1,17 +1,15 @@
 <template>
   <b-container class="text-center">
     <h3>Create a new project</h3>
-    <b-container v-if="showInput">
+    <b-container v-if="showInput" class="border m-2">
       <PairedLabel :data="new_project_id"></PairedLabel>
       <inputText :data="project_name" :receive="receive"></inputText>
       <inputText :data="description" :receive="receive"></inputText>
       <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
       <inputDropdown :data="status" :receive="receive"></inputDropdown>
       <inputDropdown :data="ready_genome" :receive="receive"></inputDropdown>
-      <b-button variant="success" class="m-2"
-        @click="create">Create</b-button>
-      <b-button variant="secondary"
-        @click="reset">Reset</b-button>
+      <b-button variant="success" class="m-2" @click="create">Create</b-button>
+      <b-button variant="secondary" @click="reset">Reset</b-button>
     </b-container>
     <b-container v-show="showWarning">
       Either Sequencing or genome should be selected.

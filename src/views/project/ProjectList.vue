@@ -1,32 +1,13 @@
 <template>
   <b-container class="border mt-3 p-2">
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Project ID</th>
-          <th>Project Name</th>
-          <th>Description</th>
-          <th>Sequencing</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(project, i) in projects" :key="i">
-          <td>{{ project.project_id }}</td>
-          <td>{{ project.project_name }}</td>
-          <td>{{ project.description }}</td>
-          <td>{{ project.sequencing }}</td>
-          <td>{{ project.status }}</td>
-          <td>
-            <b-button class="p-1 m-1" @click="deleteProject(project)"
-            >Delete</b-button>
-            <b-button class="p-1 m-1" @click="editProject(project)"
-            >Edit</b-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <b-table stripped :items="projects" :fields="fields">
+      <template #cell(Actions)="row">
+        <b-button class="p-1 m-1" @click="deleteProject(row.item)"
+          >Delete</b-button>
+        <b-button class="p-1 m-1" @click="editProject(row.item)"
+          >Edit</b-button>
+      </template>
+    </b-table>
   </b-container>
 </template>
 
@@ -41,6 +22,8 @@ export default {
   data() {
     return {
       deleted: [],
+      fields: ['project_id', 'project_name', 'description', 
+        'sequencing', 'status', 'Actions'],
     };
   },
   methods: {

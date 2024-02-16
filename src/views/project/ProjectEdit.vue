@@ -1,15 +1,13 @@
 <template>
   <b-container class="border m-3 p-2">
     <h3>Edit project {{ current_project.project_id }}</h3>
-    <div>
+    <b-container class="m-3">
       <inputText :data="project_name" :receive="receive"></inputText>
       <inputText :data="description" :receive="receive"></inputText>
       <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
       <inputDropdown :data="status" :receive="receive"></inputDropdown>
-      <div>
-        <button @click="saveUpdate">save update</button>
-      </div>
-    </div>
+    </b-container>
+    <b-button variant="success" @click="saveUpdate">save update</b-button>
   </b-container>
 </template>
 

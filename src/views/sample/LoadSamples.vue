@@ -8,14 +8,19 @@
         align="center"
       >
         <b-card-text>
-          <div>
-            <inputText :data="study_name" :receive="setStudyName"></inputText>
-            <SelectFile></SelectFile>
-          </div>
-          <div>
-            <button @click="saveSamples">Save Samples</button>
-          </div>
-          <ShowSamples></ShowSamples>
+          <b-row align-v="center" class="mb-5">
+            <b-col cols="5">
+              <inputText :data="study_name" :receive="setStudyName"></inputText>
+            </b-col>
+            <b-col cols="7">
+              <SelectFile></SelectFile>
+            </b-col>
+          </b-row>
+
+          <ShowSamples>
+            <b-button variant="success" @click="saveSamples"
+              >Save Samples</b-button>
+          </ShowSamples>
         </b-card-text>
       </b-card>
   </b-container>
