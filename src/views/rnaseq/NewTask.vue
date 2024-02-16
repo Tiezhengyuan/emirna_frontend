@@ -1,19 +1,31 @@
 <template>
-  <div class="task-container">
-    <div>Task: {{ task.task_id }}</div>
-    <div class="task-header">
-      <label>{{ status }}</label>
-      <button id="task-delete" @click="deleteTask">X</button>
-      <button id="task-stop" @click="stopTask">||</button>
-      <button id="task-submit" @click="submitTask">></button>
-    </div>
-    <TaskRelations :task="task"></TaskRelations>
-    <div class="task-method">
-      <button @click="selectTaskMethod">
-        <label>Set method:</label>
-        {{ task.task_method }}
-      </button>
-    </div>
+  <div>
+    <b-card border-variant="primary" header-bg-variant="primary"
+        header-text-variant="white" align="center">
+      <b-card-header>Task: {{ task.task_id }}</b-card-header>
+      <b-card-text>
+
+        <b-container class="border my-3">
+          <span class="h3">{{ status }}</span>
+          <b-button-group class="mx-1">
+            <b-button pill variant="danger" id="task-delete" @click="deleteTask">
+              <b-icon icon="trash-fill"></b-icon>
+            </b-button>
+            <b-button pill variant="info" id="task-stop" @click="stopTask">
+              <b-icon icon="pause-fill"></b-icon>
+            </b-button>
+            <b-button pill variant="success" id="task-submit" @click="submitTask">
+              <b-icon icon="play-fill"></b-icon>
+            </b-button>
+          </b-button-group>
+        </b-container>
+        <TaskRelations :task="task"></TaskRelations>
+
+      <b-button variant="info" @click="selectTaskMethod"
+        >Method: {{ task.task_method }}</b-button>
+
+      </b-card-text>
+    </b-card>
   </div>
 </template>
 
@@ -61,43 +73,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.task-container {
-  height: 200px;
-  width: 250px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  margin: 10px;
-  padding: 5px;
-  background-color: lightblue;
-}
-.task-header {
-  border: 1px solid black;
-  background-color: white;
-  /* height: 50px; */
-  margin: 0;
-  padding: 5px;
-  overflow: hidden;
-}
-.task-header label {
-  float: left;
-  padding: 3px;
-}
-.task-header button {
-  float: right;
-  margin-left: 5px;
-}
-#task-delete {
-  background-color: red;
-}
-#task-stop {
-  background-color: orange;
-}
-#task-submit {
-  background-color: lightgreen;
-}
-.task-method {
-  margin: 10px;
-}
-</style>
