@@ -2,24 +2,24 @@
   <b-container fluid>
     <b-card title="Applications" no-body>
       <b-card-header header-tag="nav">
-        <b-nav>
+        <b-nav tabs class="h3">
           <b-nav-item active>
-            <router-link to="/">Home</router-link>
+            <router-link to="/" class="text-decoration-none">Home</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/sample">Samples</router-link>
+            <router-link to="/sample" class="text-decoration-none">Samples</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/manage">Management</router-link>
+            <router-link to="/manage" class="text-decoration-none">Management</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/rnaseq">Bioinformatics Pipeline</router-link>
+            <router-link to="/rnaseq" class="text-decoration-none">Pipeline</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/tools">Tools</router-link>
+            <router-link to="/tools" class="text-decoration-none">Tools</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/debugging">Debugging</router-link>
+            <router-link to="/debugging" class="text-decoration-none">Debugging</router-link>
           </b-nav-item>
         </b-nav>
       </b-card-header>

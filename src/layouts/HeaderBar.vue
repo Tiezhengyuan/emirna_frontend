@@ -1,5 +1,5 @@
 <template>
-<b-container fluid class="bv-example-row border bg-dark">
+<b-container fluid class="bg-dark">
   <b-row>
     <b-col align-self="center">
       <b-img thumbnail rounded="0" src="#" alt="logo"></b-img>

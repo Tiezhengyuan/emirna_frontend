@@ -1,5 +1,5 @@
 <template>
-  <b-container class="border">
+  <b-container class="border mb-2">
     <b-row>
       <b-col>
         <SelectProject class="select">
