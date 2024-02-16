@@ -27,8 +27,9 @@
       </b-container>
       <TaskRelations :task="task"></TaskRelations>
 
-      <b-button variant="info" @click="selectTaskMethod"
-        >Method: {{ task.task_method }}</b-button>
+      <b-button variant="info" v-b-toggle.sidebar-method-params
+        @click="selectTaskMethod"
+      >Method: {{ task.task_method }}</b-button>
     </b-card-text>
 
   </b-card>

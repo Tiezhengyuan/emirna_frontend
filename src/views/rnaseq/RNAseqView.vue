@@ -2,7 +2,7 @@
   <b-container fluid>
     <RNAseqHeader></RNAseqHeader>
     <b-row>
-      <b-col cols="9">
+      <b-col cols="8">
         <h3 v-show="current_project.id">
           Project: {{ current_project.project_id }}
         </h3>
@@ -11,11 +11,12 @@
             :key="i" :task="task"></NewTask>
         </div>
       </b-col>
-      <b-col cols="3">
-        <b-container>
+      <b-col>
+        <b-sidebar id="sidebar-method-params" title="Parameters" width="40%"
+          bg-variant="dark" text-variant="light" right shadow>
           <taskMethod :is="current_task.component"
             v-if="!!current_task.component"></taskMethod>
-        </b-container>
+        </b-sidebar>
       </b-col>
     </b-row>
   </b-container>

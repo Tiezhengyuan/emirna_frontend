@@ -1,24 +1,30 @@
 <template>
-  <div class="container bowtie">
-    <div>
-      <h3>aligner: Bowtie2</h3>
-    </div>
-    <fieldset class="required">
-      <legend>Required parameters</legend>
-      <BowtieRequired></BowtieRequired>
-    </fieldset>
-    <fieldset class="alignment">
-      <legend>Alignment options</legend>
-      <BowtieAlignment></BowtieAlignment>
-    </fieldset>
-    <fieldset class="output">
-      <legend>Output options</legend>
-      <BowtieOutput></BowtieOutput>
-    </fieldset>
-    <div>
-      <button @click="save">Save</button>
-    </div>
-  </div>
+  <b-container class="m-2 text-center">
+    <h3>aligner: Bowtie2</h3>
+    <b-card class="m-2">
+      <b-card-header>Required parameters</b-card-header>
+      <b-card-body>
+        <BowtieRequired></BowtieRequired>
+      </b-card-body>
+    </b-card>
+
+    <b-card class="m-2">
+      <b-card-header>Alignment options</b-card-header>
+      <b-card-body>
+        <BowtieAlignment></BowtieAlignment>
+      </b-card-body>
+    </b-card>
+
+    <b-card class="m-2">
+      <b-card-header>Output options</b-card-header>
+      <b-card-body>
+        <BowtieOutput></BowtieOutput>  
+      </b-card-body>
+    </b-card>
+    <b-container>
+      <b-button variant="success" @click="save">Save</b-button>
+    </b-container>
+  </b-container>
 </template>
 
 <script>
@@ -41,9 +47,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container.bowtie {
-  width: 500px;
-  border: 1px solid black;
-}
-</style>

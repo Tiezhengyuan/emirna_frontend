@@ -1,7 +1,15 @@
 <template>
-  <div class="container operate-tasks">
-    <button @click="submitTask">Submit Tasks</button>
-    <button @click="refreshProjectTasks">Refresh Project</button>
+  <div>
+    <b-row class="mb-3">
+      <b-col cols="2">
+        <b-button variant="success" size="lg"
+          @click="submitTask">Submit Tasks</b-button>
+      </b-col>
+      <b-col cols="3">
+        <b-button variant="info" size="lg"
+          @click="refreshProjectTasks">Refresh Project</b-button>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -20,14 +28,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container.operate-tasks {
-  display: flex;
-  align-items: center;
-}
-.container.operate-tasks button {
-  height: 50px;
-  margin: 5px;
-  border-radius: 10px;
-}
-</style>

@@ -1,26 +1,29 @@
 <template>
   <b-container class="border mb-2">
-    <b-row>
-      <b-col>
-        <SelectProject class="select">
-          <div class="container-label">I. Select Project</div>
-        </SelectProject>
-      </b-col>
-      <b-col>
-        <div class="container-arrow">>></div>
-      </b-col>
-
-      <b-col>
-        <SelectMethod class="select">
-          <div class="container-label">II: Select method</div>
-        </SelectMethod>
-      </b-col>
-      <b-col>
-        <div class="container-arrow">>></div>
-      </b-col>
-
-      <b-col>
+    <b-row class="m-2">
         <OperateTasks class="select"></OperateTasks>
+    </b-row>
+    <b-row align-v="center" class="my-2">
+      <b-col class="p-2 m-1 bg-info bg-gradient text-dark">
+        <SelectProject><div>I. Select Project</div></SelectProject>
+      </b-col>
+      <b-col cols="auto">
+        <b-icon icon="chevron-double-right" class="h4"></b-icon>
+      </b-col>
+
+      <b-col class="p-2 m-1 bg-info bg-gradient text-dark">
+        <SelectMethod class="select"><div>II: Select method</div></SelectMethod>
+      </b-col>
+      <b-col cols="auto">
+        <b-icon icon="chevron-double-right" class="h4"></b-icon>
+      </b-col>
+
+      <b-col class="p-2 m-1 bg-info bg-gradient text-dark">
+        <SelectMethod class="select"><div>III: Select tool</div></SelectMethod>
+      </b-col>
+
+      <b-col class="add-task">
+        <button @click="addTask">Add task</button>
       </b-col>
     </b-row>
   </b-container>
@@ -41,23 +44,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container-arrow {
-  height: 120px;
-  width: 30px;
-  margin: 5px;
-  padding: 5px;
-  line-height: 100px;
-  box-sizing: border-box;
-  background-color: lightgray;
-}
-.container-label {
-  margin: 10px;
-}
-.select {
-  height: 120px;
-  margin: 5px;
-  padding: 5px;
-  background-color: lightblue;
-}
-</style>
