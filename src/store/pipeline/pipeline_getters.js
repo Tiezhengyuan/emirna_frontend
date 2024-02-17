@@ -1,4 +1,13 @@
 export default {
+  // user
+  project_names(state) {
+    return state.projects.map((el) => {
+      return el.project_name;
+    });
+  },
+
+
+  // project
   projects_list(state) {
     const options = state.projects.map((el) => {
       return {

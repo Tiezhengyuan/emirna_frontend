@@ -1,4 +1,27 @@
 export default {
+  current_user: {},
+  // project
+  projects: [],
+  next_project_id: "",
+  current_project: {},
+  current_updated_project: {},
+  deleted_projects: [],
+  current_project_files: [],
+  updated_project: {},
+  // task
+  current_task: {},
+  celery_tasks: [],
+
+  // new project
+  new_project: {
+    project_name: "",
+    description: "",
+    sequencing: null,
+    status: "A",
+    genome: null,
+    study_name: "",
+  },
+  // task
   new_task_id: 10,
   task_methods: [
     { task_method: "sequence alignment", component: "AlignerBowtie" },
@@ -17,8 +40,4 @@ export default {
       task_id: 9,
     },
   ],
-  current_task: {},
-
-  // celery
-  celery_tasks: [],
 };

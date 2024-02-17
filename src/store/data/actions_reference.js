@@ -1,4 +1,4 @@
-import { api, endpoint } from "./api";
+import { api, endpoint } from "../api";
 
 export default {
   // get

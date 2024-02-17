@@ -35,4 +35,18 @@ export default {
       R2_file: "F:raw\\sample2_2_R2.fq",
     },
   ],
+
+    // build new reference
+    data_sources: [],
+    specie_groups: [],
+    species: [],
+    genomes: [],
+    versions: [],
+    new_genome: {},
+  
+    ready_genomes: [],
+    current_ref: {
+      data_source: "",
+      specie: "",
+    },
 };
