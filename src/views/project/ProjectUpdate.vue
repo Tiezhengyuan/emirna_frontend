@@ -23,6 +23,9 @@ export default {
     ProjectEdit,
     ProjectList,
   },
+  mounted() {
+    this.$store.commit("clearCurrentProject");
+  },
   computed: {
     ...mapState(["project"]),
     showUpdate() {

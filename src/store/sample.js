@@ -3,11 +3,16 @@ import { api } from "./api";
 
 export default ({
     state: () => ({
-        seq_ends: "two_ends",
-        loaded_samples: [],
+        // load samples
         new_study_name: "",
+        // 
+        loaded_samples: [],
         current_study_name: "",
         study_names: [],
+
+
+        seq_ends: "two_ends",
+
         raw_data_count: 0,
         unparsed_data: [],
 
@@ -71,13 +76,13 @@ export default ({
 
     },
     mutations: {
-        setNewStudyName(state, name) {
-            state.new_study_name = name;
-          },
-          addStudyName(state, data) {
+        setNewStudyName(state, study_name) {
+            state.new_study_name = study_name;
+        },
+        addStudyName(state, data) {
             state.study_names.push(data);
-          },
-          setLoadedSamples(state, sample_content) {
+        },
+        setLoadedSamples(state, sample_content) {
             state.loaded_samples = [];
             let names = sample_content[0].split(",");
             names = ["sample_name", ...names.slice(1)];
@@ -91,18 +96,18 @@ export default ({
               );
               state.loaded_samples.push(item);
             }
-          },
-          deleteSample(state, sample) {
+        },
+        deleteSample(state, sample) {
             state.samples = state.samples.filter((el) => {
               const is_sample =
                 el.sample_name == sample.sample_name && el.R1_file == sample.R1_file;
               return is_sample ? 0 : 1;
             });
-          },
-          updateParseSamples(state, key_val) {
+        },
+        updateParseSamples(state, key_val) {
             state.parse_samples[key_val[0]] = key_val[1];
-          },
-          setUnparsedData(state, data) {
+        },
+        setUnparsedData(state, data) {
             data.sort((a, b) => {
               const a_name = a.sample_name.toUpperCase();
               const b_name = b.sample_name.toUpperCase();
@@ -123,12 +128,12 @@ export default ({
               return cmp;
             });
             state.unparsed_data = data;
-          },
-          removeUnparsedData(state, index) {
+        },
+        removeUnparsedData(state, index) {
             state.unparsed_data = state.unparsed_data.filter((el,i) => {
               return index !== i;
             });
-          },
+        },
 
         
     },
@@ -181,6 +186,7 @@ export default ({
                 metadata: meta,
               };
             });
+            console.log(data)
             api
               .post("/sample/load_samples/", data)
               .then(() => {
@@ -191,8 +197,8 @@ export default ({
               .catch((err) => {
                 console.log(err);
               });
-          },
-          parseSampleFiles(context) {
+        },
+        parseSampleFiles(context) {
             const data = context.state.unparsed_data.map((el) => {
               return {
                 sample: el.sample_id,
@@ -207,7 +213,7 @@ export default ({
               .catch((err) => {
                 console.log(err);
               });
-          },
+        },
         getRawDataCount(context) {
             api
                 .get("/raw_data/count/")

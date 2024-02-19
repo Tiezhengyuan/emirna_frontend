@@ -35,7 +35,7 @@ export default {
       }
     },
     editProject(project) {
-      this.$store.commit("setCurrentProject", project);
+      this.$store.commit("refreshCurrentProject", project);
     },
   },
 };

@@ -7,10 +7,10 @@
             <router-link to="/" class="text-decoration-none">Home</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/sample" class="text-decoration-none">Samples</router-link>
+            <router-link to="/manage" class="text-decoration-none">Project</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/manage" class="text-decoration-none">Management</router-link>
+            <router-link to="/sample" class="text-decoration-none">Samples</router-link>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/rnaseq" class="text-decoration-none">Pipeline</router-link>

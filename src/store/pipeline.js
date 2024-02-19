@@ -45,14 +45,14 @@ export default ({
         getUnassignedSampleFiles(context, study_name) {
             const config = {
               params: {
-                project_id: context.state.current_project.project_id,
+                project_id: context.rootState.project.current_project.project_id,
                 study_name: study_name
               },
             };
             api
               .get("/sample_project/unassigned_sample_files/", config)
               .then((res) => {
-                context.state.current_study_name = study_name;
+                context.rootState.current_study_name = study_name;
                 context.state.unassigned_sample_files = res.data;
               })
               .catch((err) => {

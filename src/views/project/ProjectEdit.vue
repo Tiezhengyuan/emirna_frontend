@@ -5,7 +5,6 @@
       <inputText :data="project_name" :receive="receive"></inputText>
       <inputText :data="project_description" :receive="receive"></inputText>
       <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
-      <inputDropdown :data="project_status" :receive="receive"></inputDropdown>
     </b-container>
     <b-button variant="success" @click="saveUpdate">save update</b-button>
   </b-container>
@@ -24,15 +23,14 @@ export default {
   },
   computed: {
     ...mapState(["project"]),
-    ...mapGetters(['project_name', 'project_description', 'sequencing',
-      'project_status']),
+    ...mapGetters(['project_name', 'project_description', 'sequencing']),
   },
   methods: {
     receive(key_val) {
       this.$store.commit("updateCurrentProject", key_val);
     },
     saveUpdate() {
-      this.$store.commit("updateUpdated");
+      this.$store.commit("updateUpdatedProjects");
     },
   },
 };

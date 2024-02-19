@@ -5,22 +5,16 @@
       <b-card-header header-tag="nav">
         <b-nav>
           <b-nav-item>
-            <router-link
-              to="/manage/build_reference"
-              class="text-decoration-none"
-            >Build Reference</router-link>
+            <router-link to="/manage/create_project"
+              class="text-decoration-none">Create Project</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link
-              to="/manage/create_project"
-              class="text-decoration-none"
-            >Create Project</router-link>
+            <router-link to="/manage/update_projects"
+              class="text-decoration-none">Update Projects</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link
-              to="/manage/update_projects"
-              class="text-decoration-none"
-            >Update Projects</router-link>
+            <router-link to="/manage/build_reference"
+              class="text-decoration-none">Build Reference</router-link>
           </b-nav-item>
         </b-nav>
       </b-card-header>

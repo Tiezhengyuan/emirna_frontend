@@ -13,7 +13,6 @@
           <b-button variant="success">Save</b-button>
         </b-col>
       </b-row>
-      
     </div>
 
     <b-container
@@ -57,7 +56,7 @@ export default {
     selectStudy(key_val) {
       const study_name = key_val[1]
       console.log(study_name)
-      // this.$store.dispatch("getUnassignedSampleFiles", study_name);
+      this.$store.dispatch("getUnassignedSampleFiles", study_name);
     },
   },
 };
