@@ -1,28 +1,18 @@
 <template>
-  <div class="container">
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Project</th>
-          <th>Progress</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, i) in status" :key="i">
-          <td>{{ item.project }}</td>
-          <td>
-            <progress min="0" max="100" :value="item.progress"></progress>
-          </td>
-          <td>{{ item.status }}</td>
-          <td>
-            <button @click="runProject(item)">{{ item.label }}</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <b-container>
+    <b-table :items="status" :fields="fields" caption-top>
+      <template #cell(progress)="row">
+        <b-progress min="0" max="100"
+          :variant="progress_color(row.item.status)"
+          :value="row.item.progress"
+        ></b-progress>
+      </template>
+      <template #cell(Action)="row">
+        <b-button variant="danger" size="sm" @click="runProject(item)"
+          >{{ row.item.label }}</b-button>
+      </template>
+    </b-table>
+  </b-container>
 </template>
 
 <script>
@@ -30,6 +20,7 @@ export default {
   name: "ProcessingStatus",
   data() {
     return {
+      fields: ['project', 'progress', 'status', 'Action'],
       status: [
         { project: "a", progress: 40, status: "running", label: "stop" },
         { project: "b", progress: 0, status: "pending", label: "stop" },
@@ -49,35 +40,17 @@ export default {
       }
       console.log(item.project);
     },
-  },
+    progress_color(status) {
+      if (status === 'done') {
+        return "success"
+      } else if (status === "pending") {
+        return "secondary"
+      } else if (status == "failed") {
+        return "danger"
+      } else {
+        return "primary"
+      }
+    },
+},
 };
 </script>
-
-<style scoped>
-.container {
-  box-sizing: border-box;
-  padding: 10px;
-}
-table {
-  width: 300px;
-  /* height: 200px; */
-  border-collapse: collapse;
-}
-caption {
-  font-weight: bold;
-  margin: 5px;
-}
-td,
-th {
-  border: 2px solid #777;
-  padding: 5px;
-}
-td progress {
-  width: 80%;
-  height: 30px;
-  text-align: center;
-}
-td progress:after {
-  content: attr(value) "%";
-}
-</style>

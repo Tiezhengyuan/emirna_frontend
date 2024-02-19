@@ -11,11 +11,11 @@ import { mapState } from "vuex";
 export default {
   name: "ProjectNav",
   computed: {
-    ...mapState["new_project"],
+    ...mapState["project"],
   },
   methods: {
     create() {
-      this.$store.commit("addNewProject");
+      this.$store.commit("project.addNewProject");
       // this.$store.dispatch("postNewProject", this.new_project);
     },
   },

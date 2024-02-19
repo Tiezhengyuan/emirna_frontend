@@ -31,14 +31,14 @@ export default {
   components: {
     inputDropdown,
   },
+  computed: {
+    ...mapGetters(["specie_group", "data_source", "specie", "version"]),
+  },
   data() {
     return {
       showSpecie: false,
       showVersion: false,
     };
-  },
-  computed: {
-    ...mapGetters(["data_source", "specie_group",  "specie", "version"]),
   },
   methods: {
     selectGroup(key_val) {

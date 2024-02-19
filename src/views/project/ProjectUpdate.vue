@@ -24,17 +24,17 @@ export default {
     ProjectList,
   },
   computed: {
-    ...mapState(["current_project", "deleted_projects", "updated_projects"]),
+    ...mapState(["project"]),
     showUpdate() {
-      return Object.keys(this.current_project).length === 0 ? false : true;
+      return Object.keys(this.project.current_project).length === 0 ? false : true;
     },
   },
   methods: {
     applyChanges() {
-      if (this.deleted_projects) {
+      if (this.project.deleted_projects) {
         this.$store.dispatch("deleteProjects");
       }
-      if (this.updated_projects) {
+      if (this.project.updated_projects) {
         this.$store.dispatch("updateProjects");
       }
     },

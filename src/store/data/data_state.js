@@ -1,6 +1,7 @@
 export default {
+  // raw data
   raw_data_count: 0,
-  // project_id: "P0001",
+  // sample, project_id: "P0001",
   seq_ends: "two_ends",
   loaded_samples: [],
   new_study_name: "",
@@ -13,6 +14,20 @@ export default {
     study_name: "",
     reg: "<S>",
   },
+  //reference
+  data_sources: [],
+  specie_groups: [],
+  species: [],
+  genomes: [],
+  versions: [],
+  new_genome: {},
+
+  ready_genomes: [],
+  current_ref: {
+    data_source: "",
+    specie: "",
+  },
+
   samples: [
     {
       sample_name: "sample1",
@@ -35,18 +50,4 @@ export default {
       R2_file: "F:raw\\sample2_2_R2.fq",
     },
   ],
-
-    // build new reference
-    data_sources: [],
-    specie_groups: [],
-    species: [],
-    genomes: [],
-    versions: [],
-    new_genome: {},
-  
-    ready_genomes: [],
-    current_ref: {
-      data_source: "",
-      specie: "",
-    },
 };

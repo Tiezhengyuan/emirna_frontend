@@ -3,19 +3,19 @@
     <RNAseqHeader></RNAseqHeader>
     <b-row>
       <b-col cols="8">
-        <h3 v-show="current_project.id">
-          Project: {{ current_project.project_id }}
+        <h3 v-show="project.current_project.id">
+          Project: {{ project.current_project.project_id }}
         </h3>
         <div class="tasks-box">
-          <NewTask v-for="(task, i) in project_tasks"
-            :key="i" :task="task"></NewTask>
+          <NewTask v-for="(project_task, i) in project_tasks"
+            :key="i" :project_task="project_task"></NewTask>
         </div>
       </b-col>
       <b-col>
         <b-sidebar id="sidebar-method-params" title="Parameters" width="40%"
           bg-variant="dark" text-variant="light" right shadow>
-          <taskMethod :is="current_task.component"
-            v-if="!!current_task.component"></taskMethod>
+          <taskMethod :is="task.current_task.component"
+            v-if="!!task.current_task.component"></taskMethod>
         </b-sidebar>
       </b-col>
     </b-row>
@@ -48,10 +48,10 @@ export default {
 
   },
   computed: {
-    ...mapState(["current_project", "tasks", "current_task"]),
+    ...mapState(["project", "task"]),
     project_tasks() {
-      return this.tasks.filter((el) => {
-        return el.project == this.current_project ? 1 : 0;
+      return this.task.tasks.filter((el) => {
+        return el.project == this.project.current_project ? 1 : 0;
       });
     },
   },

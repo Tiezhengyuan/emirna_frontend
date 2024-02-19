@@ -12,7 +12,7 @@
 
         <b-row align-v="center" class="border p-2 mb-5">
           <b-col>
-            <inputDropdown :data="study_names" :receive="receive"></inputDropdown>
+            <inputDropdown :data="input_study_names" :receive="receive"></inputDropdown>
           </b-col>
           <b-col>
             <inputText :data="sample_name_reg" :receive="receive"></inputText>
@@ -23,9 +23,9 @@
         </b-row>
 
         <b-table striped
-          :items="unparsed_data"
+          :items="sample.unparsed_data"
           :fields="fields"
-          v-show="unparsed_data.length"
+          v-show="sample.unparsed_data.length"
         >
           <template #cell(Actions)="row">
             <b-button @click="removeFile(row.index)">delete</b-button>
@@ -59,8 +59,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["unparsed_data"]),
-    ...mapGetters(["study_names", "sample_name_reg"]),
+    ...mapState(["sample"]),
+    ...mapGetters(["input_study_names", "sample_name_reg"]),
   },
   methods: {
     receive(key_val) {

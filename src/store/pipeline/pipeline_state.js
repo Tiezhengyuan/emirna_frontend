@@ -12,7 +12,8 @@ export default {
   current_task: {},
   celery_tasks: [],
 
-  // new project
+
+  // constant objects
   new_project: {
     project_name: "",
     description: "",
@@ -21,7 +22,6 @@ export default {
     genome: null,
     study_name: "",
   },
-  // task
   new_task_id: 10,
   task_methods: [
     { task_method: "sequence alignment", component: "AlignerBowtie" },

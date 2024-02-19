@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(sample, i) in samples" :key="i">
+      <tr v-for="(sample, i) in sample.samples" :key="i">
         <td>
           <button>Edit</button>
           {{ sample.sample_name }}
@@ -36,16 +36,16 @@ import { mapState } from "vuex";
 export default {
   name: "TableSingleEnd",
   computed: {
-    ...mapState(["samples"]),
+    ...mapState(["sample"]),
     sample_num() {
-      const names = this.samples.map((el) => el.sample_name);
+      const names = this.sample.samples.map((el) => el.sample_name);
       const unique = names.filter((val, index, array) => {
         return array.indexOf(val) == index;
       });
       return unique.length;
     },
     R1_num() {
-      const R1_files = this.samples.map((el) => el.R1_file);
+      const R1_files = this.sample.samples.map((el) => el.R1_file);
       return R1_files.length;
     },
   },

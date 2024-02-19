@@ -7,7 +7,7 @@
           <inputDropdown :data="projects_list" :receive="selectProject"></inputDropdown>  
         </b-col>
         <b-col>
-          <inputDropdown :data="study_names" :receive="selectStudy"></inputDropdown>
+          <inputDropdown :data="input_study_names" :receive="selectStudy"></inputDropdown>
         </b-col>
         <b-col>
           <b-button variant="success">Save</b-button>
@@ -20,7 +20,7 @@
       v-show="project_files.length > 0"
       class="border-top mt-4 pt-2"
     >
-      <h3>{{ current_project.project_id }}</h3>
+      <h3>{{ project.current_project.project_id }}</h3>
       <b-table striped hover :items="project_files" :fields="fields">
         <template #table-caption>
           The number of samples is {{ project_files.length }}.
@@ -46,8 +46,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["current_project"]),
-    ...mapGetters(["projects_list", "study_names", "project_files"]),
+    ...mapState(["project", "sample"]),
+    ...mapGetters(["projects_list", "project_files", "input_study_names"]),
   },
   methods: {
     selectProject(key_val) {
@@ -56,7 +56,8 @@ export default {
     },
     selectStudy(key_val) {
       const study_name = key_val[1]
-      this.$store.dispatch("getUnassignedSampleFiles", study_name);
+      console.log(study_name)
+      // this.$store.dispatch("getUnassignedSampleFiles", study_name);
     },
   },
 };

@@ -21,7 +21,7 @@ import ToolsView from "../views/tools/ToolsView";
 import DebuggingView from "../views/debugging/DebuggingView";
 import TableSimple from "../components/TableSimple";
 import BasicInput from "../components/BasicInput";
-
+import StoreData from "../views/debugging/StoreData";
 
 
 const routes = [
@@ -99,6 +99,11 @@ const routes = [
         path: "simple_input",
         name: "simple_input",
         component: BasicInput,
+      },
+      {
+        path: "store_data",
+        name: "store_data",
+        component: StoreData,
       },
     ],
   },

@@ -5,7 +5,7 @@
       style="max-width: 20rem;" class="mb-2"  
     >
 
-    <b-card-header>Task: {{ task.task_id }}</b-card-header>
+    <b-card-header>Task: {{ project_task.task_id }}</b-card-header>
 
     <b-card-text>
       <b-container class="border my-3">
@@ -25,11 +25,11 @@
           </b-button>
         </b-button-group>
       </b-container>
-      <TaskRelations :task="task"></TaskRelations>
+      <TaskRelations :project_task="project_task"></TaskRelations>
 
       <b-button variant="info" v-b-toggle.sidebar-method-params
         @click="selectTaskMethod"
-      >Method: {{ task.task_method }}</b-button>
+      >Method: {{ project_task.task_method }}</b-button>
     </b-card-text>
 
   </b-card>
@@ -37,31 +37,27 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import TaskRelations from "./TaskRelations";
 
 export default {
   name: "NewTask",
-  props: ["task"],
+  props: ["project_task"],
   components: {
     TaskRelations,
   },
   data() {
     return {
-      status: this.task.status,
+      status: this.project_task.status,
     };
-  },
-  computed: {
-    ...mapState(["task_methods", "tasks"]),
   },
   methods: {
     deleteTask() {
-      this.$store.commit("deleteTask", this.task);
+      this.$store.commit("deleteTask", this.project_task);
     },
     submitTask() {
       this.status = "pending";
       const obj = {
-        task_id: this.task.task_id,
+        task_id: this.project_task.task_id,
         status: this.status,
       };
       this.$store.commit("updateTaskStatus", obj);
@@ -69,13 +65,13 @@ export default {
     stopTask() {
       this.status = "stopped";
       const obj = {
-        task_id: this.task.task_id,
+        task_id: this.project_task.task_id,
         status: this.status,
       };
       this.$store.commit("updateTaskStatus", obj);
     },
     selectTaskMethod() {
-      this.$store.commit("selectTask", this.task);
+      this.$store.commit("selectTask", this.project_task);
     },
   },
 };

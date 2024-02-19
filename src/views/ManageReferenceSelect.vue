@@ -4,11 +4,11 @@
     <label>Note: genome DNA and transcripts</label>
     <div>
       <inputDropdown
-        :data="references.data_source"
+        :data="reference.references.data_source"
         :receive="getDataSource"
       ></inputDropdown>
       <inputDropdown
-        :data="references.specie"
+        :data="reference.references.specie"
         :receive="getSpecie"
       ></inputDropdown>
     </div>
@@ -25,7 +25,7 @@ export default {
     inputDropdown,
   },
   computed: {
-    ...mapState(["references"]),
+    ...mapState(["reference"]),
   },
   methods: {
     getDataSource(key_val) {

@@ -18,8 +18,7 @@
           </b-row>
 
           <ShowSamples>
-            <b-button variant="success" @click="saveSamples"
-              >Save Samples</b-button>
+            <b-button variant="success" @click="saveSamples">Save Samples</b-button>
           </ShowSamples>
         </b-card-text>
       </b-card>
@@ -43,15 +42,15 @@ export default {
     this.$store.dispatch("getStudyNames");
   },
   computed: {
-    ...mapState(["loaded_samples", "new_study_name"]),
-    ...mapGetters(["study_name"]),
+    ...mapState(["sample"]),
+    ...mapGetters(['study_name']),
   },
   methods: {
     setStudyName(key_val) {
       this.$store.commit("setNewStudyName", key_val[1]);
     },
     saveSamples() {
-      if (this.new_study_name && this.loaded_samples.length > 0) {
+      if (this.sample.new_study_name && this.sample.loaded_samples.length > 0) {
         this.$store.dispatch("postLoadedSamples");
       } else {
         console.log("study name or samples should not be empty.")

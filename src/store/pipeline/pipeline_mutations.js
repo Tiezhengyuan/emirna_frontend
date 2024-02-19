@@ -1,5 +1,5 @@
 export default {
-    // 
+    // user
     setCurrentUser(state, user) {
       state.current_user = {
         username: user.username,
@@ -67,9 +67,8 @@ export default {
       state.current_project = {};
       state.current_updated_project = {};
     },
-  
-    // deleted
-    updateDeleted(state, selected) {
+  // deleted
+  updateDeleted(state, selected) {
       // update state.projects
       state.projects = state.projects.filter((el) => {
         return el.project_id != selected;
@@ -77,6 +76,8 @@ export default {
       // update state.deleted_projects
       state.deleted_projects.push(selected);
     },
+  
+  // task
   addTask(state, new_task) {
     state.new_task_id += 1;
     state.tasks.push(new_task);

@@ -3,7 +3,7 @@
     <slot></slot>
     <label>{{ select_label }}</label>
     <select v-model="selected" @change="selectProject">
-      <option v-for="(project, i) of projects" :key="i" :value="project">
+      <option v-for="(project, i) of project.projects" :key="i" :value="project">
         {{ project.project_id }}: {{ project.project_name }}
       </option>
     </select>
@@ -22,7 +22,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["projects"]),
+    ...mapState(["project"]),
   },
   methods: {
     selectProject() {

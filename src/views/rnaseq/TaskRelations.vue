@@ -18,17 +18,17 @@ export default {
   components: {
     inputDropdown,
   },
-  props: ["task"],
+  props: ["project_task"],
   computed: {
-    ...mapState(["task_methods", "tasks"]),
+    ...mapState(["task"]),
     other_tasks() {
       return {
         name: "parent_task",
         label: "Parent task",
         value: "",
-        options: this.tasks
+        options: this.task.tasks
           .filter((el) => {
-            return el.task_id != this.task.task_id;
+            return el.task_id != this.project_task.task_id;
           })
           .map((el) => {
             return el.task_id;
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     setParentTask(task_obj) {
-      const tuple_pair = [this.task.task_id, task_obj[1]];
+      const tuple_pair = [this.project_task.task_id, task_obj[1]];
       this.$store.commit("setParentTask", tuple_pair);
     },
   },

@@ -22,9 +22,6 @@
         <SelectMethod class="select"><div>III: Select tool</div></SelectMethod>
       </b-col>
 
-      <b-col class="add-task">
-        <button @click="addTask">Add task</button>
-      </b-col>
     </b-row>
   </b-container>
 </template>

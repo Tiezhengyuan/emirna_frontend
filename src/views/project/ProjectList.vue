@@ -1,6 +1,6 @@
 <template>
   <b-container class="border mt-3 p-2">
-    <b-table stripped :items="projects" :fields="fields">
+    <b-table stripped :items="project.projects" :fields="fields">
       <template #cell(Actions)="row">
         <b-button class="p-1 m-1" @click="deleteProject(row.item)"
           >Delete</b-button>
@@ -17,7 +17,7 @@ import { mapState } from "vuex";
 export default {
   name: "ProjectList",
   computed: {
-    ...mapState(["projects"]),
+    ...mapState(["project"]),
   },
   data() {
     return {

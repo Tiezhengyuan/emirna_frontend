@@ -1,12 +1,13 @@
 <template>
   <b-container class="text-center">
     <h3>Create a new project</h3>
+
     <b-container v-if="showInput" class="border m-2">
       <PairedLabel :data="new_project_id"></PairedLabel>
       <inputText :data="project_name" :receive="receive"></inputText>
-      <inputText :data="description" :receive="receive"></inputText>
+      <inputText :data="project_description" :receive="receive"></inputText>
       <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
-      <inputDropdown :data="status" :receive="receive"></inputDropdown>
+      <inputDropdown :data="project_status" :receive="receive"></inputDropdown>
       <inputDropdown :data="ready_genome" :receive="receive"></inputDropdown>
       <b-button variant="success" class="m-2" @click="create">Create</b-button>
       <b-button variant="secondary" @click="reset">Reset</b-button>
@@ -41,22 +42,16 @@ export default {
     };
   },
   computed: {
-    ...mapState(["updated_project"]),
-    ...mapGetters([
-      "new_project_id",
-      "project_name",
-      "description",
-      "sequencing",
-      "status",
-      "ready_genome",
-    ]),
+    ...mapState(["project"]),
+    ...mapGetters(["new_project_id", "project_name", "project_description",
+      "sequencing", "project_status", "ready_genome"]),
   },
   methods: {
     receive(key_val) {
       this.$store.commit("updateUpdatedProject", key_val);
     },
     create() {
-      if (this.updated_project.sequencing && this.updated_project.genome) {
+      if (this.project.updated_project.sequencing && this.project.updated_project.genome) {
         this.$store.dispatch("postNewProject");
       } else {
         this.showWarning = true;

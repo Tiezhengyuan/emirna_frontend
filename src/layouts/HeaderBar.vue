@@ -11,7 +11,7 @@
 
     <b-col align-self="end" class="text-white">
       <span class="p-3">
-        User Name: <mark>{{ current_user.username }}</mark>
+        User Name: <mark>{{ user.current_user.username }}</mark>
       </span>
       <b-link href="#" class="text-decoration-none">logout</b-link>
     </b-col>
@@ -25,7 +25,7 @@ import { mapState } from "vuex";
 export default {
   name: "HeaderBar",
   computed: {
-    ...mapState(["current_user"]),
+    ...mapState(["user"]),
   },
 };
 </script>
