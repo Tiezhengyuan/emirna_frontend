@@ -1,6 +1,6 @@
 <template>
   <div class="container select-file">
-    <label class="file-label">Select a file</label>
+    <label class="file-label">Select sample information</label>
     <input
       class="file-selector"
       type="file"

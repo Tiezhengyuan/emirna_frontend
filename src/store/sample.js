@@ -78,6 +78,9 @@ export default ({
 
     },
     mutations: {
+        setCurrentStudyName(state, study_name) {
+            state.current_study_name = study_name;
+        },
         setNewStudyName(state, study_name) {
             state.new_study_name = study_name;
         },
@@ -165,15 +168,14 @@ export default ({
         },
         // browse study and study samples
         getStudySamples(context, study_name) {
-            const config = {study_name: study_name}
-            // TODO api filter is not working
+            const config = {
+                params: {study_name: study_name}
+            }
             api
               .get("/sample/", config)
               .then((res) => {
                 context.state.current_study_name = study_name
-                context.state.study_samples = res.data.filter(
-                    (el) => el.study_name == study_name
-                );
+                context.state.study_samples = res.data;
               })
               .catch((err) => {
                 console.log(err);

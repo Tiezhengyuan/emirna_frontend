@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 import HomeView from "../views/home/HomeView";
 
 import SampleView from "../views/sample/SampleView";
-import ImportRawData from "../views/sample/ImportRawData";
+import InjectData from "../views/sample/InjectData";
 import LoadSamples from "../views/sample/LoadSamples";
 import ParseSamples from "../views/sample/ParseSamples";
 import BrowseStudySamples from "../views/sample/BrowseStudySamples";
@@ -47,9 +47,9 @@ const routes = [
         component: BrowseStudySamples,
       },
       {
-        path: "import_raw_data",
-        name: "import_raw_data",
-        component: ImportRawData,
+        path: "inject_data",
+        name: "inject_data",
+        component: InjectData,
       },
       {
         path: "parse_samples",

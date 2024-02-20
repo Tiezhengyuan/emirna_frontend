@@ -72,7 +72,7 @@ export default ({
             });
           },
         
-        projects_list(state) {
+        input_projects(state) {
             const options = state.projects.map((el) => {
               return {
                 value: el.project_id,

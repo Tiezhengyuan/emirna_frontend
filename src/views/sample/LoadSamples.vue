@@ -36,7 +36,7 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import inputText from "../../components/forms/inputText";
-import SelectFile from "../../components/forms/SelectFile";
+import SelectFile from "./SelectFile";
 
 
 export default {

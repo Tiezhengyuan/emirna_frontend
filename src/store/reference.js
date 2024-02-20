@@ -169,7 +169,6 @@ export default ({
           },
         
           postReference(context, data) {
-            console.log(data);
             api
               .post("/reference/", data)
               .then((res) => {
