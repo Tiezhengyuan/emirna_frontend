@@ -17,9 +17,17 @@
             </b-col>
           </b-row>
 
-          <ShowSamples>
-            <b-button variant="success" @click="saveSamples">Save Samples</b-button>
-          </ShowSamples>
+          <h4 v-show="sample.loaded_samples.length > 0">
+            Samples of the study <em>{{ sample.new_study_name }}</em>
+          </h4>
+
+          <b-table striped hover class="border" :items="sample.loaded_samples">
+            <template #table-caption>
+              Number of samples is {{ sample.loaded_samples.length }}.
+            </template>
+          </b-table>
+          <b-button variant="success" @click="saveSamples">Save Samples</b-button>
+
         </b-card-text>
       </b-card>
   </b-container>
@@ -29,14 +37,13 @@
 import { mapState, mapGetters } from "vuex";
 import inputText from "../../components/forms/inputText";
 import SelectFile from "../../components/forms/SelectFile";
-import ShowSamples from "./ShowSamples";
+
 
 export default {
   name: "LoadSamples",
   components: {
     inputText,
     SelectFile,
-    ShowSamples,
   },
   mounted() {
     this.$store.dispatch("getStudyNames");

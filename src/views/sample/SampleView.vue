@@ -6,15 +6,19 @@
         <b-nav>
           <b-nav-item >
             <router-link to="/sample/load_samples"
-              class="text-decoration-none">Load Samples</router-link>
+              class="text-decoration-none">Load Study</router-link>
+          </b-nav-item>
+          <b-nav-item >
+            <router-link to="/sample/browse_study_samples"
+              class="text-decoration-none">Browse Samples</router-link>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/sample/parse_samples"
-              class="text-decoration-none">Parse Samples</router-link>
+              class="text-decoration-none">Parse data</router-link>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/sample/import_raw_data"
-              class="text-decoration-none">Import Raw Data</router-link>
+              class="text-decoration-none">Inject Data</router-link>
           </b-nav-item>
         </b-nav>
       </b-card-header>

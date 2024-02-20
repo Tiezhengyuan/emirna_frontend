@@ -24,9 +24,9 @@ export default {
       this.file = this.$refs.myFiles.files[0];
       const reader = new FileReader();
       reader.onload = (res) => {
-        const content = res.target.result.split("\n").map((el) => {
-          return el.replace("\r", "");
-        });
+        const content = res.target.result.split("\n")
+          .map((el) => el.replace("\r", ""))
+          .filter((el) => el.length > 0);
         this.$store.commit("setLoadedSamples", content);
       };
       reader.onerror = (err) => console.log(err);

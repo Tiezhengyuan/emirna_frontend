@@ -9,7 +9,9 @@ export default ({
         loaded_samples: [],
         current_study_name: "",
         study_names: [],
-
+        
+        // browse study samples
+        study_samples: [],
 
         seq_ends: "two_ends",
 
@@ -88,13 +90,13 @@ export default ({
             names = ["sample_name", ...names.slice(1)];
             state.loaded_samples.names = names;
             for (let r = 1; r < sample_content.length; r++) {
-              const values = sample_content[r].split(",");
-              const item = Object.fromEntries(
-                names.map((name, i) => {
-                  return [name, values[i]];
-                })
-              );
-              state.loaded_samples.push(item);
+                const values = sample_content[r].split(",");
+                const item = Object.fromEntries(
+                    names.map((name, i) => {
+                        return [name, values[i]];
+                    })
+                );
+                state.loaded_samples.push(item);
             }
         },
         deleteSample(state, sample) {
@@ -138,7 +140,46 @@ export default ({
         
     },
     actions: {
-          getStudyNames(context) {
+        // locad study 
+        postLoadedSamples(context) {
+            console.log(context.state.loaded_samples)
+            const data = context.state.loaded_samples.map((el) => {
+              let meta = Object.assign({}, el);
+              delete meta.sample_name;
+              return {
+                study_name: context.state.new_study_name,
+                sample_name: el.sample_name,
+                metadata: meta,
+              };
+            });
+            api
+              .post("/sample/load_samples/", data)
+              .then(() => {
+                context.dispatch("getStudyNames");
+                context.state.loaded_samples = [];
+                context.state.new_study_name = "";
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+        },
+        // browse study and study samples
+        getStudySamples(context, study_name) {
+            const config = {study_name: study_name}
+            // TODO api filter is not working
+            api
+              .get("/sample/", config)
+              .then((res) => {
+                context.state.current_study_name = study_name
+                context.state.study_samples = res.data.filter(
+                    (el) => el.study_name == study_name
+                );
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+        },
+        getStudyNames(context) {
             api
               .get("/sample/study_names/")
               .then((res) => {
@@ -148,8 +189,11 @@ export default ({
               .catch((err) => {
                 console.log(err);
               });
-          },
-          getStudyFiles(context, study_name) {
+        },
+
+
+        // 
+        getStudyFiles(context, study_name) {
             const config = {
               params: {study_name: study_name},
             };
@@ -176,28 +220,7 @@ export default ({
                 console.log(err);
               });
           },
-        postLoadedSamples(context) {
-            const data = context.state.loaded_samples.map((el) => {
-              let meta = Object.assign({}, el);
-              delete meta.sample_name;
-              return {
-                study_name: context.state.new_study_name,
-                sample_name: el.sample_name,
-                metadata: meta,
-              };
-            });
-            console.log(data)
-            api
-              .post("/sample/load_samples/", data)
-              .then(() => {
-                context.dispatch("getStudyNames");
-                context.state.loaded_samples = [];
-                context.state.new_study_name = "";
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-        },
+
         parseSampleFiles(context) {
             const data = context.state.unparsed_data.map((el) => {
               return {

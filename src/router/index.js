@@ -8,6 +8,7 @@ import SampleView from "../views/sample/SampleView";
 import ImportRawData from "../views/sample/ImportRawData";
 import LoadSamples from "../views/sample/LoadSamples";
 import ParseSamples from "../views/sample/ParseSamples";
+import BrowseStudySamples from "../views/sample/BrowseStudySamples";
 
 import ManageView from "../views/ManageView";
 import ProjectCreate from "../views/project/ProjectCreate";
@@ -39,6 +40,11 @@ const routes = [
         path: "load_samples",
         name: "load_samples",
         component: LoadSamples,
+      },
+      {
+        path: "browse_study_samples",
+        name: "browse_study_samples",
+        component: BrowseStudySamples,
       },
       {
         path: "import_raw_data",
