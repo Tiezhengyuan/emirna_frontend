@@ -1,14 +1,15 @@
 <template>
   <b-container fluid>
     <RNAseqHeader></RNAseqHeader>
+
     <b-row>
       <b-col cols="8">
         <h3 v-show="project.current_project.id">
           Project: {{ project.current_project.project_id }}
         </h3>
         <div class="tasks-box">
-          <NewTask v-for="(project_task, i) in project_tasks"
-            :key="i" :project_task="project_task"></NewTask>
+          <NewTask v-for="(project_task, i) in task.project_tasks"
+            :key="i" :task_index="i"></NewTask>
         </div>
       </b-col>
       <b-col>
@@ -19,6 +20,7 @@
         </b-sidebar>
       </b-col>
     </b-row>
+
   </b-container>
 </template>
 
@@ -45,15 +47,12 @@ export default {
     AssemblerCufflinks,
     CountReads,
     TrimSeq,
-
+  },
+  mounted() {
+    this.$store.commit("clearTask");
   },
   computed: {
     ...mapState(["project", "task"]),
-    project_tasks() {
-      return this.task.tasks.filter((el) => {
-        return el.project == this.project.current_project ? 1 : 0;
-      });
-    },
   },
 };
 </script>

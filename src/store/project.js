@@ -203,7 +203,6 @@ export default ({
         updateProjects(context) {
             for (let project_id of Object.keys(context.state.updated_projects)) {
                 const updated = context.state.updated_projects[project_id];
-                console.log(project_id)
                 const data = {
                     project_id: project_id,
                     project_name: updated.project_name,
@@ -211,7 +210,6 @@ export default ({
                     sequencing: updated.sequencing,
                     owner: updated.owner.id,
                 }
-                console.log(data)
                 api
                 .put(`/project/${project_id}/`, data)
                 .then((res) => {

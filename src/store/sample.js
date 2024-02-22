@@ -145,7 +145,6 @@ export default ({
     actions: {
         // locad study 
         postLoadedSamples(context) {
-            console.log(context.state.loaded_samples)
             const data = context.state.loaded_samples.map((el) => {
               let meta = Object.assign({}, el);
               delete meta.sample_name;

@@ -3,10 +3,13 @@ import { api } from "./api";
 
 export default ({
     state: () => ({
+        project_tasks: [],
+        new_task_id: null,
+        deleted_tasks: [],
+        task_tree: {},
+
         current_task: {},
         celery_tasks: [],
-
-        new_task_id: 10,
         task_methods: [
           { task_method: "sequence alignment", component: "AlignerBowtie" },
           { task_method: "genome alignment", component: "AlignerTophat" },
@@ -15,65 +18,110 @@ export default ({
           { task_method: "trim sequence", component: "TrimSeq" },
           { task_method: "quality control", component: "" },
         ],
-        tasks: [
-          {
-            project: "P001",
-            task_method: "Trim sequence",
-            status: "pending",
-            parent_task: "",
-            task_id: 9,
-          },
-        ],
+
       
     }),
     getters: {
+        // otherTaskIds(state, task_id) {
 
+        // },
     },
     mutations: {
-        refreshProjectTasks(state) {
-            state.tasks = state.tasks.filter((el) => {
-              return el.project == state.current_project ? 0 : 1;
-            });
+        clearTask(state){
+            state.project_tasks = []
+            state.deleted_tasks = []
+            state.task_tree = {}
+            state.current_task = {}
         },
-        addTask(state, new_task) {
-            state.new_task_id += 1;
-            state.tasks.push(new_task);
+        // task.SelectMethod.vue
+        setCurrentMethod(state, method) {
+            state.current_task['task_method'] = method.task_method
+            state.current_task['method_component'] = method.component
         },
-        deleteTask(state, task) {
-            state.tasks = state.tasks.filter((el) => {
-              return el.task_id == task.task_id ? 0 : 1;
-            });
+        addTask(state) {
+            const new_task = {
+                ...state.current_task,
+                task_id: state.new_task_id,
+                need_save: true,
+                status: null,
+            }
+            state.task_tree[state.new_task_id] = []
+            state.project_tasks.push(new_task);
         },
-        updateTaskStatus(state, task_obj) {
-            state.tasks.forEach((el) => {
-              if (el.task_id == task_obj.task_id) {
-                el.status = task_obj.status;
-              }
-            });
+        nextTaskId(state) {
+            const current_id = Number(state.new_task_id.slice(-2))
+            state.new_task_id = 'T' + String(current_id + 1).padStart(2, '0');
         },
-        setParentTask(state, task_pair) {
-            state.tasks.forEach((el) => {
-              if (el.task_id == task_pair[0]) {
-                el.parent_task = task_pair[1];
-              }
-            });
+
+        // task.NewTask.vue
+        deleteTask(state, task_index) {
+            const task_id = state.project_tasks[task_index].task_id;
+            state.deleted_tasks.push(task_id);
+            state.project_tasks.splice(task_index, 1);
         },
-        selectTask(state, task_obj) {
+        updateTaskStatus(state, pair) {
+            state.project_tasks[pair[0]] = pair[1];
+        },
+        selectTask(state, task_index) {
+            state.current_task = state.project_tasks[task_index]
+        },
+
+        // task.TaskRelations.vue
+        updateParentTask(state, pair) {
+            state.task_tree[pair[0]] = pair[1]
+            console.log(state.task_tree)
+        },
+        selectTaskMethod(state, task_obj) {
             state.current_task = task_obj;
         },
+
+        // refreshProjectTasks(state) {
+        //     state.tasks = state.tasks.filter((el) => {
+        //       return el.project == state.current_project ? 0 : 1;
+        //     });
+        // },
+
+
+
+
         
     },
     actions: {
-        getProjectTasks(context, project_id) {
-            api.get("/task/", ).then((res) => {
-              console.log(res, context, project_id);
-            }).catch((err) => {
-              console.log(err);
+        getProjectTasks(context) {
+            const project_id = context.rootState.project.current_project.project_id
+            const config = {
+                params: {project_id: project_id}
+            }
+            api
+            .get("/task/", config).then((res) => {
+                context.state.project_tasks = res.data.map((el) => {
+                    return {
+                        task_id: el.task_id,
+                        task_method: el.method_tool.method,
+                        status: el.task_execution ? el.task_execution.status : null,
+                    };
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        getNewTaskId(context) {
+            const project_id = context.rootState.project.current_project.project_id
+            const config = {
+                params: {project_id: project_id}
+            }
+            api
+            .get("/task/next_task_id", config).then((res) => {
+                context.state.new_task_id = res.data
+            })
+            .catch((err) => {
+                console.log(err);
             });
         },
         getCeleryTasks(context, status="ALL") {
             const config = {
-            params: { status: status },
+                params: { status: status },
             };
             api
             .get("/celery_task_result/", config)

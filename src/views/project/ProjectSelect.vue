@@ -16,6 +16,9 @@ import { mapState } from "vuex";
 export default {
   name: "ProjectSelect",
   props: ["select_label", "receive"],
+  mounted() {
+    this.$store.commit("clearCurrentProject")
+  },
   data() {
     return {
       selected: {},
@@ -28,11 +31,9 @@ export default {
     selectProject() {
       // console.log(this.selected);
       this.$store.commit("selectProject", this.selected);
+      this.$store.dispatch("getProjectTasks");
+      this.$store.dispatch("getNewTaskId");
     },
-  },
-  updated() {
-    console.log(this.selected);
-    this.$store.dispatch("getProjectTasks", this.selected.project_id);
   },
 };
 </script>

@@ -1,15 +1,13 @@
 <template>
-  <div class="container select-method">
-    <slot></slot>
-    <select v-model="selected">
-      <option v-for="(method, i) of task.task_methods" :key="i" :value="i">
+  <b-container>
+    <div>II: Select method</div>
+    <select v-model="selected" @change="changeMethod">
+      <option v-for="(method, i) of task.task_methods" :key="i" :value="method">
         {{ method.task_method }}
       </option>
     </select>
-    <div class="add-task">
-      <button @click="addTask">Add task</button>
-    </div>
-  </div>
+    <b-button variant="primary" @click="addTask">Add task</b-button>
+  </b-container>
 </template>
 
 <script>
@@ -19,35 +17,24 @@ export default {
   name: "SelectMethod",
   data() {
     return {
-      selected: "",
+      selected: null,
     };
   },
   computed: {
     ...mapState(["project", "task"]),
+    disableAdd() {
+      const project_id = this.project.current_project.project_id
+      return (this.selected && project_id) ? false : true;
+    },
   },
   methods: {
+    changeMethod() {
+      this.$store.commit('setCurrentMethod', this.selected)
+    },
     addTask() {
-      const selected_method = this.task.task_methods[this.selected];
-      const new_task = {
-        ...selected_method,
-        project: this.project.current_project,
-        status: "new",
-        task_id: this.task.new_task_id,
-        parent_task: "",
-      };
-      // console.log(this.task);
-      this.$store.commit("addTask", new_task);
-      // console.log(this.new_task_id);
+      this.$store.commit("addTask");
+      this.$store.commit("nextTaskId");
     },
   },
 };
 </script>
-
-<style scoped>
-.container.select-method {
-  display: block;
-}
-.add-task {
-  margin-top: 5px;
-}
-</style>

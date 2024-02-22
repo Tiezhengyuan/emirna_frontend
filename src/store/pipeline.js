@@ -15,7 +15,6 @@ export default ({
             const config = {
               params: {project_id: project_id},
             };
-            console.log(context)
             api
               .get("/sample_project/project_sample_files", config)
               .then((res) => {
@@ -61,7 +60,6 @@ export default ({
                     sample_file_id: el.sample_file_id,
                 }
             });
-            console.log(data)
             api.post("/sample_project/load_sample_files/", data)
                 .then(() => {
                     context.state.current_project_files.push(
