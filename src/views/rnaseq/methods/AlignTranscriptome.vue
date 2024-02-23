@@ -7,7 +7,7 @@
 import SetParams from './SetParams';
 
 export default {
-  name: "CountReads",
+  name: "AlignTranscriptome",
   components: {
     SetParams,
   },

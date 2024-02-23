@@ -1,15 +1,14 @@
 <template>
-  <SetParams>
-  </SetParams>
+  <SetParams></SetParams>
 </template>
 
 <script>
-import SetParams from './SetParams';
-
+import SetParams from "./SetParams";
 export default {
-  name: "CountReads",
+  name: "ConvertFormat",
   components: {
     SetParams,
   },
-};
+}
 </script>
+

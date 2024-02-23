@@ -31,6 +31,15 @@ import NewTask from "./NewTask";
 // method parameters
 import AlignGenome from "./methods/AlignGenome";
 import TrimSequences from "./methods/TrimSequences";
+import AlignTranscriptome from "./methods/AlignTranscriptome";
+import ConvertFormat from "./methods/ConvertFormat";
+import AssembleTranscripts from "./methods/AssembleTranscripts";
+import MergeTranscripts from "./methods/MergeTranscripts";
+import MergeReadCounts from "./methods/MergeReadCounts";
+import QualityControl from "./methods/QualityControl";
+import AlignShortReads from "./methods/AlignShortReads";
+import CountReads from "./methods/CountReads";
+
 
 export default {
   name: "ViewRNAseq",
@@ -39,6 +48,14 @@ export default {
     NewTask,
     AlignGenome,
     TrimSequences,
+    AlignTranscriptome,
+    ConvertFormat,
+    AssembleTranscripts,
+    MergeTranscripts,
+    MergeReadCounts,
+    QualityControl,
+    AlignShortReads,
+    CountReads,
   },
   mounted() {
     this.$store.commit("clearTask");
