@@ -24,10 +24,6 @@ import inputDropdown from "../components/forms/inputDropdown";
 
 export default {
   name: "ManageReference",
-  mounted(){
-    this.$store.dispatch("getDataSources");
-    this.$store.dispatch("getSpecieGroups");
-  },
   components: {
     inputDropdown,
   },

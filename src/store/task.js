@@ -15,9 +15,9 @@ export default ({
 
         current_task: {},
         current_task_index: 0,
-        current_params: {},
         current_method: {},
         current_method_tool: {},
+        current_params: {},
         celery_tasks: [],
     }),
     getters: {
@@ -43,10 +43,10 @@ export default ({
                 task_id: state.new_task_id,
                 need_save: true,
                 status: null,
-                params: {},
             }
             state.task_tree[state.new_task_id] = []
             state.project_tasks.push(new_task);
+            // console.log(new_task)
         },
         nextTaskId(state) {
             const current_id = Number(state.new_task_id.slice(-2))
@@ -69,16 +69,25 @@ export default ({
         // task.TaskRelations.vue
         updateParentTask(state, pair) {
             state.task_tree[pair[0]] = pair[1]
-            console.log(state.task_tree)
+            // console.log(state.task_tree)
         },
 
         // set method parameters
         setCurrentParams(state, task_index){
-            const task = state.project_tasks[task_index]
-            state.current_params = task.params ? task.params : {};
+            if (task_index < state.project_tasks.length) {
+                const task = state.project_tasks[task_index]
+                state.current_params = task.params ? task.params : {};
+            }
         },
-        updateParams(state, task_index){
-            state.project_tasks[task_index].params = state.current_params;
+        updateCurrentParams(state, key_val) {
+            state.current_params[key_val[0]] = key_val[1];
+            // console.log(state.current_params)
+        },
+        updateTaskParams(state, task_index){
+            if (task_index < state.project_tasks.length) {
+                state.project_tasks[task_index].params = state.current_params;
+                console.log(state.project_tasks[task_index].params)
+            }
         },        
     },
     actions: {

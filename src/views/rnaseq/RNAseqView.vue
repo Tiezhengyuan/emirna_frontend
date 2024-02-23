@@ -30,6 +30,7 @@ import RNAseqHeader from "./RNAseqHeader";
 import NewTask from "./NewTask";
 // method parameters
 import AlignGenome from "./methods/AlignGenome";
+import TrimSequences from "./methods/TrimSequences";
 
 export default {
   name: "ViewRNAseq",
@@ -37,6 +38,7 @@ export default {
     RNAseqHeader,
     NewTask,
     AlignGenome,
+    TrimSequences,
   },
   mounted() {
     this.$store.commit("clearTask");

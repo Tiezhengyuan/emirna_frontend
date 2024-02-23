@@ -22,10 +22,6 @@ import { mapState } from "vuex";
 
 export default {
   name: "SelectMethod",
-  mounted() {
-    this.$store.dispatch('getMethodNames');
-    this.$store.dispatch('getMethodTools');
-  },
   data() {
     return {
       selectedMethod: {},

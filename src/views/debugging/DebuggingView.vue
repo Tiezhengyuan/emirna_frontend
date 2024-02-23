@@ -12,6 +12,9 @@
           <b-nav-item>
             <router-link to="/debugging/store_data">Store</router-link>
           </b-nav-item>
+          <b-nav-item>
+            <router-link to="/debugging/parameters">parameters</router-link>
+          </b-nav-item>
         </b-nav>
       </b-card-header>
 

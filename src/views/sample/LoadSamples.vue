@@ -45,9 +45,6 @@ export default {
     inputText,
     SelectFile,
   },
-  mounted() {
-    this.$store.dispatch("getStudyNames");
-  },
   computed: {
     ...mapState(["sample"]),
     ...mapGetters(['study_name']),

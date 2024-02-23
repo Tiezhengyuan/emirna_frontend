@@ -23,7 +23,7 @@ import DebuggingView from "../views/debugging/DebuggingView";
 import TableSimple from "../components/TableSimple";
 import BasicInput from "../components/BasicInput";
 import StoreData from "../views/debugging/StoreData";
-
+import MethodParams from "../views/debugging/MethodParams";
 
 const routes = [
   {
@@ -110,6 +110,11 @@ const routes = [
         path: "store_data",
         name: "store_data",
         component: StoreData,
+      },
+      {
+        path: "parameters",
+        name: "parameters",
+        component: MethodParams,
       },
     ],
   },

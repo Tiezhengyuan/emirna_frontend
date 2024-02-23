@@ -16,7 +16,7 @@ import user from "./user";
 import reference from "./reference";
 import sample from "./sample";
 import pipeline from "./pipeline";
-
+// import params from "./params";
 
 // expose objects 
 export default new Vuex.Store({
@@ -37,6 +37,7 @@ export default new Vuex.Store({
     user,
     reference,
     sample,
-    pipeline
+    pipeline,
+    // params,
   },
 });

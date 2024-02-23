@@ -16,6 +16,13 @@ export default {
     this.$store.dispatch("getProjects");
     this.$store.dispatch("getStudyNames");
     this.$store.dispatch("getCurrentUser");
+    // methods in tasks
+    this.$store.dispatch('getMethodNames');
+    this.$store.dispatch('getMethodTools');
+    // reference
+    this.$store.dispatch("getDataSources");
+    this.$store.dispatch("getSpecieGroups");
+
   },
 };
 </script>
