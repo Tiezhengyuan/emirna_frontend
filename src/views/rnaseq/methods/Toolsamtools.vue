@@ -1,11 +1,13 @@
 <template>
-  <div>tools</div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "ViewTools",
-};
+
+}
 </script>
 
+<style>
 
+</style>

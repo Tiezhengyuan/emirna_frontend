@@ -6,6 +6,9 @@ export default ({
         current_project_files: [],
         project_samples: [],
         unassigned_sample_files: [],
+
+
+
     }),
     getters: {},
     mutations: {},
@@ -70,6 +73,8 @@ export default ({
                 .catch((err) => {
                     console.log(err)
                 })
-        }
+        },
+
+
     }
 })

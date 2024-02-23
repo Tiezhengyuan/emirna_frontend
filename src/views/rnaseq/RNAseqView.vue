@@ -13,10 +13,10 @@
         </div>
       </b-col>
       <b-col>
-        <b-sidebar id="sidebar-method-params" title="Parameters" width="40%"
+        <b-sidebar id="sidebar-method-params" title="Setup Parameters" width="40%"
           bg-variant="dark" text-variant="light" right shadow>
-          <taskMethod :is="task.current_task.component"
-            v-if="!!task.current_task.component"></taskMethod>
+          <div :is="task.current_task.component"
+            v-if="!!task.current_task.component"></div>
         </b-sidebar>
       </b-col>
     </b-row>
@@ -28,25 +28,15 @@
 import { mapState } from "vuex";
 import RNAseqHeader from "./RNAseqHeader";
 import NewTask from "./NewTask";
-
-import AlignerBowtie from "../../components/tools/bowtie/AlignerBowtie";
-import AlignerTophat from "../../components/tools/AlignerTophat";
-import AssemblerCufflinks from "../../components/tools/AssemblerCufflinks";
-import CountReads from "../../components/tools/CountReads";
-import TrimSeq from "../../components/tools/TrimSeq";
-
+// method parameters
+import AlignGenome from "./methods/AlignGenome";
 
 export default {
   name: "ViewRNAseq",
   components: {
     RNAseqHeader,
     NewTask,
-
-    AlignerBowtie,
-    AlignerTophat,
-    AssemblerCufflinks,
-    CountReads,
-    TrimSeq,
+    AlignGenome,
   },
   mounted() {
     this.$store.commit("clearTask");

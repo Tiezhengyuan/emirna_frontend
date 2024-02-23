@@ -4,27 +4,23 @@ import { api } from "./api";
 export default ({
     state: () => ({
         project_tasks: [],
+
         new_task_id: null,
         deleted_tasks: [],
         task_tree: {},
+        
+        // methods
+        methods: [],
+        method_tools: {},
 
         current_task: {},
+        current_task_index: 0,
+        current_params: {},
+        current_method: {},
+        current_method_tool: {},
         celery_tasks: [],
-        task_methods: [
-          { task_method: "sequence alignment", component: "AlignerBowtie" },
-          { task_method: "genome alignment", component: "AlignerTophat" },
-          { task_method: "genome assembly", component: "AssemblerCufflinks" },
-          { task_method: "Count reads", component: "CountReads" },
-          { task_method: "trim sequence", component: "TrimSeq" },
-          { task_method: "quality control", component: "" },
-        ],
-
-      
     }),
     getters: {
-        // otherTaskIds(state, task_id) {
-
-        // },
     },
     mutations: {
         clearTask(state){
@@ -35,15 +31,19 @@ export default ({
         },
         // task.SelectMethod.vue
         setCurrentMethod(state, method) {
-            state.current_task['task_method'] = method.task_method
-            state.current_task['method_component'] = method.component
+            state.current_method = method
+        },
+        setCurrentMethodTool(state, method_tool) {
+            state.current_method_tool = method_tool
         },
         addTask(state) {
             const new_task = {
-                ...state.current_task,
+                ...state.current_method,
+                ...state.current_method_tool,
                 task_id: state.new_task_id,
                 need_save: true,
                 status: null,
+                params: {},
             }
             state.task_tree[state.new_task_id] = []
             state.project_tasks.push(new_task);
@@ -64,27 +64,22 @@ export default ({
         },
         selectTask(state, task_index) {
             state.current_task = state.project_tasks[task_index]
+            state.current_task_index = task_index
         },
-
         // task.TaskRelations.vue
         updateParentTask(state, pair) {
             state.task_tree[pair[0]] = pair[1]
             console.log(state.task_tree)
         },
-        selectTaskMethod(state, task_obj) {
-            state.current_task = task_obj;
+
+        // set method parameters
+        setCurrentParams(state, task_index){
+            const task = state.project_tasks[task_index]
+            state.current_params = task.params ? task.params : {};
         },
-
-        // refreshProjectTasks(state) {
-        //     state.tasks = state.tasks.filter((el) => {
-        //       return el.project == state.current_project ? 0 : 1;
-        //     });
-        // },
-
-
-
-
-        
+        updateParams(state, task_index){
+            state.project_tasks[task_index].params = state.current_params;
+        },        
     },
     actions: {
         getProjectTasks(context) {
@@ -137,6 +132,26 @@ export default ({
                 console.log(err);
             });
         },
-
+        // SelectMethod.vue
+        getMethodNames(context) {
+            api
+            .get("/method/method_names/")
+            .then((res) => {
+                context.state.methods = res.data
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        getMethodTools(context) {
+            api
+            .get("/method_tool/method_tools/")
+            .then((res) => {
+                context.state.method_tools = res.data
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
     }
 })

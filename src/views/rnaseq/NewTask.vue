@@ -30,9 +30,9 @@
 
       <TaskRelations :task_index="task_index"></TaskRelations>
       
+      Method: <em>{{ project_task.method_name }}</em>
       <b-button variant="info" v-b-toggle.sidebar-method-params
-        @click="selectTaskMethod"
-      >Method: {{ project_task.task_method }}</b-button>
+        @click="selectTask">Parameters</b-button>
     </b-card-text>
 
   </b-card>
@@ -56,23 +56,20 @@ export default {
     },
   },
   methods: {
-    selectTask() {
-      this.$store.commit("selectTask", this.task_index);
-    },
     deleteTask() {
       this.$store.commit("deleteTask", this.task_index);
     },
-    submitTask() {
-      const pair = [this.task_index, 'pending'];
-      this.$store.commit("updateTaskStatus", pair);
+    selectTask() {
+      this.$store.commit("selectTask", this.task_index);
     },
-    stopTask() {
-      const pair = [this.task_index, 'stopped']
-      this.$store.commit("updateTaskStatus", pair);
-    },
-    selectTaskMethod() {
-      this.$store.commit("selectTaskMethod", this.project_task);
-    },
+    // submitTask() {
+    //   const pair = [this.task_index, 'pending'];
+    //   this.$store.commit("updateTaskStatus", pair);
+    // },
+    // stopTask() {
+    //   const pair = [this.task_index, 'stopped']
+    //   this.$store.commit("updateTaskStatus", pair);
+    // },
   },
 };
 </script>
