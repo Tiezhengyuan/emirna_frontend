@@ -20,10 +20,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-import inputDropdown from "../components/forms/inputDropdown";
+import inputDropdown from "../../components/forms/inputDropdown";
 
 export default {
-  name: "ManageReference",
+  name: "DownloadReference",
   components: {
     inputDropdown,
   },
@@ -52,7 +52,7 @@ export default {
     },
     submit() {
       this.$store.dispatch("requestNewGenome");
-      window.location.reload();
+      // window.location.reload();
     },
     reset() {
       window.location.reload();

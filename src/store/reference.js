@@ -99,6 +99,16 @@ export default ({
   },
   actions: {
     // download reference
+    getDataSources(context) {
+      api
+        .get("./genome/data_sources/")
+        .then((res) => {
+          context.state.data_sources = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getSpecieGroups(context) {
       api
         .get("./specie/group_names/")
@@ -108,16 +118,6 @@ export default ({
         .catch((err) => {
           console.log(err);
         });
-    },
-    getDataSources(context) {
-          api
-            .get("./genome/data_sources/")
-            .then((res) => {
-              context.state.data_sources = res.data;
-            })
-            .catch((err) => {
-              console.log(err);
-            });
     },
     getSpecies(context) {
       const config = {
@@ -129,7 +129,7 @@ export default ({
         .get("./specie/", config)
         .then((res) => {
           context.state.species = res.data.map((el) => {
-            return el.organism_name;
+            return el.specie_name;
           });
         })
         .catch((err) => {
@@ -140,10 +140,10 @@ export default ({
       const config = {
         params: {
           data_source: context.state.new_genome.data_source,
-          group: context.state.new_genome.group,
           specie: context.state.new_genome.specie,
         },
       };
+      console.log(config.params)
       api
         .get("./genome/", config)
         .then((res) => {
@@ -183,6 +183,22 @@ export default ({
         });
     },
 
+    // download genome, asynchronization
+    requestNewGenome(context) {
+      const config = {
+        params: context.state.new_genome,
+      };
+      console.log(context.state.new_genome)
+      endpoint
+        .get("/celery_tasks/download_genome/", config)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    
 
         postReference(context, data) {
           api
@@ -196,20 +212,6 @@ export default ({
             });
         },
       
-        // asynchronization
-        requestNewGenome(context) {
-          const config = {
-            params: context.state.new_genome,
-          };
-          endpoint
-            .get("/celery_tasks/download_genome/", config)
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        },
       
   }
 })

@@ -10,6 +10,9 @@
             <router-link to="/manage" class="text-decoration-none">Project</router-link>
           </b-nav-item>
           <b-nav-item>
+            <router-link to="/reference" class="text-decoration-none">Reference</router-link>
+          </b-nav-item>
+          <b-nav-item>
             <router-link to="/sample" class="text-decoration-none">Samples</router-link>
           </b-nav-item>
           <b-nav-item>

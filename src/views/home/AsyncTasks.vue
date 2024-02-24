@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, i) in task.celery_tasks" :key="i">
+          <tr v-for="(item, i) in pipeline.celery_tasks" :key="i">
             <td>{{ i + 1 }}</td>
             <td v-for="(name, j) in col_names" :key="j">
               {{ item[name] }}
@@ -44,7 +44,7 @@ export default {
     this.$store.dispatch("getCeleryTasks");
   },
   computed: {
-    ...mapState(["task"]),
+    ...mapState(["pipeline"]),
     table_header() {
       return this.select_columns.options.filter((el) => {
         return el.checked ? 1 : 0;

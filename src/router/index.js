@@ -13,7 +13,9 @@ import BrowseStudySamples from "../views/sample/BrowseStudySamples";
 import ManageView from "../views/ManageView";
 import ProjectCreate from "../views/project/ProjectCreate";
 import ProjectUpdate from "../views/project/ProjectUpdate";
-import ManageReference from "../views/ManageReference";
+
+import ReferenceView from "../views/reference/ReferenceView";
+import DownloadReference from "../views/reference/DownloadReference";
 
 import RNAseqView from "../views/rnaseq/RNAseqView";
 
@@ -73,11 +75,17 @@ const routes = [
         name: "update_projects",
         component: ProjectUpdate,
       },
-
+    ],
+  },
+  {
+    path: "/reference",
+    name: "reference",
+    component: ReferenceView,
+    children: [
       {
-        path: "build_reference",
-        name: "build_reference",
-        component: ManageReference,
+        path: "download_reference",
+        name: "download_reference",
+        component: DownloadReference,
       },
     ],
   },

@@ -18,7 +18,6 @@ export default ({
         current_method: {},
         current_method_tool: {},
         current_params: {},
-        celery_tasks: [],
     }),
     getters: {
     },
@@ -123,24 +122,6 @@ export default ({
                 console.log(err);
             });
         },
-        getCeleryTasks(context, status="ALL") {
-            const config = {
-                params: { status: status },
-            };
-            api
-            .get("/celery_task_result/", config)
-            .then((res) => {
-                context.state.celery_tasks = res.data.map((el) => {
-                el.task_name = String(el.task_name).replace("celery_tasks.tasks.", "");
-                el.date_created = el.date_created.split(".")[0];
-                el.date_done = el.date_done.split(".")[0];
-                return el;
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        },
         // SelectMethod.vue
         getMethodNames(context) {
             api
@@ -162,5 +143,7 @@ export default ({
                 console.log(err);
             });
         },
+        
+
     }
 })
