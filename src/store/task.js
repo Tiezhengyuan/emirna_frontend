@@ -81,7 +81,7 @@ export default ({
         },
         updateCurrentParams(state, key_val) {
             state.current_params[key_val[0]] = key_val[1];
-            // console.log(state.current_params)
+            console.log(state.current_params)
         },
         updateTaskParams(state, task_index){
             if (task_index < state.project_tasks.length) {

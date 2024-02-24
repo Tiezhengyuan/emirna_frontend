@@ -39,7 +39,8 @@ import MergeReadCounts from "./methods/MergeReadCounts";
 import QualityControl from "./methods/QualityControl";
 import AlignShortReads from "./methods/AlignShortReads";
 import CountReads from "./methods/CountReads";
-
+import BuildGenomeIndex from "./methods/BuildGenomeIndex";
+import BuildIndex from "./methods/BuildIndex";
 
 export default {
   name: "ViewRNAseq",
@@ -56,6 +57,8 @@ export default {
     QualityControl,
     AlignShortReads,
     CountReads,
+    BuildGenomeIndex,
+    BuildIndex,
   },
   mounted() {
     this.$store.commit("clearTask");

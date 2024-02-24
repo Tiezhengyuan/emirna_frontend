@@ -1,18 +1,25 @@
 <template>
   <div>
-    <TrimSequences></TrimSequences>
+    <!-- <TrimSequences></TrimSequences> -->
+    <!-- <BuildGenomeIndex></BuildGenomeIndex> -->
+    <BuildIndex></BuildIndex>
   </div>
   
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import TrimSequences from "../rnaseq/methods/TrimSequences";
+// import TrimSequences from "../rnaseq/methods/TrimSequences";
+// import BuildGenomeIndex from "../rnaseq/methods/BuildGenomeIndex";
+import BuildIndex from "../rnaseq/methods/BuildIndex";
 
 export default {
   name: "MethodParams",
   components: {
-    TrimSequences,
+    // TrimSequences,
+    // BuildGenomeIndex,
+    BuildIndex,
+
   },
   computed: {
     ...mapState(['project', 'task']),

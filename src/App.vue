@@ -20,9 +20,10 @@ export default {
     this.$store.dispatch('getMethodNames');
     this.$store.dispatch('getMethodTools');
     // reference
-    this.$store.dispatch("getDataSources");
     this.$store.dispatch("getSpecieGroups");
-
+    this.$store.dispatch("getDataSources");
+    this.$store.dispatch("getReadyGenomes");
+    this.$store.dispatch("getTypeRNAs");
   },
 };
 </script>
