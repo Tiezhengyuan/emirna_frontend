@@ -2,9 +2,10 @@ import { api } from "./api";
 
 export default ({
     state: () => ({
+        // defined with app mounted
         projects: [],
+        project_options: {},
 
-        next_project_id: "",
         // new project or selected project
         current_project: {},
         current_updated_project: {},
@@ -15,26 +16,23 @@ export default ({
     }),
     getters: {
         project_id(state) {
-            const val = state.current_project.project_id;
             return {
               label: "Project ID: ",
-              value: val ? val: state.next_project_id,
+              value: state.current_project.project_id,
             };
-          },
+        },
         project_name(state) {
-            const val = state.current_project.project_name;
             return {
               name: "project_name",
               label: "Project Name",
-              value: val ? val : "",
+              value: state.current_project.project_name,
             };
         },
         project_description(state) {
-            const val = state.current_project.description;
             return {
               name: "description",
               label: "Project Description",
-              value: val ? val : "",
+              value: state.current_project.description,
             };
         },
         sequencing(state) {
@@ -44,26 +42,15 @@ export default ({
               label: "Sequencing Technique",
               value: val ? val : null,
               required: true,
-              options: [
-                { value: "mrna-seq", label: "mRNA-Seq" },
-                { value: "mirna-seq", label: "miRNA-Seq" },
-                { value: "scrna-seq", label: "scRNA-Seq" },
-                { value: "other", label: "other" },
-              ],
+              options: state.project_options.sequencing,
             };
         },
         project_status(state) {
-            const val = state.current_project.status;
             return {
               name: "status",
               label: "Project Status",
-              value: val ? val : "A",
-              options: [
-                { value: "active", label: "active" },
-                { value: "ready", label: "ready" },
-                { value: "locked", label: "locked" },
-                { value: "deleted", label: "deleted" },
-              ],
+              value: state.current_project.status,
+              options: state.project_options.status,
             };
         },
         project_names(state) {
@@ -88,28 +75,6 @@ export default ({
         },        
     },
     mutations: {
-        setUserProjects(state, projects) {
-            state.projects = projects;
-          },
-        
-        // state.new_project
-        setNewProject(state) {
-            if (state.projects.length > 0) {
-              const last = state.projects[state.projects.length - 1];
-              const next_id = Number(last.project_id.slice(1)) + 1;
-              state.next_project_id = "P" + next_id.toString().padStart(3, "0");
-            } else {
-              state.next_project_id = "P001";
-            }
-            state.current_project.project_id = state.next_project_id;
-        },
-        updateNewProject(state, key_val) {
-            state.current_project[key_val[0]] = key_val[1];
-        },
-        addNewProject(state) {
-            state.projects.push(state.current_project);
-        },
-        
         // state.current_project
         clearCurrentProject(state) {
             state.current_project = {};
@@ -127,9 +92,6 @@ export default ({
         },
         
         // update projects
-        setNextProjectID(state, data) {
-            state.next_project_id = data.project_id;
-        },
         updateUpdatedProject(state, key_val) {
             state.updated_project[key_val[0]] = key_val[1];
         },
@@ -142,86 +104,66 @@ export default ({
             state.current_project = {};
         },
         updateDeleted(state, selected) {
-            // update state.projects
             state.projects = state.projects.filter((el) => {
               return el.project_id != selected;
             });
-            // update state.deleted_projects
             state.deleted_projects.push(selected);
         },
       
     },
     actions: {
-        // create new project
-        // get new project_id, set current_project, and post current_project
-        getNextProjectID(context) {
-            api
-            .get("/project/next_project_id/")
-            .then((res) => {
-                context.commit("setNextProjectID", res.data);
-                context.commit("setCurrentProject", res.data.project_id);
+        // App.vue
+        getProjects(context) {
+            api.get("/project").then((res) => {
+                context.state.projects =  res.data;
+            });
+        },
+        getProjectOptions(context) {
+            api.get("/project/options/").then((res) => {
+                context.state.project_options =  res.data;
+            });
+        },
+
+        // ProjectCreate.vue
+        getNewProject(context) {
+            api.get("/project/new_project/").then((res) => {
+                context.state.current_project = res.data;
             });
         },
         createNewProject(context) {
-            const u = context.state.updated_project;
-            const n = context.state.current_project;
-            const data = {
-                project_name: u.project_name ? u.project_name : n.project_name,
-                description: u.description ? u.description : n.description,
-                status: u.status ? u.status : n.status,
-                sequencing: u.sequencing ? u.sequencing : n.sequencing,
-            };
-            api
-            .post("/project/", data)
-            .then(() => {
+            const data = context.state.current_project;
+            console.log(data);
+            api.post("/project/", data).then(() => {
                 context.dispatch("getProjects");
+                context.dispatch("getNewProject");
             })
             .catch((err) => {
                 console.log(err);
             });
         },
 
-        getProjects(context) {
-            api.get("/project").then((res) => {
-            context.commit("setUserProjects", res.data);
-            context.commit("setNewProject");
-            });
-        },
+        // ProjectUpdate.vue
         deleteProjects(context) {
             for (let project_id of context.state.deleted_projects) {
-            api
-                .delete(`/project/${project_id}/`)
-                .then((res) => {
-                    console.log(res);
-                })
-                .catch((err) => {
-                console.log(err);
+                api.delete(`/project/${project_id}/`).then(() => {
+                    context.state.deleted_projects = [];
+                }).catch((err) => {
+                    console.log(err);
                 });
             }
-            context.state.deleted_projects = [];
         },
         updateProjects(context) {
             for (let project_id of Object.keys(context.state.updated_projects)) {
                 const updated = context.state.updated_projects[project_id];
-                const data = {
-                    project_id: project_id,
-                    project_name: updated.project_name,
-                    description: updated.description,
-                    sequencing: updated.sequencing,
-                    owner: updated.owner.id,
-                }
-                api
-                .put(`/project/${project_id}/`, data)
-                .then((res) => {
-                    console.log(res);
+                api.put(`/project/${project_id}/`, updated)
+                .then(() => {
+                    context.state.updated_projects = {};
                 })
                 .catch((err) => {
                     console.log(err);
                 });
             }
-            context.state.updated_projects = {};
+            
         },
-
-
     }
 })

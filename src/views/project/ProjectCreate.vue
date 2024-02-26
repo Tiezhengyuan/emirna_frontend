@@ -15,7 +15,7 @@
       Sequencing technique should be selected.
     </b-container>
     <b-container v-show="showSuccess">
-      A new project was created.
+      A new project {{project.pr}} was created.
     </b-container>
   </b-container>
 </template>
@@ -34,7 +34,7 @@ export default {
     inputDropdown,
   },
   mounted() {
-    this.$store.dispatch("getNextProjectID");
+    this.$store.dispatch("getNewProject");
   },
   data() {
     return {

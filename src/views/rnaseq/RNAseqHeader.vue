@@ -37,11 +37,11 @@ export default {
     SelectMethod,
   },
   computed: {
-    ...mapState(["project"]),
+    ...mapState(["project", "task"]),
   },
   methods: {
     submitTask() {
-      console.log("tasks");
+      console.log(this.task.project_tasks);
     },
     // remove unsubmitted tasks and get latest tasks
     refreshProjectTasks() {

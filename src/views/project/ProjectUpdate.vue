@@ -40,6 +40,7 @@ export default {
       if (this.project.updated_projects) {
         this.$store.dispatch("updateProjects");
       }
+      window.location.reload();
     },
   },
 };
