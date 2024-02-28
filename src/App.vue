@@ -20,6 +20,7 @@ export default {
     // methods in tasks
     this.$store.dispatch('getMethodNames');
     this.$store.dispatch('getMethodTools');
+    this.$store.dispatch('getMethodParents');
     // reference
     this.$store.dispatch("getSpecieGroups");
     this.$store.dispatch("getDataSources");

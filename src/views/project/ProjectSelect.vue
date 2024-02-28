@@ -3,7 +3,7 @@
     <slot></slot>
     <label>{{ select_label }}</label>
     <select v-model="selected" @change="selectProject">
-      <option v-for="(project, i) of project.projects" :key="i" :value="project">
+      <option v-for="(project, i) of project.projects" :key="i" :value="i">
         {{ project.project_id }}: {{ project.project_name }}
       </option>
     </select>
@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      selected: {},
+      selected: null,
     };
   },
   computed: {
@@ -31,8 +31,10 @@ export default {
     selectProject() {
       // console.log(this.selected);
       this.$store.commit("selectProject", this.selected);
-      this.$store.dispatch("getProjectTasks");
+      this.$store.dispatch("getTaskTree");
+      // this.$store.dispatch("getProjectTasks");
       this.$store.dispatch("getNewTaskId");
+      // console.log(this.project.current_project)
     },
   },
 };

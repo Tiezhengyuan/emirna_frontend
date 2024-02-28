@@ -3,6 +3,10 @@
     <b-row align-v="center" class="my-2">
       <b-col cols="auto">
         <b-button variant="success" size="lg"
+          @click="saveTasks">Save Tasks</b-button>
+      </b-col>
+      <b-col cols="auto">
+        <b-button variant="success" size="lg"
           @click="submitTask">Submit Tasks</b-button>
       </b-col>
       <b-col cols="auto">
@@ -40,6 +44,9 @@ export default {
     ...mapState(["project", "task"]),
   },
   methods: {
+    saveTasks() {
+      console.log(this.task.project_tasks);
+    },
     submitTask() {
       console.log(this.task.project_tasks);
     },

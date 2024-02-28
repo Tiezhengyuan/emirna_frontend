@@ -20,12 +20,12 @@
         </b-sidebar>
       </b-col>
     </b-row>
-
+  {{setT(5)}}
   </b-container>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import RNAseqHeader from "./RNAseqHeader";
 import NewTask from "./NewTask";
 // method parameters
@@ -62,9 +62,11 @@ export default {
   },
   mounted() {
     this.$store.commit("clearTask");
+    this.$store.commit("clearCurrentProject");
   },
   computed: {
     ...mapState(["project", "task"]),
+    ...mapGetters(['setT'])
   },
 };
 </script>

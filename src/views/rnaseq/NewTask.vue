@@ -11,11 +11,14 @@
         size="sm" id="task-delete" @click="deleteTask">
         <b-icon icon="trash-fill"></b-icon>
       </b-button>
+      <b-button pill size="sm" variant="success" title="Save task"
+        id="task-save" @click="saveTask">
+        <b-icon icon="save"></b-icon>
+      </b-button>
     </b-card-header>
 
     <b-card-text>
       <!-- <b-container class="border my-3">
-        <span class="h3">{{ status }}</span>
         <b-button-group class="mx-1">
           <b-button pill variant="info" title="Stop task"
             id="task-stop" @click="stopTask">
@@ -29,7 +32,7 @@
       </b-container> -->
 
       <TaskRelations :task_index="task_index"></TaskRelations>
-      
+
       Method: <em>{{ project_task.method_name }}</em>
       <b-button variant="info" v-b-toggle.sidebar-method-params
         @click="selectTask">Parameters</b-button>
@@ -50,7 +53,7 @@ export default {
     TaskRelations,
   },
   computed: {
-    ...mapState(['task']),
+    ...mapState(['project', 'task']),
     project_task() {
       return this.task.project_tasks[this.task_index];
     },
@@ -61,6 +64,10 @@ export default {
     },
     selectTask() {
       this.$store.commit("selectTask", this.task_index);
+    },
+    saveTask() {
+      // this.$store.dispatch("saveTask", this.task_index);
+      this.$store.dispatch('saveTaskPairs');
     },
     // submitTask() {
     //   const pair = [this.task_index, 'pending'];

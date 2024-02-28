@@ -95,8 +95,9 @@ export default ({
         updateUpdatedProject(state, key_val) {
             state.updated_project[key_val[0]] = key_val[1];
         },
-        selectProject(state, selected_project) {
-            state.current_project = selected_project;
+        // ProjectSelect.vue
+        selectProject(state, projects_index) {
+            state.current_project = state.projects[projects_index];
         },
         updateUpdatedProjects(state) {
             const curr_id = state.current_project.project_id;

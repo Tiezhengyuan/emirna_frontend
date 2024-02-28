@@ -8,9 +8,8 @@
       </option>
     </select>
 
-    <b-form-select class="mb-3"
-      v-model="selectedTool" :options="methodTools" @change="setMethodTool"
-    ></b-form-select>
+    <b-form-select class="mb-3" v-model="selectedTool" :options="methodTools"
+      @change="setMethodTool"></b-form-select>
 
     <b-button variant="primary" class="m-2" size="sm"
       @click="addTask">Add task</b-button>
@@ -48,8 +47,7 @@ export default {
       this.$store.commit('setCurrentMethodTool', this.selectedTool)
     },
     addTask() {
-      this.$store.commit("addTask");
-      this.$store.commit("nextTaskId");
+      this.$store.dispatch("saveNewTask");
     },
   },
 };
