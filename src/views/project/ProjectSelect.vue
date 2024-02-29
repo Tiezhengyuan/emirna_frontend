@@ -31,9 +31,7 @@ export default {
     selectProject() {
       // console.log(this.selected);
       this.$store.commit("selectProject", this.selected);
-      this.$store.dispatch("getTaskTree");
-      // this.$store.dispatch("getProjectTasks");
-      this.$store.dispatch("getNewTaskId");
+      this.$store.dispatch("getProjectTasks");
       // console.log(this.project.current_project)
     },
   },

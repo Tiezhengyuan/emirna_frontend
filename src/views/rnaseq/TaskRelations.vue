@@ -45,7 +45,7 @@ export default {
       // console.log(this.selected)
       const pair = [this.project_task.task_id, this.selected];
       // console.log(pair)
-      this.$store.commit("updateTaskPair", pair);
+      this.$store.commit("updateTaskParents", pair);
     },
   },
 };

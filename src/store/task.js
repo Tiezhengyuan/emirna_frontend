@@ -3,33 +3,26 @@ import { api } from "./api";
 
 export default ({
     state: () => ({
+        //determined by api
         project_tasks: [],
-
-        new_task_id: null,
-        deleted_tasks: [],
-        // task relation determined by api
         task_tree: {},
-        // task relation updated by UI
-        // child in key, parents in value
-        task_pair: {},
-        
-        // methods
+        new_task_id: null,
+
+        // defined by the API: method_tool/front_methods/
         methods: [],
         method_tools: {},
         method_parents: {},
-
+        
+        // determined by front-end
         current_task: {},
         current_task_index: 0,
-        current_method: {},
-        current_method_tool: {},
+        // update params
         current_params: {},
-        test: 3,
+        // child in key, parents in value
+        current_parents: {},
+
     }),
     getters: {
-        setT: (state) => (x) => {
-            state.test = x
-            return state.test
-        },
         setChecked: (state) => (task_index) => {
             const task_id = state.project_tasks[task_index].task_id;
             // console.log('set checked')
@@ -44,29 +37,22 @@ export default ({
         // RNAseqView.vue
         clearTask(state){
             state.project_tasks = []
-            state.deleted_tasks = []
             state.task_tree = {}
             state.current_task = {}
-        },
-        // task.SelectMethod.vue
-        setCurrentMethod(state, method) {
-            state.current_method = method
-        },
-        setCurrentMethodTool(state, method_tool) {
-            state.current_method_tool = method_tool
+            state.current_params = {}
+            state.current_parents = {}
+
         },
         // task.NewTask.vue
-        deleteTask(state, task_index) {
-            const task_id = state.project_tasks[task_index].task_id;
-            state.deleted_tasks.push(task_id);
-            state.project_tasks.splice(task_index, 1);
-        },
         updateTaskStatus(state, pair) {
             state.project_tasks[pair[0]] = pair[1];
         },
         selectTask(state, task_index) {
             state.current_task = state.project_tasks[task_index]
             state.current_task_index = task_index
+            state.current_params = {}
+            state.current_parents = {}
+            // console.log(state.current_task)
         },
 
         // set method parameters
@@ -76,20 +62,14 @@ export default ({
                 state.current_params = task.params ? task.params : {};
             }
         },
-        updateCurrentParams(state, key_val) {
-            state.current_params[key_val[0]] = key_val[1];
-            console.log(state.current_params)
-        },
-        updateTaskParams(state, task_index){
-            if (task_index < state.project_tasks.length) {
-                state.project_tasks[task_index].params = state.current_params;
-                console.log(state.project_tasks[task_index].params)
-            }
+        updateCurrentParams(state, pair) {
+            state.current_params[pair[0]] = pair[1];
+            // console.log(state.current_params)
         },
 
         // TaskRelation.vue
-        updateTaskPair(state, pair) {
-            state.task_pair[pair[0]] = pair[1]
+        updateTaskParents(state, pair) {
+            state.current_parents[pair[0]] = pair[1]
         }
     },
     actions: {
@@ -99,115 +79,77 @@ export default ({
             const config = {
                 params: {project_id: project_id}
             }
-            api.get("/task/project_tasks/", config).then((res) => {
-                console.log('get project tasks')
-                context.state.project_tasks = res.data;
+            api.get("/task/front_project_tasks/", config).then((res) => {
+                // console.log('get project tasks')
+                // console.log(res.data)
+                context.state.task_tree = res.data.task_tree;
+                context.state.project_tasks = res.data.tasks;
+                context.state.new_task_id = res.data.new_task_id;
             }).catch((err) => {
-                console.log(err);
-            });
-        },
-        getTaskTree(context) {
-            const project_id = context.rootState.project.current_project.project_id
-            const config = {
-                params: {project_id: project_id}
-            }
-            api.get("/task_tree/task_parents/", config).then((res) => {
-                context.state.task_tree = res.data;
-                // console.log("get task tree")
-                // console.log(context.state.task_tree)
-                context.dispatch("getProjectTasks")
-            }).catch((err) => {
-                console.log(err);
-            });
-        },
-        getNewTaskId(context) {
-            const project_id = context.rootState.project.current_project.project_id
-            const config = {
-                params: {project_id: project_id}
-            }
-            api.get("/task/next_task_id", config).then((res) => {
-                context.state.new_task_id = res.data
-            })
-            .catch((err) => {
                 console.log(err);
             });
         },
         // App.vue
-        getMethodNames(context) {
+        getMethods(context) {
             api
-            .get("/method/method_names/")
+            .get("/method_tool/front_methods/")
             .then((res) => {
-                context.state.methods = res.data
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        },
-        getMethodTools(context) {
-            api
-            .get("/method_tool/method_tools/")
-            .then((res) => {
-                context.state.method_tools = res.data
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        },
-        getMethodParents(context) {
-            api
-            .get("/method_relation/parents/")
-            .then((res) => {
-                context.state.method_parents = res.data
+                context.state.methods = res.data.method_names
+                context.state.method_tools = res.data.method_tools
+                context.state.method_parents = res.data.method_parents
             })
             .catch((err) => {
                 console.log(err);
             });
         },
         // SelectMethod.vue
-        saveNewTask(context) {
-            const project_id = context.rootState.project.current_project.project_id
-            const method_tool = context.state.current_method_tool
+        saveTask(context, task) {
             const data = {
-                project_id: project_id,
-                tasks: [{
-                    task_id: context.state.new_task_id,
-                    params: method_tool ? method_tool.params : null,
-                    method_tool_id: method_tool ? method_tool.method_tool_id : null,
-                }],
+                project_id: context.rootState.project.current_project.project_id,
+                tasks: [task,],
             }
+            console.log(data)
             api.post("task/load_tasks/", data).then(() => {
+                context.state.current_params = {}
                 context.dispatch("getProjectTasks");
-                context.dispatch("getTaskTree");
-                context.dispatch("getNewTaskId");
             }).catch((err) => {
                 console.log(err);
             });
         },
         // NewTask.vue
-        saveTaskPairs(context) {
+        deleteTask(context) {
+            const config = {
+                params: {
+                    project_id: context.rootState.project.current_project.project_id,
+                    task_id: context.state.current_task.task_id,
+                }
+            }
+            api.delete('/task/delete_tasks/', config).then(()=>{
+                context.commit('clearTask')
+                context.dispatch("getProjectTasks");
+            }).catch(()=>{})
+        },
+        saveTaskParents(context) {
             const task_id = context.state.current_task.task_id
             const data = {
                 project_id: context.rootState.project.current_project.project_id,
                 child: task_id,
-                parents: context.state.task_pair[task_id],
+                parents: context.state.current_parents[task_id],
             }
-            console.log(data)
-            api.post('/task_tree/update_task_pairs/', data).then(()=>{
-                context.dispatch("getTaskTree");
+            api.post('/task_tree/update_task_parents/', data).then(()=>{
+                context.dispatch("getProjectTasks");
             }).catch(()=>{})
         },
-        // ??? NewTask.vue
-        // saveTask(context, task_index) {
-        //     const project_id = context.rootState.project.current_project.project_id
-        //     const task = context.state.project_tasks[task_index]
+        // saveTask(context) {
+        //     // console.log(context.state.current_task.params)
         //     const data = {
-        //         project_id: project_id,
+        //         project_id: context.rootState.project.current_project.project_id,
         //         tasks: [{
-        //             task_id: task.task_id,
-        //             task_name: task.task_name,
-        //             params: task.params,
-        //             is_ready : task.is_ready,
-        //             method_tool_id: task.method_tool_id,
+        //             task_id: context.state.current_task.task_id,
+        //             task_name: context.state.current_task.task_name,
+        //             params: context.state.current_task.params,
+        //             is_ready : context.state.current_task.is_ready,
+        //             method_tool_id: context.state.current_task.method_tool_id,
         //         }],
         //     }
         //     api.post("task/load_tasks/", data).then(() => {

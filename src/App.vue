@@ -18,9 +18,7 @@ export default {
     this.$store.dispatch("getStudyNames");
     this.$store.dispatch("getCurrentUser");
     // methods in tasks
-    this.$store.dispatch('getMethodNames');
-    this.$store.dispatch('getMethodTools');
-    this.$store.dispatch('getMethodParents');
+    this.$store.dispatch('getMethods');
     // reference
     this.$store.dispatch("getSpecieGroups");
     this.$store.dispatch("getDataSources");

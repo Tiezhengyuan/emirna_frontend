@@ -26,6 +26,7 @@ export default {
     ...mapState(['task']),
     msg: {
       get() {
+
         return this.task.current_task.params.adapter_3end;
       },
       set(val) {

@@ -20,15 +20,15 @@
         </b-sidebar>
       </b-col>
     </b-row>
-  {{setT(5)}}
   </b-container>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import RNAseqHeader from "./RNAseqHeader";
 import NewTask from "./NewTask";
 // method parameters
+import ImportData from "./methods/ImportData";
 import AlignGenome from "./methods/AlignGenome";
 import TrimSequences from "./methods/TrimSequences";
 import AlignTranscriptome from "./methods/AlignTranscriptome";
@@ -47,6 +47,8 @@ export default {
   components: {
     RNAseqHeader,
     NewTask,
+    // set parameters
+    ImportData,
     AlignGenome,
     TrimSequences,
     AlignTranscriptome,
@@ -66,7 +68,6 @@ export default {
   },
   computed: {
     ...mapState(["project", "task"]),
-    ...mapGetters(['setT'])
   },
 };
 </script>
