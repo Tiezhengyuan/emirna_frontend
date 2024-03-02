@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api, endpoint } from "./api";
 
 
 export default ({
@@ -138,6 +138,18 @@ export default ({
             }
             api.post('/task_tree/update_task_parents/', data).then(()=>{
                 context.dispatch("getProjectTasks");
+            }).catch(()=>{})
+        },
+        // RBAseqHeader.vue
+        executeTasks(context) {
+            const config = {
+                params: {
+                    project_id: context.rootState.project.current_project.project_id,
+                }
+            }
+            endpoint.get('/celery_tasks/execute_tasks', config)
+            .then((res)=>{
+                console.log(res.data.task_id)
             }).catch(()=>{})
         },
         // saveTask(context) {

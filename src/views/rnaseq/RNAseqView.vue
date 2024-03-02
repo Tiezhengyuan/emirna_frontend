@@ -3,7 +3,7 @@
     <RNAseqHeader></RNAseqHeader>
 
     <b-row>
-      <b-col cols="8">
+      <b-col cols="9">
         <h3 v-show="project.current_project.id">
           Project: {{ project.current_project.project_id }}
         </h3>
@@ -12,7 +12,7 @@
             :key="i" :task_index="i"></NewTask>
         </div>
       </b-col>
-      <b-col>
+      <b-col cols="auto">
         <b-sidebar id="sidebar-method-params" title="Setup Parameters" width="40%"
           bg-variant="dark" text-variant="light" right shadow>
           <div :is="task.current_task.component"

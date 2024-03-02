@@ -7,7 +7,7 @@
       </b-col>
       <b-col cols="auto">
         <b-button variant="success" size="lg"
-          @click="submitTask">Submit Tasks</b-button>
+          @click="executeTasks">Execute Tasks</b-button>
       </b-col>
       <b-col cols="auto">
         <b-button variant="info" size="lg"
@@ -47,8 +47,8 @@ export default {
     saveTasks() {
       console.log(this.task.project_tasks);
     },
-    submitTask() {
-      console.log(this.task.project_tasks);
+    executeTasks() {
+      this.$store.dispatch('executeTasks');
     },
     // remove unsubmitted tasks and get latest tasks
     refreshProjectTasks() {

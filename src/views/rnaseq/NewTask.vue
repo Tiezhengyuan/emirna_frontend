@@ -79,8 +79,8 @@ export default {
         this.$store.dispatch("saveTask", task);
       }
       if (Object.keys(this.task.current_parents).length > 0) {
-        console.log("current parents")
-        console.log(this.task.current_parents)
+        // console.log("current parents")
+        // console.log(this.task.current_parents)
         this.$store.dispatch('saveTaskParents');
       }
     },
