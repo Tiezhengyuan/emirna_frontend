@@ -13,10 +13,11 @@ export default {
     MainPage,
   },
   mounted() {
-    this.$store.dispatch("getProjects");
-    this.$store.dispatch("getProjectOptions");
-    this.$store.dispatch("getStudyNames");
     this.$store.dispatch("getCurrentUser");
+    // project
+    this.$store.dispatch("getProjects");
+    // sample
+    this.$store.dispatch("getStudyNames");
     // methods in tasks
     this.$store.dispatch('getMethods');
     // reference

@@ -2,9 +2,9 @@
   <b-container class="border mt-3 p-2">
     <b-table stripped :items="project.projects" :fields="fields">
       <template #cell(Actions)="row">
-        <b-button class="p-1 m-1" @click="deleteProject(row.item)"
+        <b-button class="p-1 m-1" size="sm" @click="deleteProject(row.item)"
           >Delete</b-button>
-        <b-button class="p-1 m-1" @click="editProject(row.item)"
+        <b-button class="p-1 m-1" size="sm" @click="editProject(row.item)"
           >Edit</b-button>
       </template>
     </b-table>

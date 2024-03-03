@@ -55,19 +55,6 @@ export default ({
               value: "",
             };
           },
-        input_study_names(state) {
-            return {
-              name: "study_name",
-              label: "Study name",
-              value: "",
-              options: state.study_names.map((el) => {
-                return {
-                  value: el,
-                  label: el,
-                };
-              }),
-            }
-        },
         sample_name_reg(state) {
             return {
               name: "reg",
@@ -143,6 +130,18 @@ export default ({
         
     },
     actions: {
+      // app.vue, used in InjectData.vue
+      getStudyNames(context) {
+        api
+          .get("/sample/study_names/")
+          .then((res) => {
+            context.state.study_names = res.data;
+            context.state.current_study_name = "";
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
         // locad study 
         postLoadedSamples(context) {
             const data = context.state.loaded_samples.map((el) => {
@@ -180,17 +179,7 @@ export default ({
                 console.log(err);
               });
         },
-        getStudyNames(context) {
-            api
-              .get("/sample/study_names/")
-              .then((res) => {
-                context.state.study_names = res.data.study_names;
-                context.state.study_name = "";
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-        },
+
 
 
         // 

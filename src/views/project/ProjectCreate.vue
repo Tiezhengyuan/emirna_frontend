@@ -1,65 +1,67 @@
 <template>
-  <b-container class="text-center">
+  <b-container class="p-2">
     <h3>Create a new project</h3>
-
-    <b-container v-if="showInput" class="border m-2">
-      <PairedLabel :data="project_id"></PairedLabel>
-      <inputText :data="project_name" :receive="receive"></inputText>
-      <inputText :data="project_description" :receive="receive"></inputText>
-      <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
-      <inputDropdown :data="project_status" :receive="receive"></inputDropdown>
+    <b-container class="border m-2 p-2 bv-example-row">
+      <b-row align-v="center" align-h="center" class="m-2">
+        <b-col cols="4">Project ID: </b-col>
+        <b-col cols="4">{{project.new_project.project_id}}</b-col>
+      </b-row>
+      <b-row align-v="center" align-h="center" class="m-2">
+        <b-col cols="4">Project Name: </b-col>
+        <b-col cols="4">
+          <b-form-input v-model="project.new_project.project_name"></b-form-input>
+        </b-col>
+      </b-row>
+      <b-row align-v="center" align-h="center" class="m-2">
+        <b-col cols="4">Description:</b-col>
+        <b-col cols="4">
+          <b-form-input v-model="project.new_project.description"></b-form-input>
+        </b-col>
+      </b-row>
+      <b-row align-v="center" align-h="center" class="m-2">
+        <b-col cols="4">Sequencing Technique:</b-col>
+        <b-col cols="4">
+          <b-form-select v-model="project.new_project.sequencing"
+            :options="project.project_options.sequencing"></b-form-select>
+        </b-col>
+      </b-row>
+      <b-row align-v="center" align-h="center" class="m-2">
+        <b-col cols="4">Project Status:</b-col>
+        <b-col cols="4">
+          <b-form-select v-model="project.new_project.status"
+            :options="project.project_options.status"></b-form-select>
+        </b-col>
+      </b-row>
+    </b-container>
+    
+    <b-container class="m-2">
       <b-button variant="success" class="m-2" @click="create">Create</b-button>
       <b-button variant="secondary" @click="reset">Reset</b-button>
     </b-container>
-    <b-container v-show="showWarning">
-      Sequencing technique should be selected.
-    </b-container>
-    <b-container v-show="showSuccess">
-      A new project {{project.pr}} was created.
-    </b-container>
+
+    <div v-show="showSuccess">
+      A new project was created.
+    </div>
   </b-container>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import PairedLabel from "../../components/showing/PairedLabel";
-import inputText from "../../components/forms/inputText";
-import inputDropdown from "../../components/forms/inputDropdown";
+import { mapState } from "vuex";
 
 export default {
   name: "ProjectCreate",
-  components: {
-    PairedLabel,
-    inputText,
-    inputDropdown,
-  },
-  mounted() {
-    this.$store.dispatch("getNewProject");
-  },
   data() {
     return {
-      showInput: true,
-      showWarning: false,
       showSuccess: false,
     };
   },
   computed: {
     ...mapState(["project"]),
-    ...mapGetters(["project_id", "project_name", "project_description",
-      "sequencing", "project_status"]),
   },
   methods: {
-    receive(key_val) {
-      this.$store.commit("updateCurrentProject", key_val);
-    },
     create() {
-      if (this.project.current_project.sequencing) {
-        this.$store.dispatch("createNewProject");
-        this.showWarning = false;
-        this.showSuccess = true;
-      } else {
-        this.showWarning = true;
-      }
+      this.$store.dispatch("createNewProject");
+      this.showSuccess = true;
     },
     reset() {
       window.location.reload();

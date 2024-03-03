@@ -5,6 +5,7 @@ export default ({
         // defined with app mounted
         projects: [],
         project_options: {},
+        new_project: {},
 
         // new project or selected project
         current_project: {},
@@ -15,50 +16,6 @@ export default ({
         updated_projects: {},
     }),
     getters: {
-        project_id(state) {
-            return {
-              label: "Project ID: ",
-              value: state.current_project.project_id,
-            };
-        },
-        project_name(state) {
-            return {
-              name: "project_name",
-              label: "Project Name",
-              value: state.current_project.project_name,
-            };
-        },
-        project_description(state) {
-            return {
-              name: "description",
-              label: "Project Description",
-              value: state.current_project.description,
-            };
-        },
-        sequencing(state) {
-            const val = state.current_project.sequencing;
-            return {
-              name: "sequencing",
-              label: "Sequencing Technique",
-              value: val ? val : null,
-              required: true,
-              options: state.project_options.sequencing,
-            };
-        },
-        project_status(state) {
-            return {
-              name: "status",
-              label: "Project Status",
-              value: state.current_project.status,
-              options: state.project_options.status,
-            };
-        },
-        project_names(state) {
-            return state.projects.map((el) => {
-              return el.project_name;
-            });
-          },
-        
         input_projects(state) {
             const options = state.projects.map((el) => {
               return {
@@ -115,30 +72,18 @@ export default ({
     actions: {
         // App.vue
         getProjects(context) {
-            api.get("/project").then((res) => {
-                context.state.projects =  res.data;
+            api.get("/project/front_projects/").then((res) => {
+                context.state.new_project = res.data.new_project;
+                context.state.projects =  res.data.projects;
+                context.state.project_options =  res.data.options;
             });
         },
-        getProjectOptions(context) {
-            api.get("/project/options/").then((res) => {
-                context.state.project_options =  res.data;
-            });
-        },
-
         // ProjectCreate.vue
-        getNewProject(context) {
-            api.get("/project/new_project/").then((res) => {
-                context.state.current_project = res.data;
-            });
-        },
         createNewProject(context) {
-            const data = context.state.current_project;
-            console.log(data);
-            api.post("/project/", data).then(() => {
+            api.post("/project/", context.state.new_project)
+            .then(() => {
                 context.dispatch("getProjects");
-                context.dispatch("getNewProject");
-            })
-            .catch((err) => {
+            }).catch((err) => {
                 console.log(err);
             });
         },

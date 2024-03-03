@@ -1,10 +1,17 @@
 <template>
   <b-container>
+    {{project.current_project.project_id}}, {{sample.current_study_name}}
     <b-row align-v="center">
-
       <b-col cols="3" class="border p-2 text-start">
-        <inputDropdown :data="input_projects" :receive="selectProject"></inputDropdown>  
-        <inputDropdown :data="input_study_names" :receive="selectStudy"></inputDropdown>
+        <b-form-group label="Select one Project">
+            <b-form-select v-model="project.current_project"
+              :options="project.project_options.projects"></b-form-select>
+        </b-form-group>
+        <b-form-group label="Select one Study">
+            <b-form-select v-model="sample.current_study_name"
+              :options="sample.study_names"></b-form-select>
+        </b-form-group>
+
         <b-button variant="success" class="m-3"
           @click="injectSamples">Inject samples</b-button>
       </b-col>
@@ -42,14 +49,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import inputDropdown from "../../components/forms/inputDropdown";
+import { mapState} from "vuex";
 
 export default {
   name: "InjectData",
-  components: {
-    inputDropdown,
-  },
   data () {
     return {
       "fields": ["study_name", "sample_name", "raw_data.length"],
@@ -57,7 +60,6 @@ export default {
   },
   computed: {
     ...mapState(["project", "sample", "pipeline"]),
-    ...mapGetters(["input_projects", "input_study_names"]),
   },
   methods: {
     selectProject(key_val) {

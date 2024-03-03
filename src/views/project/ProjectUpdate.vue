@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-button variant="success" @click="applyChanges">Apply all changes</b-button>
+    <b-button variant="success" size="lg" @click="applyChanges">Apply all changes</b-button>
     <b-row>
       <b-col cols="auto 8">
         <ProjectList></ProjectList>

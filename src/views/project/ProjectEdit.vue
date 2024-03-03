@@ -2,35 +2,46 @@
   <b-container class="border m-3 p-2">
     <h3>Edit project {{ project.current_project.project_id }}</h3>
     <b-container class="m-3">
-      <inputText :data="project_name" :receive="receive"></inputText>
-      <inputText :data="project_description" :receive="receive"></inputText>
-      <inputDropdown :data="sequencing" :receive="receive"></inputDropdown>
+    <b-row align-v="center" align-h="center" class="m-2">
+      <b-col>Project Name</b-col>
+      <b-col>
+        <b-form-input v-model="project.current_project.project_name"></b-form-input>
+      </b-col>
+    </b-row>
+    <b-row align-v="center" align-h="center" class="m-2">
+      <b-col>Project Description</b-col>
+      <b-col>
+        <b-form-input v-model="project.current_project.description"></b-form-input>
+      </b-col>
+    </b-row>
+    <b-row align-v="center" align-h="center" class="m-2">
+      <b-col>Sequencing Technique</b-col>
+      <b-col>
+        <b-form-select v-model="project.current_project.sequencing"
+          :options="project.project_options.sequencing"></b-form-select>
+      </b-col>
+    </b-row>
     </b-container>
-    <b-button variant="success" @click="saveUpdate">save update</b-button>
+
+    <b-button variant="success" size="md" @click="save" class="m-2">Save Updates</b-button>
+    <b-button variant="secondary" size="md" @click="cancel">Cancel</b-button>
   </b-container>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import inputText from "../../components/forms/inputText";
-import inputDropdown from "../../components/forms/inputDropdown";
+import { mapState } from "vuex";
 
 export default {
   name: "ProjectEdit",
-  components: {
-    inputText,
-    inputDropdown,
-  },
   computed: {
     ...mapState(["project"]),
-    ...mapGetters(['project_name', 'project_description', 'sequencing']),
   },
   methods: {
-    receive(key_val) {
-      this.$store.commit("updateCurrentProject", key_val);
-    },
-    saveUpdate() {
+    save() {
       this.$store.commit("updateUpdatedProjects");
+    },
+    cancel() {
+      this.$store.commit("clearCurrentProject");
     },
   },
 };
