@@ -21,9 +21,9 @@ export default {
     // methods in tasks
     this.$store.dispatch('getMethods');
     // reference
-    this.$store.dispatch("getSpecieGroups");
-    this.$store.dispatch("getDataSources");
-    this.$store.dispatch("getReadyGenomes");
+    this.$store.dispatch("getGenomes");
+
+this.$store.dispatch("getSpecieGroups");
     this.$store.dispatch("getTypeRNAs");
   },
 };
