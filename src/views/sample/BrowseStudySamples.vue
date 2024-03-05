@@ -1,34 +1,53 @@
 <template>
   <b-container>
-    <b-container class="border mb-3">
-      <inputDropdown :data="input_study_names" :receive="receive"></inputDropdown>
-    </b-container>
+    <b-row class="border mb-3">
+      <b-col cols="4">Select a Study</b-col>
+      <b-col cols="4">
+        <b-form-select v-model="sample.current_study.study_name" @change="receive"
+          :options="sample.study_names"></b-form-select>
+      </b-col>
+    </b-row>
 
-    <h4 v-show="sample.study_samples.length > 0">
-      Study Samples
-    </h4>
-    <p>Study Name: <em>{{sample.current_study_name}}</em></p>
-    <b-table striped :items="sample.study_samples">
-    </b-table>
+    <div v-show="showSamples">
+      <h4>Study Samples</h4>
+      <p>Study Name: <em>{{sample.current_study.study_name}}</em>
+        <b-button variant="danger" size="sm" class="m-2"
+          @click="deleteStudy">Delete</b-button>
+      </p>
+      <b-table striped :items="sample.study_samples" :fields="fields">
+        <template #cell(RawData)="row">{{row.item.raw_data.length}}</template>
+      </b-table>
+    </div>
   </b-container>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import inputDropdown from "../../components/forms/inputDropdown";
+import { mapState } from "vuex";
 
 export default {
   name: "BrowseStudySamples",
-  components: {
-    inputDropdown,
+  mounted() {
+    this.$store.commit('initCurrentStudy')
+  },
+  data() {
+    return {
+      fields: ["study_name", "sample_name", "metadata", "RawData"]
+    }
   },
   computed: {
     ...mapState(["sample"]),
-    ...mapGetters(['input_study_names']),
+    showSamples() {
+      return this.sample.current_study.study_name && (this.sample.study_samples.length > 0);
+    },
   },
   methods: {
-    receive(key_val) {
-      this.$store.dispatch('getStudySamples', key_val[1])
+    receive() {
+      if (this.sample.current_study.study_name) {
+        this.$store.dispatch('getStudySamples')
+      }
+    },
+    deleteStudy() {
+      this.$store.dispatch('deleteStudySamples');
     },
   },
 };

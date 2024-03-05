@@ -17,7 +17,8 @@
         </b-col>
       </b-row>
 
-      <b-row v-show="reference.new_genome.group_name" align-h="center" align-v="center" class="m-2">
+      <b-row v-show="reference.new_genome.group_name"
+        align-h="center" align-v="center" class="m-2">
         <b-col cols="4">Specie</b-col>
         <b-col cols="4">
           <b-form-select v-model="reference.new_genome.specie_name"

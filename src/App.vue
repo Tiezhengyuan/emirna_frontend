@@ -17,13 +17,12 @@ export default {
     // project
     this.$store.dispatch("getProjects");
     // sample
-    this.$store.dispatch("getStudyNames");
+    this.$store.dispatch("getStudy");
     // methods in tasks
     this.$store.dispatch('getMethods');
-    // reference
+    //genome reference
     this.$store.dispatch("getGenomes");
-
-this.$store.dispatch("getSpecieGroups");
+    // RNA annotations
     this.$store.dispatch("getTypeRNAs");
   },
 };

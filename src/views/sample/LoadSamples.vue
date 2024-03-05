@@ -1,19 +1,22 @@
 <template>
   <b-container>
       <b-card
-        header="Load samples into database"
+        header="Load Samples or Phenotypes into Database"
         border-variant="primary"
         header-bg-variant="primary"
         header-text-variant="white"
         align="center"
       >
         <b-card-text>
-          <b-row align-v="center" class="mb-5">
-            <b-col cols="5">
-              <inputText :data="study_name" :receive="setStudyName"></inputText>
-            </b-col>
-            <b-col cols="7">
+          <b-row align-v="center" class="m-2">
+            <b-col cols="8">
               <SelectFile></SelectFile>
+            </b-col>
+          </b-row>
+          <b-row align-v="center" class="m-2">
+            <b-col cols="4">Enter Study Name:</b-col>
+            <b-col cols="4">
+              <b-form-input v-model="sample.new_study_name"></b-form-input>
             </b-col>
           </b-row>
 
@@ -26,38 +29,41 @@
               Number of samples is {{ sample.loaded_samples.length }}.
             </template>
           </b-table>
-          <b-button variant="success" @click="saveSamples">Save Samples</b-button>
+          <b-button variant="success" :disabled="!canLoad" @click="saveSamples">Save Samples</b-button>
 
+          <div v-show="doLoad">Try to load samples</div>
+          <div v-show="!canLoad">Note: Study name or samples should not be empty.</div>
         </b-card-text>
       </b-card>
   </b-container>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import inputText from "../../components/forms/inputText";
+import { mapState } from "vuex";
 import SelectFile from "./SelectFile";
 
 
 export default {
   name: "LoadSamples",
   components: {
-    inputText,
     SelectFile,
+  },
+  data() {
+    return {
+      'doLoad': false,
+    };
   },
   computed: {
     ...mapState(["sample"]),
-    ...mapGetters(['study_name']),
+    canLoad() {
+      return this.sample.new_study_name && this.sample.loaded_samples.length > 0
+    },
   },
   methods: {
-    setStudyName(key_val) {
-      this.$store.commit("setNewStudyName", key_val[1]);
-    },
     saveSamples() {
-      if (this.sample.new_study_name && this.sample.loaded_samples.length > 0) {
+      if (this.canLoad) {
         this.$store.dispatch("postLoadedSamples");
-      } else {
-        console.log("study name or samples should not be empty.")
+        this.doLoad=true;
       }
     },
   },

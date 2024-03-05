@@ -3,7 +3,7 @@ import { api, endpoint } from "./api";
 
 export default ({
   state: () => ({
-      // determined by getGenomes()
+      // determined by actions: getGenomes()
       data_sources: [],
       ready_genomes: [],
       specie_groups: [],
@@ -73,8 +73,6 @@ export default ({
           context.state.specie_groups = res.data.specie_groups;
           context.state.group_species = res.data.group_species;
           context.state.version_genomes = res.data.version_genomes;
-        }).catch((err) => {
-          console.log(err);
         });
     },
     // download genome, asynchronization
@@ -86,9 +84,6 @@ export default ({
       endpoint.get("/celery_tasks/download_genome/", config)
         .then(() => {
           context.commit('initNewGenome');
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
     
@@ -108,19 +103,17 @@ export default ({
     },
 
 
-
-        postReference(context, data) {
-          api
-            .post("/reference/", data)
-            .then((res) => {
-              console.log(res);
-              window.location.reload();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        },
-      
-      
-  }
+    //?? 
+    postReference(context, data) {
+      api
+        .post("/reference/", data)
+        .then((res) => {
+          console.log(res);
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 })
