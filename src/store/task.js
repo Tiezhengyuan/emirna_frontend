@@ -64,7 +64,7 @@ export default ({
         },
         updateCurrentParams(state, pair) {
             state.current_params[pair[0]] = pair[1];
-            // console.log(state.current_params)
+            console.log(state.current_params)
         },
 
         // TaskRelation.vue
@@ -152,23 +152,5 @@ export default ({
                 console.log(res.data.task_id)
             }).catch(()=>{})
         },
-        // saveTask(context) {
-        //     // console.log(context.state.current_task.params)
-        //     const data = {
-        //         project_id: context.rootState.project.current_project.project_id,
-        //         tasks: [{
-        //             task_id: context.state.current_task.task_id,
-        //             task_name: context.state.current_task.task_name,
-        //             params: context.state.current_task.params,
-        //             is_ready : context.state.current_task.is_ready,
-        //             method_tool_id: context.state.current_task.method_tool_id,
-        //         }],
-        //     }
-        //     api.post("task/load_tasks/", data).then(() => {
-        //         // console.log(context.project_tasks)
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     });
-        // },
     }
 })

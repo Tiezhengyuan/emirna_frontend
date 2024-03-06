@@ -43,6 +43,7 @@
                 <b-form-checkbox v-model="row.detailsShowing" @change="row.toggleDetails">
                   Details via check
                 </b-form-checkbox>
+                <!-- {{row}} -->
               </template>
             </b-table>
           </b-collapse>

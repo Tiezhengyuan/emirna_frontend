@@ -4,15 +4,13 @@
       header-text-variant="white" align="center"
       style="max-width: 20rem;" class="mb-2"  
     >
-
     <b-card-header>
       Task: {{ project_task.task_id }}
       <b-button pill variant="danger" title="Delete task"
         size="sm" id="task-delete" @click="deleteTask">
         <b-icon icon="trash-fill"></b-icon>
       </b-button>
-      <b-button pill size="sm" variant="success" title="Save task"
-        id="task-save" @click="saveTask">
+      <b-button pill size="sm" variant="success" title="Save task" id="task-save" @click="saveTask">
         <b-icon icon="save"></b-icon>
       </b-button>
     </b-card-header>
@@ -60,6 +58,9 @@ export default {
     project_task() {
       return this.task.project_tasks[this.task_index];
     },
+    noChanges() {
+      return Object.keys(this.task.current_params).length == 0 && Object.keys(this.task.current_parents).length == 0;
+    }
   },
   methods: {
     selectTask() {
@@ -70,7 +71,7 @@ export default {
     },
     saveTask() {
       if (Object.keys(this.task.current_params).length > 0) {
-        console.log("current params")
+        console.log("post current params")
         console.log(this.task.current_params)
         const task = {
           task_id: this.project_task.task_id,

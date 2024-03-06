@@ -23,7 +23,7 @@
     </b-row>
     </b-container>
 
-    <b-button variant="success" size="md" @click="save" class="m-2">Save Updates</b-button>
+    <b-button variant="success" size="md" @click="save" class="m-2">OK</b-button>
     <b-button variant="secondary" size="md" @click="cancel">Cancel</b-button>
   </b-container>
 </template>

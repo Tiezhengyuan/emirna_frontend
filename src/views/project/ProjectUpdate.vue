@@ -1,6 +1,8 @@
 <template>
   <b-container>
-    <b-button variant="success" size="lg" @click="applyChanges">Apply all changes</b-button>
+    <b-button variant="success" size="lg" @click="applyChanges"
+      :disabled="Object.keys(project.deleted_projects).length==0 && Object.keys(project.updated_projects).length==0"
+      >Apply all changes</b-button>
     <b-row>
       <b-col cols="auto 8">
         <ProjectList></ProjectList>
@@ -31,6 +33,7 @@ export default {
     showUpdate() {
       return Object.keys(this.project.current_project).length === 0 ? false : true;
     },
+
   },
   methods: {
     applyChanges() {
