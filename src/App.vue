@@ -23,7 +23,7 @@ export default {
     //genome reference
     this.$store.dispatch("getGenomes");
     // RNA annotations
-    this.$store.dispatch("getTypeRNAs");
+    this.$store.dispatch("getRNAs");
   },
 };
 </script>

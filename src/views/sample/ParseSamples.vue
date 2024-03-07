@@ -11,10 +11,15 @@
       <b-card-text>
 
         <b-row align-v="center" class="border p-2 mb-5">
-          <b-col>Select a Study</b-col>
+          <b-col>Select study</b-col>
           <b-col>
             <b-form-select v-model="sample.current_study.study_name" @change="updateParsing"
               :options="sample.study_names"></b-form-select>
+          </b-col>
+          <b-col>Select data batch </b-col>
+          <b-col>
+            <b-form-select v-model="sample.current_study.batch_name" @change="updateParsing"
+              :options="sample.batch_names"></b-form-select>
           </b-col>
           <b-col>Regular Expression</b-col>
           <b-col>

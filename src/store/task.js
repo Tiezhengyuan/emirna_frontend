@@ -50,7 +50,7 @@ export default ({
         selectTask(state, task_index) {
             state.current_task = state.project_tasks[task_index]
             state.current_task_index = task_index
-            state.current_params = {}
+            state.current_params = state.current_task.params ? state.current_task.params : {},
             state.current_parents = {}
             // console.log(state.current_task)
         },

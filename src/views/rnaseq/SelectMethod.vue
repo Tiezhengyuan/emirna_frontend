@@ -42,8 +42,11 @@ export default {
       const new_task = {
         task_id: this.task.new_task_id,
         method_tool_id: this.selectedTool ? this.selectedTool.method_tool_id : null,
-        params: this.selectedTool.params ? this.selectedTool.params : 
-          (this.selectedMethod.params ? this.selectedMethod.params : null),
+      }
+      if (this.selectedTool.params) {
+        new_task.params = this.selectedTool.params
+      } else if (this.selectedMethod.params){
+        new_task.params = this.selectedMethod.params
       }
       this.$store.dispatch("saveTask", new_task);
     },

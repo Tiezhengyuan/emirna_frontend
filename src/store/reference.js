@@ -87,15 +87,13 @@ export default ({
         });
     },
     
-    // select RNA for build index
-    getTypeRNAs(context) {
+    //App.vue
+    getRNAs(context) {
       api
-        .get("./rna/type_rnas/")
+        .get("./rna/front_rnas/")
         .then((res) => {
-          context.state.type_rnas = res.data;
-          context.state.rna_types = Object.keys(res.data).map((el) => {
-            return {text: el, value: el}
-          })
+          context.state.type_rnas = res.data.type_rnas;
+          context.state.rna_types = res.data.rna_types;
         })
         .catch((err) => {
           console.log(err);

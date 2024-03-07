@@ -1,15 +1,12 @@
 <template>
   <SetParams>
-
     <template #required>
-      <b-form-group label-cols="4" label="Select RNA type">
-        <b-form-select v-model="selectedRNAType" @change="setRNAType"
-          :options="reference.rna_types"></b-form-select>
+      <b-form-group label="Select RNA type">
+        <b-form-select v-model="rna_type" :options="reference.rna_types" @change="changeRNAType"></b-form-select>
       </b-form-group>
 
-      <b-form-group label-cols="4" label="Select RNA">
-        <b-form-select v-model="selectedRNA" @change="setRNA"
-          :options="rnas"></b-form-select>
+      <b-form-group label="Select RNA">
+        <b-form-select v-model="select_rna" :options="type_rnas" @change="setRNA"></b-form-select>
       </b-form-group>
     </template>
 
@@ -25,26 +22,29 @@ export default {
   components: {
     SetParams,
   },
+  mounted() {
+    this.$store.state.task.current_params.model = 'RNA';
+  },
   computed: {
-    ...mapState(['reference']),
-    rnas() {
-      return this. reference.type_rnas[this.selectedRNAType];
+    ...mapState(['reference', 'task']),
+    type_rnas() {
+      return this.reference.type_rnas[this.rna_type];
     }
   },
   data () {
     return {
-      selectedRNAType: '',
-      selectedRNA: '',
+      select_model: 'RNA',
+      rna_type: this.$store.state.task.current_params.query ? this.$store.state.task.current_params.query.annot_type : null,
+      select_rna: this.$store.state.task.current_params.id,
     }
   },
   methods: {
-    setRNAType(){
-      const pair = ['annot_type', this.selectedRNAType]
-      this.$store.commit('updateCurrentParams', pair)
+    changeRNAType() {
+      this.$store.state.task.current_params.query = {annot_type: this.rna_type};
+      this.$store.state.task.current_params.id = null;
     },
     setRNA(){
-      const pair = ['annot_id', this.selectedRNA]
-      this.$store.commit('updateCurrentParams', pair)
+      this.$store.commit('updateCurrentParams', ['id', this.select_rna]);
     }
   },
 };

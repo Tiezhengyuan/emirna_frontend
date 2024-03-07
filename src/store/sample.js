@@ -5,6 +5,7 @@ export default ({
     state: () => ({
       // mounted at app.vue
       study_names: [],
+      batch_names: [],
 
       // LoadSamples.vue:
       // they are data before saved into db
@@ -27,6 +28,7 @@ export default ({
       initCurrentStudy(state) {
         state.current_study = {
           study_name: null,
+          batch_name: null,
           reg: "<S>",
         }
       },
@@ -76,6 +78,7 @@ export default ({
           .get("/sample/front_study/")
           .then((res) => {
             context.state.study_names = res.data.study_names;
+            context.state.batch_names = res.data.batch_names;
             context.commit('initCurrentStudy');
           })
           .catch((err) => {
