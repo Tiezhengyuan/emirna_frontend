@@ -15,7 +15,6 @@ export default ({
         
         // determined by front-end
         current_task: {},
-        current_task_index: 0,
         // update params
         current_params: {},
         // child in key, parents in value
@@ -44,35 +43,74 @@ export default ({
 
         },
         // task.NewTask.vue
-        updateTaskStatus(state, pair) {
-            state.project_tasks[pair[0]] = pair[1];
-        },
         selectTask(state, task_index) {
             state.current_task = state.project_tasks[task_index]
-            state.current_task_index = task_index
-            state.current_params = state.current_task.params ? state.current_task.params : {},
+            if (state.current_task.params) {
+                state.current_params = {
+                    ...state.current_task.params,
+                    change: false,
+                }
+            }else {
+                state.current_params = {}
+            }
             state.current_parents = {}
             // console.log(state.current_task)
         },
+        // updateTaskStatus(state, pair) {
+        //     state.project_tasks[pair[0]] = pair[1];
+        // },
 
-        // set method parameters
-        setCurrentParams(state, task_index){
-            if (task_index < state.project_tasks.length) {
-                const task = state.project_tasks[task_index]
-                state.current_params = task.params ? task.params : {};
+        // SetParams.vue
+        setCurrentParams(state){
+            if (state.current_task.params) {
+                state.current_params = {
+                    ...state.current_task.params,
+                    change: false,
+                }
+            }else {
+                state.current_params = {}
             }
+            // console.log(state.current_params)
         },
         updateCurrentParams(state, pair) {
             state.current_params[pair[0]] = pair[1];
-            console.log(state.current_params)
         },
 
         // TaskRelation.vue
         updateTaskParents(state, pair) {
             state.current_parents[pair[0]] = pair[1]
+            console.log(state.current_parents)
         }
     },
     actions: {
+        // App.vue
+        getMethods(context) {
+            api
+            .get("/method_tool/front_methods/")
+            .then((res) => {
+                context.state.methods = res.data.method_names
+                context.state.method_tools = res.data.method_tools
+                context.state.method_parents = res.data.method_parents
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        // SetParams.vue
+        updateTaskParams(context) {
+            const data = {
+                project_id: context.rootState.project.current_project.project_id,
+                task_id: context.state.current_task.task_id,
+                params: context.state.current_params,
+            }
+            console.log(data)
+            api.put('task/update_params/', data)
+                .catch((res) => {
+                    console.log(res)
+                })
+
+        },
+        
         // ProjectSelect.vue
         getProjectTasks(context) {
             const project_id = context.rootState.project.current_project.project_id
@@ -86,19 +124,6 @@ export default ({
                 context.state.project_tasks = res.data.tasks;
                 context.state.new_task_id = res.data.new_task_id;
             }).catch((err) => {
-                console.log(err);
-            });
-        },
-        // App.vue
-        getMethods(context) {
-            api
-            .get("/method_tool/front_methods/")
-            .then((res) => {
-                context.state.methods = res.data.method_names
-                context.state.method_tools = res.data.method_tools
-                context.state.method_parents = res.data.method_parents
-            })
-            .catch((err) => {
                 console.log(err);
             });
         },
@@ -140,7 +165,7 @@ export default ({
                 context.dispatch("getProjectTasks");
             }).catch(()=>{})
         },
-        // RBAseqHeader.vue
+        // RNAseqHeader.vue
         executeTasks(context) {
             const config = {
                 params: {

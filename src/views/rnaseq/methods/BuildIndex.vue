@@ -1,12 +1,14 @@
 <template>
   <SetParams>
     <template #required>
+      {{task.current_params}}
       <b-form-group label="Select RNA type">
-        <b-form-select v-model="rna_type" :options="reference.rna_types" @change="changeRNAType"></b-form-select>
+        <b-form-select v-model="task.current_params.annot_type" :options="reference.rna_types"
+          @change="changeRNAType"></b-form-select>
       </b-form-group>
 
       <b-form-group label="Select RNA">
-        <b-form-select v-model="select_rna" :options="type_rnas" @change="setRNA"></b-form-select>
+        <b-form-select v-model="task.current_params.id" :options="type_rnas" @change="setRNA"></b-form-select>
       </b-form-group>
     </template>
 
@@ -28,23 +30,25 @@ export default {
   computed: {
     ...mapState(['reference', 'task']),
     type_rnas() {
-      return this.reference.type_rnas[this.rna_type];
-    }
+      return this.reference.type_rnas[this.task.current_params.annot_type];
+    },
   },
   data () {
     return {
       select_model: 'RNA',
-      rna_type: this.$store.state.task.current_params.query ? this.$store.state.task.current_params.query.annot_type : null,
+      rna_type: this.$store.state.task.current_params.annot_type,
       select_rna: this.$store.state.task.current_params.id,
     }
   },
   methods: {
-    changeRNAType() {
-      this.$store.state.task.current_params.query = {annot_type: this.rna_type};
+    changeRNAType(val) {
+      this.rna_type = val;
       this.$store.state.task.current_params.id = null;
+      this.$store.state.task.current_params.change=true;
     },
     setRNA(){
-      this.$store.commit('updateCurrentParams', ['id', this.select_rna]);
+      // console.log(this.$store.state.task.current_params)
+      this.$store.state.task.current_params.change=true;
     }
   },
 };

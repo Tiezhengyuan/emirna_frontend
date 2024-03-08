@@ -10,9 +10,6 @@
         size="sm" id="task-delete" @click="deleteTask">
         <b-icon icon="trash-fill"></b-icon>
       </b-button>
-      <b-button pill size="sm" variant="success" title="Save task" id="task-save" @click="saveTask">
-        <b-icon icon="save"></b-icon>
-      </b-button>
     </b-card-header>
 
     <b-card-text>
@@ -51,7 +48,8 @@ export default {
     TaskRelations,
   },
   mounted() {
-    this.$store.commit('selectTask', this.task_index)
+    this.$store.commit('selectTask', this.task_index);
+    // this.$store.commit('setCurrentParams', this.task_index);
   },
   computed: {
     ...mapState(['project', 'task']),
@@ -68,22 +66,6 @@ export default {
     },
     deleteTask() {
       this.$store.dispatch("deleteTask", this.task_index);
-    },
-    saveTask() {
-      if (Object.keys(this.task.current_params).length > 0) {
-        console.log("post current params")
-        console.log(this.task.current_params)
-        const task = {
-          task_id: this.project_task.task_id,
-          params: this.task.current_params,
-        }
-        this.$store.dispatch("saveTask", task);
-      }
-      if (Object.keys(this.task.current_parents).length > 0) {
-        // console.log("current parents")
-        // console.log(this.task.current_parents)
-        this.$store.dispatch('saveTaskParents');
-      }
     },
     // submitTask() {
     //   const pair = [this.task_index, 'pending'];

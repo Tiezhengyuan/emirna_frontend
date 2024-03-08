@@ -3,6 +3,11 @@
     <b-button variant="primary" v-b-toggle.parent size="sm">
       Expand parent tasks
     </b-button>
+    <b-button pill size="sm" variant="success" title="Save task" id="task-save"
+      :disabled="disableSave" @click="saveParents">
+      <b-icon icon="save"></b-icon>
+    </b-button>
+
     <b-collapse id="parent">
       <b-form-group>
         <b-form-checkbox-group :options="parent_task_ids"
@@ -22,7 +27,7 @@ export default {
   data() {
     return {
       selected: [],
-      visible: false,
+      disableSave: true,
     }
   },
   beforeMount() {
@@ -41,11 +46,18 @@ export default {
   },
   methods: {
     updateParent() {
-      this.visible = !this.visible
+      this.disableSave = false
       // console.log(this.selected)
       const pair = [this.project_task.task_id, this.selected];
       // console.log(pair)
       this.$store.commit("updateTaskParents", pair);
+    },
+    saveParents() {
+      if (Object.keys(this.task.current_parents).length > 0) {
+        // console.log("current parents")
+        // console.log(this.task.current_parents)
+        this.$store.dispatch('saveTaskParents');
+      }
     },
   },
 };
