@@ -1,15 +1,15 @@
 <template>
 <b-container fluid class="bg-dark">
   <b-row>
-    <b-col align-self="center">
-      <b-img thumbnail rounded="0" src="#" alt="logo"></b-img>
+    <b-col cols="2" align-self="center">
+      <b-img thumbnail rounded="0" src="erna_logo.png" alt="logo"></b-img>
     </b-col>
 
-    <b-col class="text-white">
-      <h1>eRNA</h1>
+    <b-col class="text-white" align-self="center">
+      <h1>Bioinformatics for miRNA-Seq Data Analysis</h1>
     </b-col>
 
-    <b-col align-self="end" class="text-white">
+    <b-col cols="auto" align-self="end" class="text-white">
       <span class="p-3">
         User Name: <mark>{{ user.current_user.username }}</mark>
       </span>

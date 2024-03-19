@@ -13,24 +13,11 @@
     </b-card-header>
 
     <b-card-text>
-      <!-- <b-container class="border my-3">
-        <b-button-group class="mx-1">
-          <b-button pill variant="info" title="Stop task"
-            id="task-stop" @click="stopTask">
-            <b-icon icon="stop-fill"></b-icon>
-          </b-button>
-          <b-button pill variant="success" title="Run task"
-            id="task-submit" @click="submitTask">
-            <b-icon icon="play-fill"></b-icon>
-          </b-button>
-        </b-button-group>
-      </b-container> -->
-
       <TaskRelations :task_index="task_index"></TaskRelations>
 
       Method: <em>{{ project_task.method_name }}</em>
-      <b-button variant="info" v-b-toggle.sidebar-method-params
-        @click="selectTask">Parameters</b-button>
+      <b-button variant="info" size="sm" v-b-toggle.sidebar-method-params
+        v-show="setParams" @click="selectTask">Parameters</b-button>
     </b-card-text>
 
   </b-card>
@@ -58,6 +45,11 @@ export default {
     },
     noChanges() {
       return Object.keys(this.task.current_params).length == 0 && Object.keys(this.task.current_parents).length == 0;
+    },
+    setParams() {
+      const method_name = this.task.project_tasks[this.task_index].method_name
+      const params = ["trim_sequences", "build_index"]
+      return params.indexOf(method_name) >= 0 ? true : false;
     }
   },
   methods: {
@@ -67,14 +59,6 @@ export default {
     deleteTask() {
       this.$store.dispatch("deleteTask", this.task_index);
     },
-    // submitTask() {
-    //   const pair = [this.task_index, 'pending'];
-    //   this.$store.commit("updateTaskStatus", pair);
-    // },
-    // stopTask() {
-    //   const pair = [this.task_index, 'stopped']
-    //   this.$store.commit("updateTaskStatus", pair);
-    // },
   },
 };
 </script>

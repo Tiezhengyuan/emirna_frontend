@@ -19,13 +19,6 @@
         </b-col>
       </b-row>
       <b-row align-v="center" align-h="center" class="m-2">
-        <b-col cols="4">Sequencing Technique:</b-col>
-        <b-col cols="4">
-          <b-form-select v-model="project.new_project.sequencing"
-            :options="project.project_options.sequencing"></b-form-select>
-        </b-col>
-      </b-row>
-      <b-row align-v="center" align-h="center" class="m-2">
         <b-col cols="4">Project Status:</b-col>
         <b-col cols="4">
           <b-form-select v-model="project.new_project.status"

@@ -47,16 +47,13 @@ export default {
   methods: {
     updateParent() {
       this.disableSave = false
-      // console.log(this.selected)
       const pair = [this.project_task.task_id, this.selected];
-      // console.log(pair)
       this.$store.commit("updateTaskParents", pair);
     },
     saveParents() {
       if (Object.keys(this.task.current_parents).length > 0) {
-        // console.log("current parents")
-        // console.log(this.task.current_parents)
         this.$store.dispatch('saveTaskParents');
+        this.disableSave = true
       }
     },
   },

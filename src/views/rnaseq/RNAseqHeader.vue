@@ -5,10 +5,6 @@
         <b-button variant="success" size="lg"
           @click="executeTasks">Execute Tasks</b-button>
       </b-col>
-      <b-col cols="auto">
-        <b-button variant="info" size="lg"
-          @click="refreshProjectTasks">Refresh Project</b-button>
-      </b-col>
       <b-col cols="1"></b-col>
 
       <b-col cols="auto" class="p-2 m-1 bg-info bg-gradient text-dark">
@@ -42,10 +38,6 @@ export default {
   methods: {
     executeTasks() {
       this.$store.dispatch('executeTasks');
-    },
-    // remove unsubmitted tasks and get latest tasks
-    refreshProjectTasks() {
-      this.$store.commit("refreshProjectTasks");
     },
   }
 };

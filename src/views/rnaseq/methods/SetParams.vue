@@ -3,8 +3,7 @@
     <h3>{{ task.current_task.task_id }}:{{ task.current_task.label }}</h3>
     <h5>{{ task.current_task.tool_name}} {{ task.current_task.version}} </h5>
     <b-container class="text-center">
-      <b-button variant="success" class="m-2" :disabled="!this.task.current_params.change"
-        @click="save">Save</b-button>
+      <b-button variant="success" class="m-2" :disabled="disableSave" @click="save">Save</b-button>
       <b-button variant="info" class="m-2" @click="reset">Reset</b-button>
     </b-container>
 
@@ -42,7 +41,7 @@ export default {
   computed: {
     ...mapState(["task"]),
     disableSave() {
-      return this.task.current_params.change ? false : true;
+      return this.task.current_params.change && this.task.current_params.id ? false : true;
     }
   },
   methods: {

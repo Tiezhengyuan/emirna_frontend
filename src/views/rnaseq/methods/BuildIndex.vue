@@ -1,7 +1,6 @@
 <template>
   <SetParams>
     <template #required>
-      {{task.current_params}}
       <b-form-group label="Select RNA type">
         <b-form-select v-model="task.current_params.annot_type" :options="reference.rna_types"
           @change="changeRNAType"></b-form-select>
@@ -24,8 +23,8 @@ export default {
   components: {
     SetParams,
   },
-  mounted() {
-    this.$store.state.task.current_params.model = 'RNA';
+  afterMounted() {
+    this.$set(this.$store.state.task.current_params, 'model', 'RNA')
   },
   computed: {
     ...mapState(['reference', 'task']),
@@ -43,12 +42,13 @@ export default {
   methods: {
     changeRNAType(val) {
       this.rna_type = val;
-      this.$store.state.task.current_params.id = null;
+      this.$set(this.$store.state.task.current_params, 'model', 'RNA');
+      this.$set(this.$store.state.task.current_params, 'id', null);
       this.$store.state.task.current_params.change=true;
     },
-    setRNA(){
-      // console.log(this.$store.state.task.current_params)
+    setRNA(val){
       this.$store.state.task.current_params.change=true;
+      this.$set(this.$store.state.task.current_params, 'id', val);
     }
   },
 };

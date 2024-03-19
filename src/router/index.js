@@ -21,12 +21,6 @@ import RNAseqView from "../views/rnaseq/RNAseqView";
 
 import ToolsView from "../views/tools/ToolsView";
 
-import DebuggingView from "../views/debugging/DebuggingView";
-import TableSimple from "../components/TableSimple";
-import BasicInput from "../components/BasicInput";
-import StoreData from "../views/debugging/StoreData";
-import MethodParams from "../views/debugging/MethodParams";
-
 const routes = [
   {
     path: "/",
@@ -98,33 +92,6 @@ const routes = [
     path: "/tools",
     name: "tools",
     component: ToolsView,
-  },
-  {
-    path: "/debugging",
-    name: "debugging",
-    component: DebuggingView,
-    children: [
-      {
-        path: "simple_table",
-        name: "simple_table",
-        component: TableSimple,
-      },
-      {
-        path: "simple_input",
-        name: "simple_input",
-        component: BasicInput,
-      },
-      {
-        path: "store_data",
-        name: "store_data",
-        component: StoreData,
-      },
-      {
-        path: "parameters",
-        name: "parameters",
-        component: MethodParams,
-      },
-    ],
   },
 ];
 

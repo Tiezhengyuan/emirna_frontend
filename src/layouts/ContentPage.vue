@@ -10,19 +10,10 @@
             <router-link to="/manage" class="text-decoration-none">Project</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/reference" class="text-decoration-none">Reference</router-link>
-          </b-nav-item>
-          <b-nav-item>
             <router-link to="/sample" class="text-decoration-none">Samples</router-link>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/rnaseq" class="text-decoration-none">Pipeline</router-link>
-          </b-nav-item>
-          <b-nav-item>
-            <router-link to="/tools" class="text-decoration-none">Tools</router-link>
-          </b-nav-item>
-          <b-nav-item>
-            <router-link to="/debugging" class="text-decoration-none">Debugging</router-link>
           </b-nav-item>
         </b-nav>
       </b-card-header>

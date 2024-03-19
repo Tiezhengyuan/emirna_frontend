@@ -56,10 +56,6 @@ export default ({
             state.current_parents = {}
             // console.log(state.current_task)
         },
-        // updateTaskStatus(state, pair) {
-        //     state.project_tasks[pair[0]] = pair[1];
-        // },
-
         // SetParams.vue
         setCurrentParams(state){
             if (state.current_task.params) {
@@ -105,10 +101,10 @@ export default ({
             }
             console.log(data)
             api.put('task/update_params/', data)
-                .catch((res) => {
-                    console.log(res)
+                .then(() => {
+                    context.dispatch('getProjectTasks')
+                    context.state.current_params.change = false
                 })
-
         },
         
         // ProjectSelect.vue
@@ -137,8 +133,6 @@ export default ({
             api.post("task/load_tasks/", data).then(() => {
                 context.state.current_params = {}
                 context.dispatch("getProjectTasks");
-            }).catch((err) => {
-                console.log(err);
             });
         },
         // NewTask.vue
@@ -149,11 +143,13 @@ export default ({
                     task_id: context.state.current_task.task_id,
                 }
             }
-            api.delete('/task/delete_tasks/', config).then(()=>{
-                context.commit('clearTask')
-                context.dispatch("getProjectTasks");
-            }).catch(()=>{})
+            api.delete('/task/delete_tasks/', config)
+                .then(()=>{
+                    context.commit('clearTask')
+                    context.dispatch("getProjectTasks");
+                })
         },
+        // TaskRelations.vue
         saveTaskParents(context) {
             const task_id = context.state.current_task.task_id
             const data = {
@@ -161,9 +157,10 @@ export default ({
                 child: task_id,
                 parents: context.state.current_parents[task_id],
             }
-            api.post('/task_tree/update_task_parents/', data).then(()=>{
-                context.dispatch("getProjectTasks");
-            }).catch(()=>{})
+            api.post('/task_tree/update_task_parents/', data)
+                .then(()=>{
+                    context.dispatch("getProjectTasks");
+                })
         },
         // RNAseqHeader.vue
         executeTasks(context) {
@@ -173,9 +170,9 @@ export default ({
                 }
             }
             endpoint.get('/celery_tasks/execute_tasks', config)
-            .then((res)=>{
-                console.log(res.data.task_id)
-            }).catch(()=>{})
+                .then((res)=>{
+                    console.log(res.data.task_id)
+                })
         },
     }
 })
