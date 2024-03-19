@@ -2,7 +2,8 @@
   <b-container fluid class="border mb-2">
     <b-row align-v="center" class="my-2">
       <b-col cols="auto">
-        <b-button variant="success" size="lg"
+      {{task.project_status}}
+        <b-button variant="success" size="lg" :disabled="canRun"
           @click="executeTasks">Execute Tasks</b-button>
       </b-col>
       <b-col cols="1"></b-col>
@@ -34,9 +35,13 @@ export default {
   },
   computed: {
     ...mapState(["project", "task"]),
+    canRun() {
+      return this.task.project_status == 'ready' ? false : true;
+    },
   },
   methods: {
     executeTasks() {
+      this.task.project_status = 'run'
       this.$store.dispatch('executeTasks');
     },
   }

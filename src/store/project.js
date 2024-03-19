@@ -44,8 +44,15 @@ export default ({
         updateCurrentProject(state, key_val) {
             state.current_project[key_val[0]] = key_val[1];
         },
-        refreshCurrentProject(state, project) {
-            state.current_project = project;
+        // RNAseqview.vue: add/delete tasks
+        refreshCurrentProject(state) {
+            const project_index = state.current_project.project_index;
+            console.log(project_index)
+            console.log(state.projects[project_index].status)
+            state.current_project = {
+                ...state.projects[project_index],
+                project_index: project_index,
+            };
         },
         
         // update projects
@@ -53,8 +60,11 @@ export default ({
             state.updated_project[key_val[0]] = key_val[1];
         },
         // ProjectSelect.vue
-        selectProject(state, projects_index) {
-            state.current_project = state.projects[projects_index];
+        selectProject(state, project_index) {
+            state.current_project = {
+                ...state.projects[project_index],
+                project_index: project_index,
+            };
         },
         updateUpdatedProjects(state) {
             const curr_id = state.current_project.project_id;

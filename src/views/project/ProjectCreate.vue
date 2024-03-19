@@ -18,13 +18,6 @@
           <b-form-input v-model="project.new_project.description"></b-form-input>
         </b-col>
       </b-row>
-      <b-row align-v="center" align-h="center" class="m-2">
-        <b-col cols="4">Project Status:</b-col>
-        <b-col cols="4">
-          <b-form-select v-model="project.new_project.status"
-            :options="project.project_options.status"></b-form-select>
-        </b-col>
-      </b-row>
     </b-container>
     
     <b-container class="m-2">

@@ -7,6 +7,7 @@ export default ({
         project_tasks: [],
         task_tree: {},
         new_task_id: null,
+        project_status: null,
 
         // defined by the API: method_tool/front_methods/
         methods: [],
@@ -119,6 +120,7 @@ export default ({
                 context.state.task_tree = res.data.task_tree;
                 context.state.project_tasks = res.data.tasks;
                 context.state.new_task_id = res.data.new_task_id;
+                context.state.project_status = res.data.project_status;
             }).catch((err) => {
                 console.log(err);
             });
