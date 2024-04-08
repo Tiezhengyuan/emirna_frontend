@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const endpoint = axios.create({
-  // baseURL: process.env.VUE_APP_ROOT_API,
   auth: {
     username: "admin",
     password: "admin",
@@ -9,7 +8,6 @@ export const endpoint = axios.create({
 });
 
 export const api = axios.create({
-  // baseURL: process.env.VUE_APP_ROOT_API,
   auth: {
     username: "admin",
     password: "admin",

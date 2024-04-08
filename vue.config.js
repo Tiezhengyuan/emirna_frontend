@@ -1,10 +1,15 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,
+  publicPath: '/',
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    proxy: {
+      '^/api': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
+    },
+  }
 });
-// module.exports = {
-//   devServer: {
-//     proxy: "http://localhost:8000",
-//   },
-// };
-// .\chrome.exe --disable-web-security --user-data-dir="c:/ChromeDevSession"
