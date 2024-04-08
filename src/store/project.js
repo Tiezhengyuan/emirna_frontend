@@ -82,7 +82,7 @@ export default ({
     actions: {
         // App.vue
         getProjects(context) {
-            api.get("/project/front_projects/").then((res) => {
+            api.get("/api/project/front_projects/").then((res) => {
                 context.state.new_project = res.data.new_project;
                 context.state.projects =  res.data.projects;
                 context.state.project_options =  res.data.options;
@@ -90,7 +90,7 @@ export default ({
         },
         // ProjectCreate.vue
         createNewProject(context) {
-            api.post("/project/", context.state.new_project)
+            api.post("/api/project/", context.state.new_project)
             .then(() => {
                 context.dispatch("getProjects");
             }).catch((err) => {

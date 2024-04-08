@@ -1,19 +1,7 @@
 import axios from "axios";
 
-const mode = "DEV";
-const server = {
-  DEV: {
-    endpoint: "http://localhost:8000/",
-    baseURL: "http://localhost:8000/api/",
-  },
-  PROD: {
-    endpoint: "http://localhost:4800/",
-    baseURL: "http://localhost:4800/api/",
-  },
-};
-
 export const endpoint = axios.create({
-  baseURL: server[mode].endpoint,
+  // baseURL: process.env.VUE_APP_ROOT_API,
   auth: {
     username: "admin",
     password: "admin",
@@ -21,7 +9,7 @@ export const endpoint = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: server[mode].baseURL,
+  // baseURL: process.env.VUE_APP_ROOT_API,
   auth: {
     username: "admin",
     password: "admin",

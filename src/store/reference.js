@@ -66,7 +66,7 @@ export default ({
     // App.vue
     getGenomes(context) {
       api
-        .get("./genome/front_genomes/")
+        .get("/api/genome/front_genomes/")
         .then((res) => {
           context.state.data_sources = res.data.data_sources;
           context.state.ready_genomes = res.data.ready_genomes;
@@ -81,7 +81,7 @@ export default ({
         params: context.state.new_genome,
       };
       console.log(config)
-      endpoint.get("/celery_tasks/download_genome/", config)
+      endpoint.get("/api/celery_tasks/download_genome/", config)
         .then(() => {
           context.commit('initNewGenome');
         });
@@ -90,7 +90,7 @@ export default ({
     //App.vue
     getRNAs(context) {
       api
-        .get("./rna/front_rnas/")
+        .get("/api/rna/front_rnas/")
         .then((res) => {
           context.state.type_rnas = res.data.type_rnas;
           context.state.rna_types = res.data.rna_types;
@@ -104,7 +104,7 @@ export default ({
     //?? 
     postReference(context, data) {
       api
-        .post("/reference/", data)
+        .post("/api/reference/", data)
         .then((res) => {
           console.log(res);
           window.location.reload();

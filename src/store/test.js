@@ -9,7 +9,7 @@ const actions_test = {
   },
   getGroups() {
     smartscope_api
-      .get("/groups/")
+      .get("/api/groups/")
       .then((res) => {
         console.log(res.data);
       })

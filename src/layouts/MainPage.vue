@@ -19,6 +19,9 @@ export default {
     ContentPage,
     FooterBar,
   },
+  mounted() {
+    console.log(process.env.VUE_APP_ROOT_API)
+  },
 };
 </script>
 

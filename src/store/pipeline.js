@@ -30,7 +30,7 @@ export default ({
         },
       };
       api
-        .get("/sample_project/project_data/", config)
+        .get("/api/sample_project/project_data/", config)
         .then((res) => {
           context.state.project_samples = res.data.project_samples;
           context.state.unassigned_samples = res.data.unassigned_samples;
@@ -43,14 +43,14 @@ export default ({
     };
     console.log(data)
     api
-      .post("/sample_project/load_project_samples/", data)
+      .post("/api/sample_project/load_project_samples/", data)
       .then(() => {
         context.dispatch('getProjectData');
       });
   },
   deleteProjectSample(context, item) {
     api
-      .delete(`/sample_project/${item.sample_project_id}`)
+      .delete(`/api/sample_project/${item.sample_project_id}`)
       .then(() => {
         context.dispatch("getProjectData");
       });
@@ -61,7 +61,7 @@ export default ({
       params: { status: status },
     };
     api
-      .get("/celery_task_result/", config)
+      .get("/api/celery_task_result/", config)
       .then((res) => {
         context.state.celery_tasks = res.data.map((el) => {
           return {

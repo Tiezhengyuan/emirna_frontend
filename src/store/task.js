@@ -25,11 +25,8 @@ export default ({
     getters: {
         setChecked: (state) => (task_index) => {
             const task_id = state.project_tasks[task_index].task_id;
-            // console.log('set checked')
-            // console.log(state.task_tree)
             const parents= state.task_tree[task_id]
             const checked = parents ? parents.filter(el => el.check).map(el => el.value) : [];
-            // console.log(state.task_tree)
             return checked
         }
     },
@@ -83,7 +80,7 @@ export default ({
         // App.vue
         getMethods(context) {
             api
-            .get("/method_tool/front_methods/")
+            .get("/api/method_tool/front_methods/")
             .then((res) => {
                 context.state.methods = res.data.method_names
                 context.state.method_tools = res.data.method_tools
@@ -101,7 +98,7 @@ export default ({
                 params: context.state.current_params,
             }
             console.log(data)
-            api.put('task/update_params/', data)
+            api.put('/apitask/update_params/', data)
                 .then(() => {
                     context.dispatch('getProjectTasks')
                     context.state.current_params.change = false
@@ -114,7 +111,7 @@ export default ({
             const config = {
                 params: {project_id: project_id}
             }
-            api.get("/task/front_project_tasks/", config).then((res) => {
+            api.get("/api/task/front_project_tasks/", config).then((res) => {
                 // console.log('get project tasks')
                 // console.log(res.data)
                 context.state.task_tree = res.data.task_tree;
@@ -132,7 +129,7 @@ export default ({
                 tasks: [task,],
             }
             console.log(data)
-            api.post("task/load_tasks/", data).then(() => {
+            api.post("/apitask/load_tasks/", data).then(() => {
                 context.state.current_params = {}
                 context.dispatch("getProjectTasks");
             });
@@ -145,7 +142,7 @@ export default ({
                     task_id: context.state.current_task.task_id,
                 }
             }
-            api.delete('/task/delete_tasks/', config)
+            api.delete('/api/task/delete_tasks/', config)
                 .then(()=>{
                     context.commit('clearTask')
                     context.dispatch("getProjectTasks");
@@ -159,7 +156,7 @@ export default ({
                 child: task_id,
                 parents: context.state.current_parents[task_id],
             }
-            api.post('/task_tree/update_task_parents/', data)
+            api.post('/api/task_tree/update_task_parents/', data)
                 .then(()=>{
                     context.dispatch("getProjectTasks");
                 })
@@ -171,7 +168,7 @@ export default ({
                     project_id: context.rootState.project.current_project.project_id,
                 }
             }
-            endpoint.get('/celery_tasks/execute_tasks', config)
+            endpoint.get('/api/celery_tasks/execute_tasks', config)
                 .then((res)=>{
                     console.log(res.data.task_id)
                 })

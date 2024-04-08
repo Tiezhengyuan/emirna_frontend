@@ -2,7 +2,8 @@
 <b-container fluid class="bg-dark">
   <b-row>
     <b-col cols="2" align-self="center">
-      <b-img thumbnail rounded="0" src="erna_logo.png" alt="logo"></b-img>
+      <b-img :src="require('../assets/erna_logo.png')" alt="logo" 
+        thumbnail rounded="0"></b-img>
     </b-col>
 
     <b-col class="text-white" align-self="center">

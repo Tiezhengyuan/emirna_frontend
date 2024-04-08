@@ -25,7 +25,7 @@ export default ({
     actions: {
         getCurrentUser(context) {
             api
-              .get("/user/current/")
+              .get("/api/user/current/")
               .then((res) => {
                 context.commit("setCurrentUser", res.data);
               })

@@ -15,15 +15,15 @@ export default {
   mounted() {
     this.$store.dispatch("getCurrentUser");
     // project
-    this.$store.dispatch("getProjects");
+    //this.$store.dispatch("getProjects");
     // sample
-    this.$store.dispatch("getStudy");
+    //this.$store.dispatch("getStudy");
     // methods in tasks
-    this.$store.dispatch('getMethods');
+    //this.$store.dispatch('getMethods');
     //genome reference
-    this.$store.dispatch("getGenomes");
+    //this.$store.dispatch("getGenomes");
     // RNA annotations
-    this.$store.dispatch("getRNAs");
+    //this.$store.dispatch("getRNAs");
   },
 };
 </script>

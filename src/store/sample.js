@@ -74,8 +74,7 @@ export default ({
     actions: {
       // app.vue, used in InjectData.vue
       getStudy(context) {
-        api
-          .get("/sample/front_study/")
+        api.get("/api/sample/front_study/")
           .then((res) => {
             context.state.study_names = res.data.study_names;
             context.state.batch_names = res.data.batch_names;
@@ -96,7 +95,7 @@ export default ({
               metadata: meta,
             };
           });
-          api.post("/sample/load_samples/", data)
+          api.post("/api/sample/load_samples/", data)
             .then((res) => {
               context.dispatch("getStudy");
               context.state.loaded_samples = [];
@@ -114,7 +113,7 @@ export default ({
             study_name: context.state.current_study.study_name,
           }
         }
-        api.get("/sample_file/study_files/", config)
+        api.get("/api/sample_file/study_files/", config)
           .then((res) => {
             context.state.study_samples = res.data;
           });
@@ -127,7 +126,7 @@ export default ({
           }
         }
         api
-          .delete("/sample/delete_study_samples/", config)
+          .delete("/api/sample/delete_study_samples/", config)
           .then(() => {
             context.dispatch('getStudy');
           });
@@ -139,7 +138,7 @@ export default ({
           params: context.state.current_study,
         };
         console.log(config.params);
-        api.get("/sample_file/unparsed_data/", config)
+        api.get("/api/sample_file/unparsed_data/", config)
           .then((res) => {
             context.state.unparsed_data = res.data;
           });
@@ -152,7 +151,7 @@ export default ({
           };
         });
         api
-          .post("/sample_file/parse_sample_files/", data)
+          .post("/api/sample_file/parse_sample_files/", data)
           .then(() => {
             context.state.unparsed_data = [];
           });
@@ -160,7 +159,7 @@ export default ({
 
       getRawDataCount(context) {
           api
-              .get("/raw_data/count/")
+              .get("/api/raw_data/count/")
               .then((res) => {
               context.state.raw_data_count = res.data.count;
               })
