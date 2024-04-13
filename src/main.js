@@ -3,7 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-
 // bootstrap
 import {BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 // This imports all the layout components such as <b-container>, <b-row>, <b-col>:
@@ -38,7 +37,6 @@ Vue.use(LinkPlugin)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 
 
 

@@ -1,4 +1,5 @@
 import { api } from "./api";
+// import cookies from "vue-cookies";
 
 export default ({
     state: () => ({
@@ -90,7 +91,10 @@ export default ({
         },
         // ProjectCreate.vue
         createNewProject(context) {
-            api.post("/api/project/", context.state.new_project)
+            const headers = {
+                'X-CSRFToken':context.rootState.user.csrf_token
+            }
+            api.post("/api/project/", context.state.new_project, {headers})
             .then(() => {
                 context.dispatch("getProjects");
             }).catch((err) => {
@@ -100,8 +104,11 @@ export default ({
 
         // ProjectUpdate.vue
         deleteProjects(context) {
+            const headers = {
+                'X-CSRFToken':context.rootState.user.csrf_token
+            }
             for (let project_id of context.state.deleted_projects) {
-                api.delete(`/project/${project_id}/`).then(() => {
+                api.delete(`/project/${project_id}/`, {headers}).then(() => {
                     context.state.deleted_projects = [];
                 }).catch((err) => {
                     console.log(err);

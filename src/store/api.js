@@ -8,6 +8,8 @@ export const endpoint = axios.create({
 });
 
 export const api = axios.create({
+  xsrfHeaderName: 'X-CSRF-Token',
+  withCredentials: true,
   auth: {
     username: "admin",
     password: "admin",

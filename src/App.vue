@@ -14,6 +14,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getCurrentUser");
+    this.$store.dispatch("getToken");
     // project
     this.$store.dispatch("getProjects");
     // sample
