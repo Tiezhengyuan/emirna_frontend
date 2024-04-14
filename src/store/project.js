@@ -48,18 +48,13 @@ export default ({
         // RNAseqview.vue: add/delete tasks
         refreshCurrentProject(state) {
             const project_index = state.current_project.project_index;
-            console.log(project_index)
-            console.log(state.projects[project_index].status)
             state.current_project = {
                 ...state.projects[project_index],
                 project_index: project_index,
             };
         },
-        
-        // update projects
-        updateUpdatedProject(state, key_val) {
-            state.updated_project[key_val[0]] = key_val[1];
-        },
+
+        // ProjectList.vue
         // ProjectSelect.vue
         selectProject(state, project_index) {
             state.current_project = {
@@ -67,8 +62,10 @@ export default ({
                 project_index: project_index,
             };
         },
+        // update projects
         updateUpdatedProjects(state) {
             const curr_id = state.current_project.project_id;
+            console.log(curr_id)
             state.updated_projects[curr_id] = state.current_project;
             state.current_project = {};
         },
@@ -104,21 +101,26 @@ export default ({
 
         // ProjectUpdate.vue
         deleteProjects(context) {
-            const headers = {
-                'X-CSRFToken':context.rootState.user.csrf_token
-            }
             for (let project_id of context.state.deleted_projects) {
-                api.delete(`/project/${project_id}/`, {headers}).then(() => {
-                    context.state.deleted_projects = [];
-                }).catch((err) => {
-                    console.log(err);
-                });
+                api.delete(`/api/project/${project_id}/`)
+                    .then(() => {
+                        context.state.deleted_projects = [];
+                    }).catch((err) => {
+                        console.log(err);
+                    });
             }
         },
         updateProjects(context) {
+            console.log(context.state.updated_projects)
             for (let project_id of Object.keys(context.state.updated_projects)) {
                 const updated = context.state.updated_projects[project_id];
-                api.put(`/project/${project_id}/`, updated)
+                const data = {
+                    project_id: updated.project_id,
+                    project_name: updated.project_name,
+                    description: updated.description,
+                    owner: updated.owner.user_id,
+                }
+                api.put(`/api/project/${project_id}/`, data)
                 .then(() => {
                     context.state.updated_projects = {};
                 })

@@ -4,7 +4,7 @@
       <template #cell(Actions)="row">
         <b-button class="p-1 m-1" size="sm" @click="deleteProject(row.item)"
           >Delete</b-button>
-        <b-button class="p-1 m-1" size="sm" @click="editProject(row.item)"
+        <b-button class="p-1 m-1" size="sm" @click="editProject(row)"
           >Edit</b-button>
       </template>
     </b-table>
@@ -22,8 +22,7 @@ export default {
   data() {
     return {
       deleted: [],
-      fields: ['project_id', 'project_name', 'description', 
-        'sequencing', 'status', 'Actions'],
+      fields: ['project_id', 'project_name', 'description', 'status', 'Actions'],
     };
   },
   methods: {
@@ -34,8 +33,8 @@ export default {
         this.$store.commit("updateDeleted", selected);
       }
     },
-    editProject(project) {
-      this.$store.commit("refreshCurrentProject", project);
+    editProject(row) {
+      this.$store.commit("selectProject", row.index);
     },
   },
 };

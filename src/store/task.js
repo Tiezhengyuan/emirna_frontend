@@ -98,7 +98,7 @@ export default ({
                 params: context.state.current_params,
             }
             console.log(data)
-            api.put('/apitask/update_params/', data)
+            api.put('/api/task/update_params/', data)
                 .then(() => {
                     context.dispatch('getProjectTasks')
                     context.state.current_params.change = false
@@ -129,7 +129,7 @@ export default ({
                 tasks: [task,],
             }
             console.log(data)
-            api.post("/apitask/load_tasks/", data).then(() => {
+            api.post("/api/task/load_tasks/", data).then(() => {
                 context.state.current_params = {}
                 context.dispatch("getProjectTasks");
             });
@@ -168,7 +168,7 @@ export default ({
                     project_id: context.rootState.project.current_project.project_id,
                 }
             }
-            endpoint.get('/api/celery_tasks/execute_tasks', config)
+            endpoint.get('/celery_tasks/execute_tasks', config)
                 .then((res)=>{
                     console.log(res.data.task_id)
                 })

@@ -14,16 +14,8 @@
         <b-form-input v-model="project.current_project.description"></b-form-input>
       </b-col>
     </b-row>
-    <b-row align-v="center" align-h="center" class="m-2">
-      <b-col>Sequencing Technique</b-col>
-      <b-col>
-        <b-form-select v-model="project.current_project.sequencing"
-          :options="project.project_options.sequencing"></b-form-select>
-      </b-col>
-    </b-row>
     </b-container>
-
-    <b-button variant="success" size="md" @click="save" class="m-2">OK</b-button>
+    <b-button variant="success" size="md" @click="saveUpdate" class="m-2">OK</b-button>
     <b-button variant="secondary" size="md" @click="cancel">Cancel</b-button>
   </b-container>
 </template>
@@ -37,7 +29,7 @@ export default {
     ...mapState(["project"]),
   },
   methods: {
-    save() {
+    saveUpdate() {
       this.$store.commit("updateUpdatedProjects");
     },
     cancel() {
